@@ -1,4 +1,4 @@
-<title>프로젝트 콜로니 MVP</title>
+<title>골디락스</title>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,7 +160,8 @@
   .planet .tier{font-family:var(--f-m);font-size:10px;letter-spacing:.1em;padding:2px 6px;border-radius:3px;white-space:nowrap}
   .tier.prime{color:var(--habit);background:rgba(86,214,127,.12)} .tier.marg{color:var(--marginal);background:rgba(224,169,74,.12)} .tier.host{color:var(--hostile);background:rgba(242,104,95,.12)} .tier.home{color:var(--sky);background:rgba(109,182,232,.12)}
   .planet .ptype{font-family:var(--f-m);font-size:11px;color:var(--muted);margin:3px 0 10px}
-  .pstats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;margin-bottom:11px}
+  .pstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-bottom:11px}
+  .pstats>*{min-width:0}
   .pstat{background:var(--void-2);border-radius:3px;padding:6px 6px;text-align:center}
   .pstat .pv{font-family:var(--f-m);font-size:13px;font-variant-numeric:tabular-nums;color:var(--ink)}
   .pstat .pl{font-family:var(--f-m);font-size:9px;color:var(--dim);letter-spacing:.06em;margin-top:1px}
@@ -217,7 +218,7 @@
   .emp-h small{font-family:var(--f-b);font-size:11.5px;letter-spacing:0;text-transform:none;color:var(--dim)}
   .branch{margin-bottom:14px}
   .br-t{font-family:var(--f-m);font-size:10.5px;color:var(--muted);letter-spacing:.1em;margin-bottom:7px}
-  .br-g{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+  .br-g{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
   @media(max-width:620px){.br-g{grid-template-columns:1fr}}
   .tech{background:var(--void-2);border:1px solid var(--line);border-radius:9px;padding:11px 12px}
   .tech.ok{border-color:var(--amber-line)}
@@ -246,7 +247,7 @@
   .ti-x{margin-left:auto;font-family:var(--f-m);font-size:11px;color:var(--muted)}
   .ti-d{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5}
   .ti-d b{color:var(--habit)}
-  .megas{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .megas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   @media(max-width:660px){.megas{grid-template-columns:1fr}}
   .mega{background:var(--void-2);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:7px}
   .mega.ok{border-color:var(--amber-line)}
@@ -320,7 +321,7 @@
   .rn-s{display:flex;justify-content:space-between;gap:10px;font-family:var(--f-m);font-size:10.5px;color:var(--muted);margin:7px 0 9px}
   .rnow .act{width:100%;font-family:var(--f-m);font-size:11.5px;padding:6px}
   .rnone{background:var(--void-2);border:1px dashed var(--line);border-radius:10px;padding:16px;text-align:center;color:var(--dim);font-size:12.5px}
-  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   @media(max-width:660px){.cards{grid-template-columns:1fr}}
   .card2{background:var(--void-2);border:1px solid var(--line);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:7px}
   .card2.rep{border-color:rgba(201,139,240,.45)} .card2.unl{border-color:rgba(109,182,232,.45)}
@@ -358,7 +359,8 @@
   .bld .bcx{color:var(--dim)}
 
   /* 안정도: 행복도 / 범죄율 */
-  .stab{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:6px}
+  .stab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;margin-bottom:6px}
+  .stab>*{min-width:0}
   .meter .mh{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--f-m);font-size:11px;color:var(--muted);margin-bottom:3px}
   .meter .mh b{font-size:13px;font-variant-numeric:tabular-nums}
   .mbar{height:6px;background:var(--void-2);border-radius:3px;overflow:hidden}
@@ -394,16 +396,17 @@
   .slotbar i{width:9px;height:9px;border-radius:2px;background:var(--void-2);border:1px solid var(--line)}
   .slotbar i.on{background:var(--amber);border-color:var(--amber)}
   /* 구역 타일 */
-  .dtiles{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px}
+  .dtiles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px;margin-bottom:12px}
+  .dtiles>*{min-width:0}
   .dtile{display:flex;align-items:center;gap:9px;text-align:left;background:var(--void-2);border:1px solid var(--line);border-radius:6px;padding:9px 10px;transition:.12s;position:relative}
   .dtile:hover:not(:disabled){border-color:var(--amber-line);background:var(--panel-2)}
   .dtile:disabled{opacity:.42;cursor:not-allowed}
   .dtile.built{border-color:rgba(246,183,60,.28)}
   .dt-ic{font-size:20px;flex:none;line-height:1;filter:saturate(1.1)}
-  .dt-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+  .dt-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px;padding-right:28px}
   .dt-n{font-family:var(--f-d);font-weight:600;font-size:12px;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .dt-n b{color:var(--amber)}
-  .dt-io{font-family:var(--f-m);font-size:10px}
+  .dt-io{font-family:var(--f-m);font-size:10px;line-height:1.35;word-break:keep-all}
   .dt-io .up-good{color:var(--habit)} .dt-io .up-bad{color:var(--hostile)}
   .dt-add{position:absolute;top:6px;right:8px;font-family:var(--f-m);font-size:13px;color:var(--dim)}
   .dtile:hover:not(:disabled) .dt-add{color:var(--amber)}
@@ -542,6 +545,13 @@
     .cards{grid-template-columns:1fr}
     .legend{display:none}
     .modal .card{width:min(94vw,520px);max-height:88dvh}
+
+    /* 구역 타일: 2열은 390px에서 한글 라벨이 잘리고 단어가 쪼개진다 → 1열로 편다 */
+    .dtiles{grid-template-columns:minmax(0,1fr)}
+    .dtile{padding:10px 12px}
+    .dt-b{padding-right:36px}
+    .dt-n{font-size:12.5px}
+    .dt-io{font-size:11px;word-break:keep-all}
   }
 
   /* 자원 생산/소비 툴팁 */
@@ -589,7 +599,7 @@
 
 <div class="app">
   <div class="top">
-    <div class="brand"><b>◆</b> 프로젝트 콜로니 <span style="font-family:var(--f-m);font-size:10px;color:var(--dim);letter-spacing:.14em">MVP</span></div>
+    <div class="brand" data-tip="골디락스 — 생명체가 살 수 있는 온도대(골디락스 존)에 놓인 행성을 찾아 정착시키는 게임입니다 · 등장하는 300개 항성계는 모두 실제 관측된 별입니다"><b>◆</b> 골디락스 <span style="font-family:var(--f-m);font-size:10px;color:var(--dim);letter-spacing:.14em">GOLDILOCKS</span></div>
     <div class="res" id="res"></div>
     <div class="gdate" id="gdate" data-tip="게임 내 날짜 — 1배속에서 1초당 5일이 흐릅니다">2200. 01. 01</div>
     <div class="speed" id="speed">
@@ -2082,22 +2092,31 @@ function initTips(){
     if(el){ anchor=el; showTip(el); }
     else if(!e.target.closest("#restip")){ anchor=null; hideResTip(); }
   });
+  let sx0=0, sy0=0, moved=false;
   document.addEventListener("pointerdown",e=>{
     if(e.pointerType!=="touch"){ return; }
     const el=e.target.closest("[data-tip]");
     hideResTip();                       // 새로 누르면 열려 있던 툴팁은 먼저 닫는다
+    held=false; moved=false; sx0=e.clientX; sy0=e.clientY;
     if(!el) return;
-    held=false;
     anchor=el;
-    if(!el.closest(TIP_ACTIVE)){ showTip(el); held=true; return; }   // 정보 요소: 즉시
     clearTimeout(holdT);
-    holdT=setTimeout(()=>{ held=true; showTip(el); }, 350);          // 버튼: 길게 누르기
+    // 정보 요소든 버튼이든 '길게 누르기'로 통일한다.
+    // 짧은 탭에서 툴팁이 떠 버리면 그 다음 클릭이 억제되어 버튼이 먹통이 된다.
+    holdT=setTimeout(()=>{ if(!moved){ held=true; showTip(el); } }, 500);
   },{passive:true});
-  const endHold=()=>{ clearTimeout(holdT); };
-  document.addEventListener("pointerup",endHold,{passive:true});
-  document.addEventListener("pointercancel",()=>{clearTimeout(holdT);hideResTip();},{passive:true});
+  // 손가락이 움직이면(=스크롤) 길게 누르기를 취소한다. 이게 없으면 스크롤할 때마다
+  // 툴팁이 뜨고, 뒤따르는 클릭이 막혀 화면이 먹통처럼 느껴진다.
+  document.addEventListener("pointermove",e=>{
+    if(e.pointerType!=="touch"||moved)return;
+    if(Math.abs(e.clientX-sx0)>8||Math.abs(e.clientY-sy0)>8){
+      moved=true; clearTimeout(holdT); if(!held) hideResTip(); }
+  },{passive:true});
+  document.addEventListener("pointerup",()=>{ clearTimeout(holdT); },{passive:true});
+  document.addEventListener("pointercancel",()=>{clearTimeout(holdT);held=false;hideResTip();},{passive:true});
   document.addEventListener("click",e=>{
-    if(held){ held=false; if(e.target.closest(TIP_ACTIVE)){ e.preventDefault(); e.stopPropagation(); } return; }
+    if(held){ held=false; e.preventDefault(); e.stopPropagation(); return; }   // 길게 눌러 툴팁을 띄운 경우에만
+    if(moved){ moved=false; return; }                                          // 스크롤 제스처였다면 아무것도 하지 않음
     const el=e.target.closest("[data-tip]");
     if(!el){ if(!e.target.closest("#restip")) hideResTip(); return; }
     // 정보 표시용 요소는 클릭으로도 열린다 (호버가 없는 기기 대비)
@@ -2404,8 +2423,14 @@ function employedTotal(e){return Object.values(e).reduce((a,b)=>a+b,0);}
 
 function renderAll(){renderTop();renderCoach();renderPanel();renderScore();updateReach();updateNodes();if(typeof renderLanes==='function'&&LANES.length)renderLanes();}
 /* 콜로니 패널을 매초 실시간 갱신 (스크롤 위치 유지) */
+/* 패널을 만지는 중에는 다시 그리지 않는다.
+   0.25초마다 innerHTML을 통째로 갈아끼우면 모바일에서 관성 스크롤이 끊기고,
+   손가락 아래의 버튼이 사라져 탭이 씹힌다. */
+let panelBusy=0;
+const markPanelBusy=()=>{ panelBusy=Date.now(); };
 function refreshPanelLive(){
   if($("modal").classList.contains("on"))return;
+  if(Date.now()-panelBusy < 900) return;     // 만지는 중 · 스크롤 직후에는 건너뜀
   const el=$("panel"); if(!el)return;
   const st=el.scrollTop; renderPanel(); el.scrollTop=st;
 }
@@ -2441,7 +2466,7 @@ function toast(msg,type){notify(msg,type||"warn");}
 function renderLog(){}   // 알림은 이제 상시 표시하지 않음 (자동 소멸)
 
 /* ============ 저장 ============ */
-const KEY="planet_colony_mvp_v4_tech";
+const KEY="goldilocks_v1";
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 function load(){try{const raw=localStorage.getItem(KEY);if(raw){S=JSON.parse(raw);return true;}}catch(e){}return false;}
 function exportSave(){return btoa(unescape(encodeURIComponent(JSON.stringify(S))));}
@@ -2699,6 +2724,9 @@ function boot(){
   $("panelClose").onclick=()=>appEl.classList.add("panel-closed");
   $("panelReopen").onclick=()=>appEl.classList.remove("panel-closed");
   initTips();   // 통합 툴팁 (마우스 오버 / 터치 길게 누르기)
+  {const pn=$("panel");
+   if(pn){ ["pointerdown","pointermove","scroll","touchstart","touchmove","wheel"].forEach(ev=>
+     pn.addEventListener(ev,markPanelBusy,{passive:true})); }}
   $("saveBtn").onclick=()=>{save();toast("저장 완료","good");};
   $("resetBtn").onclick=()=>{showModal(`<h2>새 게임을 시작할까요?</h2><p>현재 진행 상황이 사라집니다.</p><div class="row"><button class="act solid" id="mYes">새로 시작</button><button class="act ghost" id="mNo">취소</button></div>`,true);
     $("mYes").onclick=()=>{newGame();initMap();renderAll();$("modal").classList.remove("on");openHelp();};$("mNo").onclick=()=>$("modal").classList.remove("on");};
