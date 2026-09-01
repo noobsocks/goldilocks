@@ -1,5 +1,8 @@
 <title>골디락스</title>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -14,7 +17,13 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  html,body{overscroll-behavior:none;overscroll-behavior-x:none}
+  /* 웹앱: 더블탭 확대·더블탭 스크롤을 막는다.
+     touch-action:manipulation 이 실제로 이를 끄는 규칙이다 (iOS는 user-scalable=no 를 무시한다).
+     지도만은 직접 팬/핀치를 처리하므로 touch-action:none 을 따로 유지한다. */
+  html,body{overscroll-behavior:none;overscroll-behavior-x:none;
+    touch-action:manipulation;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+  button,.r,.dtile,.pol,.tk,.si,.jchip,.menu-btn,.act,.ev-o,.sheet-handle{touch-action:manipulation}
+  .side-scroll{overscroll-behavior:contain}
   body{background:var(--void);color:var(--ink);font-family:var(--f-b);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow:hidden}
   ::selection{background:var(--amber);color:#1a1206}
   button{font-family:inherit;cursor:pointer;color:inherit}
@@ -49,10 +58,19 @@
   .dot-e{background:var(--amber)} .dot-m{background:#b9c2cf} .dot-f{background:var(--habit)} .dot-r{background:var(--sky)} .dot-u{background:var(--marginal)} .dot-p{background:#c98bf0}
   .divider{width:1px;height:22px;background:var(--line);margin:0 2px}
   .speed{display:flex;gap:4px}
-  .speed button{background:var(--void-2);border:1px solid var(--line);border-radius:4px;padding:5px 10px;font-family:var(--f-m);font-size:12px;color:var(--muted)}
+  .speed button{background:var(--void-2);border:1px solid var(--line);border-radius:4px;padding:5px 9px;font-family:var(--f-m);font-size:12px;color:var(--muted);
+    display:inline-flex;align-items:center;justify-content:center;line-height:1;letter-spacing:-1px;white-space:nowrap;flex:none}
   .speed button.on{background:var(--amber);color:#1a1206;border-color:var(--amber);font-weight:600}
-  .menu-btn{background:var(--void-2);border:1px solid var(--line);border-radius:4px;padding:5px 11px;font-family:var(--f-m);font-size:12px;color:var(--muted)}
+  .menu-btn{background:var(--void-2);border:1px solid var(--line);border-radius:4px;padding:5px 11px;font-family:var(--f-m);font-size:12px;color:var(--muted);white-space:nowrap}
+  .menu-btn .mb-i{margin-right:5px}
   .menu-btn.help{border-color:var(--amber-line);color:var(--amber-2)}
+  .gsys{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+  .gsys-h{font-family:var(--f-m);font-size:10.5px;letter-spacing:.13em;color:var(--dim);margin-bottom:9px}
+  .gsys-b{display:flex;flex-wrap:wrap;gap:8px}
+  .gsys-b .act{flex:1;min-width:104px}
+  .gsys-n{font-size:11.5px;color:var(--dim);margin-top:9px;line-height:1.6}
+  .act.danger{border-color:rgba(242,104,95,.5);color:var(--hostile)}
+  .act.danger:hover{background:var(--hostile);color:#fff}
 
   /* COACH BAR */
   .coach{display:flex;align-items:center;gap:12px;padding:10px 18px;background:linear-gradient(90deg,rgba(246,183,60,.14),rgba(246,183,60,.03));border-bottom:1px solid var(--amber-line)}
@@ -339,11 +357,17 @@
   .terra{background:var(--void-2);border:1px solid var(--line);border-radius:9px;padding:11px 12px;margin-bottom:12px}
   .tr-now{font-family:var(--f-m);font-size:12px;margin-bottom:9px;color:var(--muted)}
   .tr-now b{color:var(--habit);font-size:14px} .tr-now small{color:var(--dim)}
+  .tr-up{color:var(--habit);font-weight:600;font-size:10.5px;margin-left:4px}
   .tr-nx{color:var(--amber-2)}
   .terra .act{width:100%;font-family:var(--f-m);font-size:12px;padding:7px}
 
   /* 행성 특성 칩 */
   .ptags{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 4px}
+  .ptag.unk{border-style:dashed;color:var(--dim)}
+  .probing{background:var(--void-2);border:1px solid var(--amber-line);border-radius:6px;padding:11px 13px;margin-top:6px}
+  .pb-t{font-family:var(--f-m);font-size:11.5px;color:var(--amber-2);margin-bottom:7px}
+  .pbar{height:5px;background:var(--void);border-radius:3px;overflow:hidden;margin-bottom:9px}
+  .pbar i{display:block;height:100%;background:var(--amber-2);transition:width .3s linear}
   .ptag{display:inline-flex;align-items:center;gap:4px;font-family:var(--f-m);font-size:10.5px;background:var(--void-2);border:1px solid var(--line);border-radius:11px;padding:2px 8px;color:#b8c2d4;cursor:default}
   .ptag.dep{background:rgba(246,183,60,.14);border-color:rgba(246,183,60,.5);color:var(--amber-2)}
 
@@ -409,6 +433,22 @@
   .dt-io{font-family:var(--f-m);font-size:10px;line-height:1.35;word-break:keep-all}
   .dt-io .up-good{color:var(--habit)} .dt-io .up-bad{color:var(--hostile)}
   .dt-add{position:absolute;top:6px;right:8px;font-family:var(--f-m);font-size:13px;color:var(--dim)}
+  /* 공사 진행 게이지 */
+  .dwrap.building .dtile{border-color:var(--amber-line);background:rgba(246,183,60,.06)}
+  .dt-bar{display:block;height:4px;border-radius:2px;background:var(--void);overflow:hidden;margin-top:5px}
+  .dt-bar i{display:block;height:100%;background:var(--amber-2);transition:width .3s linear}
+  .dt-bt{font-family:var(--f-m);font-size:9.5px;color:var(--amber-2);margin-top:3px}
+  .pol.lock{opacity:.4}
+  .pol-lock{font-family:var(--f-m);font-size:10px;color:var(--amber-2)}
+  .pw-box{background:var(--void-2);border:1px solid var(--line);border-radius:6px;padding:11px 13px;margin-bottom:9px}
+  .pw-h{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;color:var(--dim);margin-bottom:7px}
+  .pw-h small{letter-spacing:0;text-transform:none}
+  .pw-r{display:flex;justify-content:space-between;gap:12px;padding:3px 0;font-size:13px;color:var(--muted)}
+  .pw-r b{font-family:var(--f-m);color:var(--ink)}
+  .pw-r b.g{color:var(--habit)} .pw-r b.b{color:var(--hostile)}
+  .pw-warn{background:rgba(242,104,95,.1);border:1px solid rgba(242,104,95,.35);border-radius:6px;
+    padding:11px 13px;font-size:12.5px;color:var(--ink);line-height:1.65;margin:4px 0 16px}
+  .slotbar i.wip{background:var(--amber-line);opacity:.6}
   .dtile:hover:not(:disabled) .dt-add{color:var(--amber)}
   /* 순생산 박스 */
   .prodbox{display:flex;flex-wrap:wrap;align-items:center;gap:7px 10px;background:var(--void-2);border:1px solid var(--line);border-radius:6px;padding:9px 11px;margin-bottom:8px}
@@ -488,7 +528,7 @@
     .r .rate{font-size:9.5px}
     .brand{font-size:13px}
     .menu-btn{padding:5px 9px;font-size:11.5px}
-    #speed button{width:30px;height:28px}
+    #speed button{min-width:30px;height:28px;padding:0 7px}
     .speed{flex:none}
   }
   /* 폰: 터치 타깃 확보 + 정보 밀도 완화 */
@@ -538,7 +578,12 @@
     .zoomctl{bottom:56px;right:10px}                /* 시트 핸들에 가리지 않게 */
     .app:not(.sheet-peek) .zoomctl{display:none}    /* 시트를 펼치면 지도 조작 버튼은 숨김 */
     .menu-btn,#speed button{min-height:34px}
-    #speed button{width:34px}
+    /* 도움말 라벨을 접어 날짜·배속·기술·도움말이 한 줄에 들어가게 한다 */
+    #helpBtn .mb-t{display:none}
+    #helpBtn .mb-i{margin-right:0;font-size:14px}
+    .menu-btn{padding:5px 9px}
+    .gdate{letter-spacing:-.02em}
+    #speed button{min-width:34px;padding:0 8px}
     .act{min-height:38px}
     .pol,.dtile,.jmv{min-height:34px}
     .card2 .act,.terra .act,.anom .act,.rnow .act{min-height:36px}
@@ -608,8 +653,8 @@
       <button data-s="2" data-tip="2배속 — 1초당 10일">▶▶</button>
       <button data-s="4" data-tip="4배속 — 1초당 20일">▶▶▶</button>
     </div>
-    <button class="menu-btn tech" id="empBtn" data-tip="기술 트리 — 연구 진행과 메가구조물 · 단축키 T">⚛ 기술</button>
-    <button class="menu-btn help" id="helpBtn" data-tip="도움말 — 용어와 규칙 설명">? 도움말</button>
+    <button class="menu-btn tech" id="empBtn" data-tip="기술 트리 — 연구 진행과 메가구조물 · 단축키 T"><span class="mb-i">⚛</span><span class="mb-t">기술</span></button>
+    <button class="menu-btn help" id="helpBtn" data-tip="도움말 — 용어·규칙 설명과 게임 관리(저장 · 세이브 코드 · 새 게임)"><span class="mb-i">?</span><span class="mb-t">도움말</span></button>
     <button class="menu-btn" id="saveBtn">저장</button>
     <button class="menu-btn" id="ioBtn">세이브 코드</button>
     <button class="menu-btn" id="resetBtn">새 게임</button>
@@ -668,31 +713,41 @@
 const SYSTEMS = [{"id":"sol","name":"태양계","en":"Sol","dist":0,"star":"G2V","ang":0,"planets":[{"n":"지구","t":"지구형 암석","r":1.0,"m":1.0,"temp":255,"esi":1.0,"home":true},{"n":"화성","t":"지구형 암석","r":0.53,"m":0.11,"temp":210,"esi":0.64},{"n":"금성","t":"지구형 암석","r":0.95,"m":0.82,"temp":232,"esi":0.44},{"n":"목성","t":"가스 거인","r":11.2,"m":317.8,"temp":110,"esi":0.12}]},{"name":"Proxima Centauri","star":"M5.5V","dist":4.24,"planets":[{"n":"Proxima Cen b","t":"슈퍼지구","r":1.1,"m":1.07,"temp":234,"esi":0.87},{"n":"Proxima Cen d","t":"지구형 암석","r":0.81,"m":0.26,"temp":360,"esi":0.3},{"n":"Proxima Cen c","t":"미니 해왕성","r":1.5,"m":7.0,"temp":39,"esi":0.1}],"id":"proxima-centauri","en":"Proxima Centauri","ang":137.51},{"id":"barnard-s-star","name":"Barnard's star","en":"Barnard's star","dist":6,"star":"M3.5-4 V","planets":[{"n":"Barnard d","t":"지구형 암석","r":0.69,"m":0.26,"temp":483,"esi":0.75}],"ang":275.02},{"id":"gj-887","name":"GJ 887","en":"GJ 887","dist":10.7,"star":"M1 V","planets":[{"n":"GJ 887 c","t":"슈퍼지구","r":2.43,"m":6.5,"temp":320,"esi":0.72},{"n":"GJ 887 e","t":"지구형 암석","r":1.12,"m":1.46,"temp":544,"esi":0.78}],"ang":327.54},{"name":"Ross 128","star":"M4.0V","dist":11.0,"planets":[{"n":"Ross 128 b","t":"슈퍼지구","r":1.1,"m":1.4,"temp":294,"esi":0.86}],"id":"ross-128","en":"Ross 128","ang":105.05},{"id":"gl-725-a","name":"Gl 725 A","en":"Gl 725 A","dist":11.5,"star":"M3","planets":[{"n":"Gl 725 A b","t":"지구형 암석","r":1.48,"m":2.78,"temp":376,"esi":0.81}],"ang":242.56},{"id":"tau-cet","name":"tau Cet","en":"tau Cet","dist":11.8,"star":"G8.5V","planets":[{"n":"tau Cet g","t":"지구형 암석","r":1.18,"m":1.75,"temp":640,"esi":0.72}],"ang":20.06},{"id":"gj-1061","name":"GJ 1061","en":"GJ 1061","dist":12,"star":"M5.5 V","planets":[{"n":"GJ 1061 d","t":"지구형 암석","r":1.16,"m":1.67,"temp":242,"esi":0.95}],"ang":157.57},{"name":"Luyten's Star","star":"M3.5V","dist":12.36,"planets":[{"n":"GJ 273 b","t":"슈퍼지구","r":1.35,"m":2.9,"temp":259,"esi":0.91},{"n":"GJ 273 c","t":"지구형 암석","r":0.9,"m":1.2,"temp":470,"esi":0.35}],"id":"luyten-s-star","en":"Luyten's Star","ang":72.59},{"id":"teegarden-s-star","name":"Teegarden's Star","en":"Teegarden's Star","dist":12.5,"star":"M7.0 V","planets":[{"n":"Teegarden's Star c","t":"지구형 암석","r":1.02,"m":1.05,"temp":209,"esi":0.94}],"ang":210.1},{"id":"gj-1002","name":"GJ 1002","en":"GJ 1002","dist":15.8,"star":"M5.5 V","planets":[{"n":"GJ 1002 b","t":"지구형 암석","r":1.03,"m":1.08,"temp":231,"esi":0.97}],"ang":262.62},{"id":"gj-251","name":"GJ 251","en":"GJ 251","dist":18.2,"star":"M3.0 V","planets":[{"n":"GJ 251 c","t":"슈퍼지구","r":1.8,"m":3.88,"temp":216,"esi":0.81}],"ang":40.13},{"id":"gl-725-b","name":"Gl 725 B","en":"Gl 725 B","dist":22.3,"star":"M4","planets":[{"n":"Gl 725 B c","t":"슈퍼지구","r":1.66,"m":3.4,"temp":215,"esi":0.83}],"ang":315.14},{"id":"ltt-1445-a","name":"LTT 1445 A","en":"LTT 1445 A","dist":22.4,"star":"M3.0","planets":[{"n":"LTT 1445 A c","t":"지구형 암석","r":1.15,"m":1.54,"temp":508,"esi":0.79},{"n":"LTT 1445 A b","t":"지구형 암석","r":1.34,"m":2.73,"temp":431,"esi":0.8}],"ang":92.65},{"id":"gj-357","name":"GJ 357","en":"GJ 357","dist":30.8,"star":"M2.5 V","planets":[{"n":"GJ 357 c","t":"슈퍼지구","r":1.66,"m":3.4,"temp":401,"esi":0.76},{"n":"GJ 357 d","t":"슈퍼지구","r":2.34,"m":6.1,"temp":220,"esi":0.74},{"n":"GJ 357 b","t":"지구형 암석","r":1.2,"m":1.83,"temp":518,"esi":0.77}],"ang":145.18},{"id":"hd-260655","name":"HD 260655","en":"HD 260655","dist":32.6,"star":"M0 V","planets":[{"n":"HD 260655 b","t":"지구형 암석","r":1.24,"m":2.14,"temp":709,"esi":0.69},{"n":"HD 260655 c","t":"지구형 암석","r":1.53,"m":3.09,"temp":557,"esi":0.7}],"ang":335.21},{"id":"l-363-38","name":"L 363-38","en":"L 363-38","dist":33.4,"star":"M V","planets":[{"n":"L 363-38 b","t":"슈퍼지구","r":2,"m":4.67,"temp":330,"esi":0.76}],"ang":112.72},{"id":"gj-341","name":"GJ 341","en":"GJ 341","dist":34.1,"star":"M1","planets":[{"n":"GJ 341 b","t":"지구형 암석","r":0.88,"m":4,"temp":629,"esi":0.73}],"ang":250.22},{"id":"l-98-59","name":"L 98-59","en":"L 98-59","dist":34.6,"star":"M3 V","planets":[{"n":"L 98-59 c","t":"지구형 암석","r":1.33,"m":2,"temp":526,"esi":0.75},{"n":"L 98-59 b","t":"지구형 암석","r":0.84,"m":0.46,"temp":620,"esi":0.73},{"n":"L 98-59 e","t":"지구형 암석","r":1.49,"m":2.82,"temp":347,"esi":0.82},{"n":"L 98-59 f","t":"지구형 암석","r":1.48,"m":2.8,"temp":285,"esi":0.87},{"n":"L 98-59 d","t":"슈퍼지구","r":1.63,"m":1.64,"temp":416,"esi":0.76}],"ang":27.73},{"id":"gliese-12","name":"Gliese 12","en":"Gliese 12","dist":39.8,"star":"M4 V","planets":[{"n":"Gliese 12 b","t":"지구형 암석","r":0.93,"m":0.95,"temp":315,"esi":0.93}],"ang":80.26},{"id":"trappist-1","name":"TRAPPIST-1","en":"TRAPPIST-1","dist":40.5,"star":"M8.0 V","planets":[{"n":"TRAPPIST-1 d","t":"지구형 암석","r":0.79,"m":0.39,"temp":286,"esi":0.91},{"n":"TRAPPIST-1 h","t":"지구형 암석","r":0.76,"m":0.33,"temp":172,"esi":0.83},{"n":"TRAPPIST-1 c","t":"지구형 암석","r":1.1,"m":1.31,"temp":340,"esi":0.9},{"n":"TRAPPIST-1 e","t":"지구형 암석","r":0.92,"m":0.69,"temp":250,"esi":0.97},{"n":"TRAPPIST-1 f","t":"지구형 암석","r":1.05,"m":1.04,"temp":218,"esi":0.95},{"n":"TRAPPIST-1 b","t":"지구형 암석","r":1.12,"m":1.37,"temp":398,"esi":0.86},{"n":"TRAPPIST-1 g","t":"지구형 암석","r":1.13,"m":1.32,"temp":197,"esi":0.9}],"ang":217.76},{"id":"55-cnc-b","name":"55 Cnc B","en":"55 Cnc B","dist":40.7,"star":"M4.5 V","planets":[{"n":"55 Cnc B b","t":"슈퍼지구","r":1.69,"m":3.5,"temp":395,"esi":0.76},{"n":"55 Cnc B c","t":"슈퍼지구","r":2.16,"m":5.3,"temp":230,"esi":0.77}],"ang":355.27},{"id":"lhs-475","name":"LHS 475","en":"LHS 475","dist":40.7,"star":"M3.5 V","planets":[{"n":"LHS 475 b","t":"지구형 암석","r":0.99,"m":0.94,"temp":586,"esi":0.78}],"ang":132.78},{"id":"gj-1132","name":"GJ 1132","en":"GJ 1132","dist":41.1,"star":"M4.5 V","planets":[{"n":"GJ 1132 c","t":"지구형 암석","r":1.52,"m":2.91,"temp":300,"esi":0.85},{"n":"GJ 1132 b","t":"지구형 암석","r":1.19,"m":1.84,"temp":584,"esi":0.75}],"ang":185.3},{"id":"lhs-1140","name":"LHS 1140","en":"LHS 1140","dist":48.9,"star":"M4.5 V","planets":[{"n":"LHS 1140 b","t":"슈퍼지구","r":1.73,"m":5.6,"temp":226,"esi":0.83},{"n":"LHS 1140 c","t":"지구형 암석","r":1.27,"m":1.91,"temp":422,"esi":0.81}],"ang":152.84},{"id":"gj-3929","name":"GJ 3929","en":"GJ 3929","dist":51.6,"star":"M3.5 V","planets":[{"n":"GJ 3929 c","t":"슈퍼지구","r":2.26,"m":5.71,"temp":317,"esi":0.74},{"n":"GJ 3929 b","t":"지구형 암석","r":1.09,"m":1.75,"temp":568,"esi":0.77}],"ang":67.86},{"id":"gj-676-a","name":"GJ 676 A","en":"GJ 676 A","dist":52.3,"star":"M0","planets":[{"n":"GJ 676 A d","t":"슈퍼지구","r":1.78,"m":3.81,"temp":757,"esi":0.6},{"n":"GJ 676 A e","t":"슈퍼지구","r":2.47,"m":6.67,"temp":352,"esi":0.7}],"ang":205.37},{"id":"gj-3998","name":"GJ 3998","en":"GJ 3998","dist":59.2,"star":"M1","planets":[{"n":"GJ 3998 d","t":"슈퍼지구","r":2.34,"m":6.07,"temp":292,"esi":0.75}],"ang":172.91},{"id":"lhs-1478","name":"LHS 1478","en":"LHS 1478","dist":59.5,"star":"m3 V","planets":[{"n":"LHS 1478 b","t":"지구형 암석","r":1.24,"m":2.33,"temp":595,"esi":0.73}],"ang":310.42},{"id":"toi-260","name":"TOI-260","en":"TOI-260","dist":65.8,"star":"K8 V","planets":[{"n":"TOI-260 b","t":"슈퍼지구","r":1.71,"m":4.23,"temp":493,"esi":0.71}],"ang":277.96},{"id":"ltt-3780","name":"LTT 3780","en":"LTT 3780","dist":71.7,"star":"M3.5 V","planets":[{"n":"LTT 3780 c","t":"슈퍼지구","r":2.39,"m":8.04,"temp":359,"esi":0.7},{"n":"LTT 3780 b","t":"지구형 암석","r":1.33,"m":2.46,"temp":903,"esi":0.61}],"ang":160.51},{"id":"toi-270","name":"TOI-270","en":"TOI-270","dist":73.3,"star":"M3 V","planets":[{"n":"TOI-270 b","t":"지구형 암석","r":1.28,"m":1.48,"temp":600,"esi":0.72},{"n":"TOI-270 c","t":"슈퍼지구","r":2.33,"m":6.2,"temp":489,"esi":0.64},{"n":"TOI-270 d","t":"슈퍼지구","r":2,"m":4.2,"temp":383,"esi":0.73}],"ang":213.04},{"id":"toi-4336-a","name":"TOI-4336 A","en":"TOI-4336 A","dist":73.5,"star":"M3.5 V","planets":[{"n":"TOI-4336 A b","t":"슈퍼지구","r":2.14,"m":3.33,"temp":309,"esi":0.76},{"n":"TOI-4336 A c","t":"지구형 암석","r":1.25,"m":1.55,"temp":400,"esi":0.83}],"ang":350.54},{"id":"toi-1468","name":"TOI-1468","en":"TOI-1468","dist":80.7,"star":"M3.0 V","planets":[{"n":"TOI-1468 c","t":"슈퍼지구","r":2.13,"m":4.1,"temp":338,"esi":0.74},{"n":"TOI-1468 b","t":"지구형 암석","r":1.4,"m":3.04,"temp":684,"esi":0.67}],"ang":318.08},{"id":"toi-771","name":"TOI-771","en":"TOI-771","dist":82.4,"star":"M3","planets":[{"n":"TOI-771 b","t":"지구형 암석","r":1.36,"m":2.47,"temp":543,"esi":0.74},{"n":"TOI-771 c","t":"지구형 암석","r":1.5,"m":2.87,"temp":365,"esi":0.81}],"ang":233.1},{"id":"lp-791-18","name":"LP 791-18","en":"LP 791-18","dist":86.4,"star":"M(6.1 +/- 0.7) V","planets":[{"n":"LP 791-18 d","t":"지구형 암석","r":1.03,"m":0.91,"temp":396,"esi":0.88},{"n":"LP 791-18 c","t":"슈퍼지구","r":2.49,"m":7.16,"temp":324,"esi":0.71},{"n":"LP 791-18 b","t":"지구형 암석","r":1.21,"m":1.94,"temp":564,"esi":0.75}],"ang":63.13},{"id":"toi-776","name":"TOI-776","en":"TOI-776","dist":88.6,"star":"M1 V","planets":[{"n":"TOI-776 c","t":"슈퍼지구","r":2.05,"m":6.9,"temp":420,"esi":0.7},{"n":"TOI-776 b","t":"슈퍼지구","r":1.8,"m":5,"temp":520,"esi":0.69}],"ang":338.15},{"id":"g-9-40","name":"G 9-40","en":"G 9-40","dist":91.1,"star":"M2.5 V","planets":[{"n":"G 9-40 b","t":"슈퍼지구","r":1.9,"m":4,"temp":441,"esi":0.71}],"ang":83.2},{"id":"gj-9827","name":"GJ 9827","en":"GJ 9827","dist":96.7,"star":"K7 V","planets":[{"n":"GJ 9827 d","t":"슈퍼지구","r":1.98,"m":3.02,"temp":675,"esi":0.61},{"n":"GJ 9827 c","t":"지구형 암석","r":1.13,"m":1.86,"temp":716,"esi":0.7},{"n":"GJ 9827 b","t":"지구형 암석","r":1.44,"m":4.28,"temp":1035,"esi":0.57}],"ang":325.75},{"id":"lhs-1815","name":"LHS 1815","en":"LHS 1815","dist":97.3,"star":"M1","planets":[{"n":"LHS 1815 b","t":"지구형 암석","r":1.09,"m":1.58,"temp":617,"esi":0.75}],"ang":103.26},{"id":"toi-700","name":"TOI-700","en":"TOI-700","dist":101.5,"star":"M2.5 V","planets":[{"n":"TOI-700 b","t":"지구형 암석","r":0.91,"m":0.7,"temp":417,"esi":0.85},{"n":"TOI-700 d","t":"지구형 암석","r":1.07,"m":1.25,"temp":269,"esi":0.97},{"n":"TOI-700 c","t":"미니 해왕성","r":2.6,"m":7.27,"temp":356,"esi":0.68},{"n":"TOI-700 e","t":"지구형 암석","r":0.95,"m":0.82,"temp":273,"esi":0.97}],"ang":18.28},{"id":"lp-890-9","name":"LP 890-9","en":"LP 890-9","dist":105.8,"star":"M6 V","planets":[{"n":"LP 890-9 c","t":"지구형 암석","r":1.37,"m":25.3,"temp":272,"esi":0.9},{"n":"LP 890-9 b","t":"지구형 암석","r":1.32,"m":13.2,"temp":396,"esi":0.82}],"ang":345.82},{"id":"toi-5720","name":"TOI-5720","en":"TOI-5720","dist":116.8,"star":"M3.5 +/- 1.0","planets":[{"n":"TOI-5720 b","t":"지구형 암석","r":1.09,"m":4.3,"temp":708,"esi":0.71}],"ang":228.37},{"id":"toi-1266","name":"TOI-1266","en":"TOI-1266","dist":117.5,"star":"M2","planets":[{"n":"TOI-1266 d","t":"슈퍼지구","r":1.74,"m":3.68,"temp":288,"esi":0.83}],"ang":143.39},{"id":"k2-18","name":"K2-18","en":"K2-18","dist":124,"star":"M2.5 V","planets":[{"n":"K2-18 b","t":"슈퍼지구","r":2.37,"m":8.92,"temp":284,"esi":0.75},{"n":"K2-18 c","t":"미니 해왕성","r":2.65,"m":7.51,"temp":363,"esi":0.67}],"ang":300.96},{"id":"toi-2285","name":"TOI-2285","en":"TOI-2285","dist":138.3,"star":"M V","planets":[{"n":"TOI-2285 b","t":"슈퍼지구","r":1.77,"m":19.5,"temp":358,"esi":0.78}],"ang":321.02},{"id":"k2-136","name":"K2-136","en":"K2-136","dist":193.2,"star":"K5 V","planets":[{"n":"K2-136 c","t":"미니 해왕성","r":3,"m":18.1,"temp":470,"esi":0.59},{"n":"K2-136 d","t":"지구형 암석","r":1.57,"m":3,"temp":420,"esi":0.77},{"n":"K2-136 b","t":"지구형 암석","r":1.01,"m":4.3,"temp":610,"esi":0.77}],"ang":283.84},{"id":"toi-2322","name":"TOI-2322","en":"TOI-2322","dist":195.2,"star":"K4","planets":[{"n":"TOI-2322 c","t":"슈퍼지구","r":1.87,"m":18.1,"temp":497,"esi":0.69},{"n":"TOI-2322 b","t":"지구형 암석","r":0.99,"m":2.31,"temp":603,"esi":0.77}],"ang":61.34},{"id":"kepler-138","name":"Kepler-138","en":"Kepler-138","dist":218.1,"star":"M1 V","planets":[{"n":"Kepler-138 d","t":"지구형 암석","r":1.51,"m":2.1,"temp":345,"esi":0.82}],"ang":69.01},{"id":"kepler-445","name":"Kepler-445","en":"Kepler-445","dist":414.9,"star":"M4","planets":[{"n":"Kepler-445 d","t":"지구형 암석","r":1.25,"m":2.1,"temp":305,"esi":0.9}],"ang":119.75},{"id":"k2-338","name":"K2-338","en":"K2-338","dist":511.9,"star":"M V","planets":[{"n":"K2-338 b","t":"지구형 암석","r":1.03,"m":1.08,"temp":783,"esi":0.7}],"ang":337.51},{"id":"kepler-296","name":"Kepler-296","en":"Kepler-296","dist":544.7,"star":"M2 V","planets":[{"n":"Kepler-296 f","t":"슈퍼지구","r":1.8,"m":3.89,"temp":274,"esi":0.83}],"ang":272.59},{"id":"kepler-398","name":"Kepler-398","en":"Kepler-398","dist":578.5,"star":"M V","planets":[{"n":"Kepler-398 c","t":"지구형 암석","r":1.01,"m":1.01,"temp":536,"esi":0.8}],"ang":155.15},{"id":"kepler-1948","name":"Kepler-1948","en":"Kepler-1948","dist":632.4,"star":"M V","planets":[{"n":"Kepler-1948 b","t":"지구형 암석","r":1.03,"m":1.09,"temp":399,"esi":0.88}],"ang":110.29},{"id":"kepler-131","name":"Kepler-131","en":"Kepler-131","dist":745.8,"star":"M V","planets":[{"n":"Kepler-131 c","t":"지구형 암석","r":0.84,"m":8.25,"temp":615,"esi":0.73}],"ang":158.09},{"id":"kepler-1735","name":"Kepler-1735","en":"Kepler-1735","dist":800.1,"star":"M V","planets":[{"n":"Kepler-1735 b","t":"지구형 암석","r":1.19,"m":1.84,"temp":502,"esi":0.78}],"ang":40.64},{"id":"kepler-1697","name":"Kepler-1697","en":"Kepler-1697","dist":808.1,"star":"M V","planets":[{"n":"Kepler-1697 b","t":"지구형 암석","r":1.26,"m":2.12,"temp":630,"esi":0.71}],"ang":93.17},{"id":"kepler-1074","name":"Kepler-1074","en":"Kepler-1074","dist":818.1,"star":"M V","planets":[{"n":"Kepler-1074 b","t":"지구형 암석","r":1.25,"m":2.1,"temp":568,"esi":0.74}],"ang":145.69},{"id":"kepler-114","name":"Kepler-114","en":"Kepler-114","dist":846.5,"star":"M0 V","planets":[{"n":"Kepler-114 b","t":"지구형 암석","r":1.26,"m":1.09,"temp":586,"esi":0.73}],"ang":250.74},{"id":"kepler-1904","name":"Kepler-1904","en":"Kepler-1904","dist":883.4,"star":"M V","planets":[{"n":"Kepler-1904 b","t":"지구형 암석","r":1.39,"m":2.51,"temp":567,"esi":0.72}],"ang":270.8},{"id":"kepler-1008","name":"Kepler-1008","en":"Kepler-1008","dist":921.6,"star":"M V","planets":[{"n":"Kepler-1008 b","t":"지구형 암석","r":1.28,"m":2.18,"temp":627,"esi":0.71}],"ang":173.42},{"id":"kepler-236","name":"Kepler-236","en":"Kepler-236","dist":941.8,"star":"M1 V","planets":[{"n":"Kepler-236 c","t":"슈퍼지구","r":2,"m":4.66,"temp":329,"esi":0.76}],"ang":225.95},{"id":"kepler-1124","name":"Kepler-1124","en":"Kepler-1124","dist":945.5,"star":"M V","planets":[{"n":"Kepler-1124 b","t":"지구형 암석","r":1.28,"m":2.18,"temp":621,"esi":0.71}],"ang":278.47},{"id":"kepler-62","name":"Kepler-62","en":"Kepler-62","dist":981.3,"star":"K2 V","planets":[{"n":"Kepler-62 f","t":"지구형 암석","r":1.41,"m":35,"temp":208,"esi":0.86}],"ang":246.01},{"id":"kepler-988","name":"Kepler-988","en":"Kepler-988","dist":994.4,"star":"M V","planets":[{"n":"Kepler-988 b","t":"슈퍼지구","r":2.07,"m":4.94,"temp":368,"esi":0.73}],"ang":298.54},{"id":"kepler-1630","name":"Kepler-1630","en":"Kepler-1630","dist":1080.3,"star":"M V","planets":[{"n":"Kepler-1630 b","t":"슈퍼지구","r":2.19,"m":5.43,"temp":182,"esi":0.72}],"ang":31.19},{"id":"epic-212737443","name":"EPIC 212737443","en":"EPIC 212737443","dist":1096.7,"star":"K3","planets":[{"n":"EPIC 212737443 c","t":"미니 해왕성","r":2.69,"m":7.7,"temp":316,"esi":0.7}],"ang":358.73},{"id":"kepler-167","name":"Kepler-167","en":"Kepler-167","dist":1115.2,"star":"K4","planets":[{"n":"Kepler-167 d","t":"지구형 암석","r":1.24,"m":2.06,"temp":538,"esi":0.76},{"n":"Kepler-167 e","t":"가스 거인","r":10.16,"m":321.01,"temp":134,"esi":0.35},{"n":"Kepler-167 b","t":"슈퍼지구","r":1.72,"m":3.6,"temp":918,"esi":0.57},{"n":"Kepler-167 c","t":"슈퍼지구","r":1.67,"m":3.44,"temp":771,"esi":0.61}],"ang":188.76},{"id":"kepler-1157","name":"Kepler-1157","en":"Kepler-1157","dist":1115.9,"star":"M V","planets":[{"n":"Kepler-1157 b","t":"지구형 암석","r":1.09,"m":1.32,"temp":732,"esi":0.7}],"ang":326.27},{"id":"kepler-1190","name":"Kepler-1190","en":"Kepler-1190","dist":1117.1,"star":"M V","planets":[{"n":"Kepler-1190 b","t":"지구형 암석","r":1.33,"m":2.33,"temp":609,"esi":0.71}],"ang":241.28},{"id":"kepler-81","name":"Kepler-81","en":"Kepler-81","dist":1136,"star":"M0 V","planets":[{"n":"Kepler-81 d","t":"지구형 암석","r":1.21,"m":1.92,"temp":418,"esi":0.83}],"ang":208.82},{"id":"kepler-174","name":"Kepler-174","en":"Kepler-174","dist":1254.9,"star":"M V","planets":[{"n":"Kepler-174 d","t":"슈퍼지구","r":2.19,"m":5.43,"temp":212,"esi":0.75}],"ang":301.48},{"id":"kepler-395","name":"Kepler-395","en":"Kepler-395","dist":1374.4,"star":"M V","planets":[{"n":"Kepler-395 c","t":"지구형 암석","r":1.32,"m":2.3,"temp":341,"esi":0.86}],"ang":34.13},{"id":"kepler-106","name":"Kepler-106","en":"Kepler-106","dist":1449.2,"star":"M V","planets":[{"n":"Kepler-106 d","t":"지구형 암석","r":0.95,"m":8.1,"temp":649,"esi":0.74},{"n":"Kepler-106 e","t":"미니 해왕성","r":2.56,"m":11.17,"temp":531,"esi":0.6}],"ang":74.26},{"id":"kepler-1388","name":"Kepler-1388","en":"Kepler-1388","dist":1480.1,"star":"M V","planets":[{"n":"Kepler-1388 b","t":"미니 해왕성","r":2.59,"m":7.22,"temp":434,"esi":0.64},{"n":"Kepler-1388 e","t":"슈퍼지구","r":2.46,"m":6.62,"temp":299,"esi":0.73},{"n":"Kepler-1388 c","t":"슈퍼지구","r":2.26,"m":5.73,"temp":566,"esi":0.62}],"ang":94.32},{"id":"kepler-1459","name":"Kepler-1459","en":"Kepler-1459","dist":1485.6,"star":"M V","planets":[{"n":"Kepler-1459 b","t":"지구형 암석","r":1.36,"m":2.42,"temp":349,"esi":0.85}],"ang":231.83},{"id":"kepler-1178","name":"Kepler-1178","en":"Kepler-1178","dist":1573,"star":"M V","planets":[{"n":"Kepler-1178 b","t":"지구형 암석","r":1.07,"m":1.24,"temp":378,"esi":0.88}],"ang":29.4},{"id":"kepler-1058","name":"Kepler-1058","en":"Kepler-1058","dist":1604.7,"star":"M V","planets":[{"n":"Kepler-1058 b","t":"미니 해왕성","r":2.72,"m":7.85,"temp":239,"esi":0.72}],"ang":324.48},{"id":"kepler-1840","name":"Kepler-1840","en":"Kepler-1840","dist":1673.5,"star":"M V","planets":[{"n":"Kepler-1840 b","t":"미니 해왕성","r":2.78,"m":8.13,"temp":284,"esi":0.71}],"ang":37.07},{"id":"kepler-1965","name":"Kepler-1965","en":"Kepler-1965","dist":1701.9,"star":"M V","planets":[{"n":"Kepler-1965 b","t":"지구형 암석","r":1.35,"m":2.4,"temp":492,"esi":0.76}],"ang":89.59},{"id":"kepler-1992","name":"Kepler-1992","en":"Kepler-1992","dist":1738.3,"star":"M V","planets":[{"n":"Kepler-1992 b","t":"지구형 암석","r":0.91,"m":0.69,"temp":637,"esi":0.74}],"ang":227.1},{"id":"kepler-354","name":"Kepler-354","en":"Kepler-354","dist":1807.1,"star":"M V","planets":[{"n":"Kepler-354 c","t":"지구형 암석","r":1.31,"m":2.27,"temp":508,"esi":0.76}],"ang":194.64},{"id":"kepler-331","name":"Kepler-331","en":"Kepler-331","dist":1892.1,"star":"M V","planets":[{"n":"Kepler-331 d","t":"슈퍼지구","r":1.64,"m":3.33,"temp":346,"esi":0.8}],"ang":267.23},{"id":"kepler-1701","name":"Kepler-1701","en":"Kepler-1701","dist":1905.2,"star":"M V","planets":[{"n":"Kepler-1701 b","t":"슈퍼지구","r":2.22,"m":5.57,"temp":273,"esi":0.77}],"ang":44.74},{"id":"kepler-1849","name":"Kepler-1849","en":"Kepler-1849","dist":2060.9,"star":"M V","planets":[{"n":"Kepler-1849 b","t":"슈퍼지구","r":2.39,"m":6.29,"temp":355,"esi":0.7}],"ang":274.9},{"id":"kepler-1126","name":"Kepler-1126","en":"Kepler-1126","dist":2073.5,"star":"M V","planets":[{"n":"Kepler-1126 b","t":"슈퍼지구","r":1.73,"m":3.64,"temp":374,"esi":0.77}],"ang":52.4},{"id":"kepler-595","name":"Kepler-595","en":"Kepler-595","dist":2097.2,"star":"M V","planets":[{"n":"Kepler-595 c","t":"지구형 암석","r":1.01,"m":3.3,"temp":679,"esi":0.74},{"n":"Kepler-595 b","t":"미니 해왕성","r":3.71,"m":17.4,"temp":535,"esi":0.52}],"ang":189.91},{"id":"kepler-1690","name":"Kepler-1690","en":"Kepler-1690","dist":2295.5,"star":"M V","planets":[{"n":"Kepler-1690 b","t":"미니 해왕성","r":2.81,"m":8.3,"temp":267,"esi":0.72}],"ang":60.07},{"id":"kepler-1545","name":"Kepler-1545","en":"Kepler-1545","dist":2380.8,"star":"M V","planets":[{"n":"Kepler-1545 b","t":"미니 해왕성","r":2.7,"m":7.75,"temp":274,"esi":0.72}],"ang":27.61},{"id":"kepler-230","name":"Kepler-230","en":"Kepler-230","dist":2416,"star":"M V","planets":[{"n":"Kepler-230 c","t":"슈퍼지구","r":2.04,"m":4.82,"temp":359,"esi":0.74}],"ang":217.64},{"id":"kepler-371","name":"Kepler-371","en":"Kepler-371","dist":2652.3,"star":"M V","planets":[{"n":"Kepler-371 c","t":"슈퍼지구","r":1.78,"m":3.82,"temp":443,"esi":0.73}],"ang":277.84},{"id":"kepler-1440","name":"Kepler-1440","en":"Kepler-1440","dist":3637.8,"star":"M V","planets":[{"n":"Kepler-1440 b","t":"지구형 암석","r":1.26,"m":2.13,"temp":597,"esi":0.73}],"ang":308.51},{"id":"kepler-1503","name":"Kepler-1503","en":"Kepler-1503","dist":3997.3,"star":"M V","planets":[{"n":"Kepler-1503 b","t":"슈퍼지구","r":2.27,"m":5.77,"temp":321,"esi":0.74}],"ang":263.65},{"id":"kepler-1489","name":"Kepler-1489","en":"Kepler-1489","dist":4184.7,"star":"G","planets":[{"n":"Kepler-1489 b","t":"슈퍼지구","r":1.77,"m":3.78,"temp":400,"esi":0.75}],"ang":8.7},{"name":"Wolf 359","star":"M6.0V","dist":7.86,"planets":[{"n":"Wolf 359 b","t":"슈퍼지구","r":1.7,"m":3.8,"temp":520,"esi":0.24},{"n":"Wolf 359 c","t":"미니 해왕성","r":2.0,"m":5.0,"temp":70,"esi":0.08}],"id":"wolf-359","en":"Wolf 359","ang":52.52},{"name":"Lalande 21185","star":"M2.0V","dist":8.31,"planets":[{"n":"GJ 411 b","t":"슈퍼지구","r":1.4,"m":2.7,"temp":370,"esi":0.32},{"n":"GJ 411 c","t":"미니 해왕성","r":2.3,"m":18,"temp":110,"esi":0.09}],"id":"lalande-21185","en":"Lalande 21185","ang":190.03},{"name":"YZ Ceti","star":"M4.0V","dist":12.1,"planets":[{"n":"YZ Ceti b","t":"지구형 암석","r":0.75,"m":0.7,"temp":470,"esi":0.3},{"n":"YZ Ceti c","t":"지구형 암석","r":0.9,"m":1.1,"temp":410,"esi":0.38},{"n":"YZ Ceti d","t":"지구형 암석","r":1.0,"m":1.1,"temp":350,"esi":0.47}],"id":"yz-ceti","en":"YZ Ceti","ang":295.08},{"id":"gj-674","name":"GJ 674","en":"GJ 674","dist":14.8,"star":"M2.5","planets":[{"n":"GJ 674 b","t":"미니 해왕성","r":3.33,"m":11.09,"temp":531,"esi":0.55}],"ang":347.6},{"id":"gj-876","name":"GJ 876","en":"GJ 876","dist":15.2,"star":"M2.5V","planets":[{"n":"GJ 876 c","t":"가스 거인","r":14,"m":226.98,"temp":242,"esi":0.36}],"ang":125.11},{"id":"hd-219134","name":"HD 219134","en":"HD 219134","dist":21.3,"star":"K3 V","planets":[{"n":"HD 219134 g","t":"미니 해왕성","r":3.28,"m":10.81,"temp":339,"esi":0.63},{"n":"HD 219134 h","t":"가스 거인","r":12.7,"m":108.06,"temp":118,"esi":0.3}],"ang":177.64},{"id":"gj-486","name":"GJ 486","en":"GJ 486","dist":26.3,"star":"M3.5 V","planets":[{"n":"GJ 486 b","t":"지구형 암석","r":1.29,"m":2.77,"temp":696,"esi":0.68}],"ang":230.16},{"id":"gj-367","name":"GJ 367","en":"GJ 367","dist":30.7,"star":"M1.0 V","planets":[{"n":"GJ 367 c","t":"슈퍼지구","r":1.86,"m":4.13,"temp":null,"esi":0.49},{"n":"GJ 367 d","t":"슈퍼지구","r":2.33,"m":6.03,"temp":null,"esi":0.42},{"n":"GJ 367 b","t":"지구형 암석","r":0.74,"m":0.5,"temp":1329,"esi":0.52}],"ang":7.67},{"id":"hd-285968","name":"HD 285968","en":"HD 285968","dist":30.9,"star":"M2 V","planets":[{"n":"HD 285968 b","t":"미니 해왕성","r":2.83,"m":8.4,"temp":450,"esi":0.61}],"ang":282.68},{"id":"au-mic","name":"AU Mic","en":"AU Mic","dist":31.7,"star":"M1 V","planets":[{"n":"AU Mic b","t":"미니 해왕성","r":4.79,"m":8.99,"temp":555,"esi":0.47},{"n":"AU Mic c","t":"미니 해왕성","r":2.79,"m":14.46,"temp":425,"esi":0.63},{"n":"AU Mic e","t":"미니 해왕성","r":4.87,"m":21.1,"temp":null,"esi":0.24},{"n":"AU Mic d","t":"지구형 암석","r":1.02,"m":1.05,"temp":null,"esi":0.69}],"ang":60.19},{"id":"gj-436","name":"GJ 436","en":"GJ 436","dist":31.8,"star":"M2.5 V","planets":[{"n":"GJ 436 b","t":"미니 해왕성","r":4.17,"m":22.1,"temp":686,"esi":0.46}],"ang":197.7},{"id":"gj-180","name":"GJ 180","en":"GJ 180","dist":38.9,"star":"M3","planets":[{"n":"GJ 180 d","t":"미니 해왕성","r":2.66,"m":7.56,"temp":188,"esi":0.68}],"ang":165.24},{"id":"gj-806","name":"GJ 806","en":"GJ 806","dist":39.3,"star":"M1.5 V","planets":[{"n":"GJ 806 b","t":"지구형 암석","r":1.33,"m":1.9,"temp":940,"esi":0.61},{"n":"GJ 806 c","t":"슈퍼지구","r":2.28,"m":5.8,"temp":490,"esi":0.65}],"ang":302.75},{"id":"hd-69830","name":"HD 69830","en":"HD 69830","dist":41,"star":"K0V","planets":[{"n":"HD 69830 c","t":"미니 해왕성","r":3.46,"m":11.8,"temp":567,"esi":0.53}],"ang":270.29},{"id":"55-cnc","name":"55 Cnc","en":"55 Cnc","dist":41,"star":"G8 V","planets":[{"n":"55 Cnc e","t":"슈퍼지구","r":1.88,"m":7.99,"temp":1958,"esi":0.4},{"n":"55 Cnc d","t":"가스 거인","r":13,"m":1232.49,"temp":105,"esi":0.29},{"n":"55 Cnc c","t":"가스 거인","r":8.51,"m":54.47,"temp":499,"esi":0.38},{"n":"55 Cnc b","t":"가스 거인","r":13.9,"m":263.98,"temp":700,"esi":0.27},{"n":"55 Cnc f","t":"가스 거인","r":7.59,"m":44.81,"temp":277,"esi":0.47}],"ang":47.8},{"id":"ups-and","name":"ups And","en":"ups And","dist":43.7,"star":"F8 V","planets":[{"n":"ups And d","t":"가스 거인","r":12.5,"m":3257.74,"temp":234,"esi":0.38},{"n":"ups And b","t":"가스 거인","r":14,"m":218.53,"temp":1524,"esi":0.2}],"ang":322.81},{"id":"hip-79431","name":"HIP 79431","en":"HIP 79431","dist":47.4,"star":"M3 V","planets":[{"n":"HIP 79431 b","t":"가스 거인","r":13.4,"m":667.42,"temp":177,"esi":0.34}],"ang":100.32},{"id":"gj-1214","name":"GJ 1214","en":"GJ 1214","dist":47.8,"star":"M4 V","planets":[{"n":"GJ 1214 b","t":"미니 해왕성","r":2.73,"m":8.41,"temp":567,"esi":0.58}],"ang":237.83},{"id":"lhs-3844","name":"LHS 3844","en":"LHS 3844","dist":48.5,"star":"M4.5-M5.0","planets":[{"n":"LHS 3844 b","t":"지구형 암석","r":1.29,"m":2.37,"temp":816,"esi":0.64}],"ang":15.34},{"id":"hd-160691","name":"HD 160691","en":"HD 160691","dist":50.9,"star":"G3 IV-V","planets":[{"n":"HD 160691 b","t":"가스 거인","r":7.55,"m":1366.66,"temp":262,"esi":0.48}],"ang":290.35},{"id":"hd-128311","name":"HD 128311","en":"HD 128311","dist":53.3,"star":"K0","planets":[{"n":"HD 128311 b","t":"가스 거인","r":13.5,"m":562.24,"temp":200,"esi":0.35}],"ang":342.88},{"id":"gj-3021","name":"GJ 3021","en":"GJ 3021","dist":57.3,"star":"G6 V","planets":[{"n":"GJ 3021 b","t":"가스 거인","r":13.1,"m":1071.04,"temp":350,"esi":0.35}],"ang":120.38},{"id":"hd-153557","name":"HD 153557","en":"HD 153557","dist":58.5,"star":"K0","planets":[{"n":"HD 153557 b","t":"미니 해왕성","r":4.77,"m":20.34,"temp":772,"esi":0.41}],"ang":257.89},{"id":"toi-4527","name":"TOI-4527","en":"TOI-4527","dist":59,"star":"M2V:","planets":[{"n":"TOI-4527.01","t":"지구형 암석","r":0.91,"m":0.69,"temp":1363,"esi":0.55}],"ang":35.4},{"id":"hd-39091","name":"HD 39091","en":"HD 39091","dist":59.6,"star":"G0 V","planets":[{"n":"pi Men d","t":"미니 해왕성","r":3.72,"m":13.38,"temp":444,"esi":0.56},{"n":"pi Men c","t":"슈퍼지구","r":2.02,"m":3.63,"temp":1170,"esi":0.49},{"n":"HD 39091 b","t":"가스 거인","r":12.3,"m":4481.38,"temp":173,"esi":0.35}],"ang":87.92},{"id":"hd-27442","name":"HD 27442","en":"HD 27442","dist":59.6,"star":"K1/2III","planets":[{"n":"HD 27442 b","t":"가스 거인","r":13.5,"m":495.8,"temp":370,"esi":0.34}],"ang":225.43},{"id":"hip-54373","name":"HIP 54373","en":"HIP 54373","dist":61,"star":"K5 V","planets":[{"n":"HIP 54373 c","t":"미니 해왕성","r":3.57,"m":12.44,"temp":463,"esi":0.56}],"ang":2.94},{"id":"hd-189733","name":"HD 189733","en":"HD 189733","dist":64.5,"star":"K2 V","planets":[{"n":"HD 189733 b","t":"가스 거인","r":12.67,"m":359.15,"temp":1209,"esi":0.23}],"ang":140.45},{"id":"toi-6255","name":"TOI-6255","en":"TOI-6255","dist":66.3,"star":"M V","planets":[{"n":"TOI-6255 b","t":"지구형 암석","r":1.08,"m":1.44,"temp":1256,"esi":0.57}],"ang":55.46},{"id":"toi-5789","name":"TOI-5789","en":"TOI-5789","dist":66.7,"star":"K1 V","planets":[{"n":"TOI-5789 c","t":"미니 해왕성","r":2.86,"m":5,"temp":718,"esi":0.52}],"ang":192.97},{"id":"gj-328","name":"GJ 328","en":"GJ 328","dist":66.9,"star":"M0.0","planets":[{"n":"GJ 328 c","t":"미니 해왕성","r":4.91,"m":21.4,"temp":184,"esi":0.53},{"n":"GJ 328 b","t":"가스 거인","r":13.3,"m":797.75,"temp":74,"esi":0.25}],"ang":330.48},{"id":"toi-6324","name":"TOI-6324","en":"TOI-6324","dist":67,"star":"M V","planets":[{"n":"TOI-6324 b","t":"지구형 암석","r":1.06,"m":1.17,"temp":1216,"esi":0.58}],"ang":107.99},{"id":"hd-215152","name":"HD 215152","en":"HD 215152","dist":70.4,"star":"K3 V","planets":[{"n":"HD 215152 e","t":"가스 거인","r":6.87,"m":975.42,"temp":518,"esi":0.41}],"ang":245.5},{"id":"hd-90156","name":"HD 90156","en":"HD 90156","dist":71.6,"star":"G5V","planets":[{"n":"HD 90156 b","t":"미니 해왕성","r":4.43,"m":17.98,"temp":518,"esi":0.49}],"ang":23.0},{"id":"cd-35-2722","name":"CD-35 2722","en":"CD-35 2722","dist":73,"star":"M1 V","planets":[{"n":"CD-35 2722 b","t":"가스 거인","r":17.37,"m":9375.94,"temp":1800,"esi":0.16}],"ang":298.02},{"id":"gj-3090","name":"GJ 3090","en":"GJ 3090","dist":73.3,"star":"M2 V","planets":[{"n":"GJ 3090 b","t":"슈퍼지구","r":2.18,"m":4.52,"temp":723,"esi":0.57},{"n":"GJ 3090 c","t":"미니 해왕성","r":3.14,"m":10,"temp":407,"esi":0.61}],"ang":75.53},{"id":"toi-2134","name":"TOI-2134","en":"TOI-2134","dist":73.8,"star":"K5 V","planets":[{"n":"TOI-2134 b","t":"미니 해왕성","r":2.74,"m":9.37,"temp":660,"esi":0.55},{"n":"TOI-2134 c","t":"가스 거인","r":7.35,"m":58.3,"temp":302,"esi":0.47}],"ang":128.05},{"id":"hd-207496","name":"HD 207496","en":"HD 207496","dist":77,"star":"K2.5 V","planets":[{"n":"HD 207496 b","t":"슈퍼지구","r":2.25,"m":6.1,"temp":743,"esi":0.56}],"ang":265.56},{"id":"kobe-1","name":"KOBE-1","en":"KOBE-1","dist":78.2,"star":"K7 V","planets":[{"n":"KOBE-1 b","t":"미니 해왕성","r":2.91,"m":8.8,"temp":594,"esi":0.55}],"ang":43.07},{"id":"wd-1856-534","name":"WD 1856+534","en":"WD 1856+534","dist":80.7,"star":"DC","planets":[{"n":"WD 1856+534 b","t":"가스 거인","r":10.4,"m":4386.05,"temp":163,"esi":0.37}],"ang":180.58},{"id":"l-168-9","name":"L 168-9","en":"L 168-9","dist":82,"star":"M0.5 V","planets":[{"n":"L 168-9 b","t":"슈퍼지구","r":1.63,"m":4.07,"temp":998,"esi":0.56}],"ang":95.59},{"id":"dmpp-4","name":"DMPP-4","en":"DMPP-4","dist":82.6,"star":"F5-F8 V","planets":[{"n":"DMPP-4 b","t":"미니 해왕성","r":3.53,"m":12.2,"temp":1646,"esi":0.34}],"ang":10.61},{"id":"hd-16417","name":"HD 16417","en":"HD 16417","dist":82.8,"star":"G1 V","planets":[{"n":"HD 16417 b","t":"미니 해왕성","r":5,"m":22.1,"temp":964,"esi":0.37}],"ang":148.12},{"id":"toi-912","name":"TOI-912","en":"TOI-912","dist":85.2,"star":"M3","planets":[{"n":"TOI-912 b","t":"슈퍼지구","r":1.93,"m":5.1,"temp":551,"esi":0.66}],"ang":285.62},{"id":"hd-134606","name":"HD 134606","en":"HD 134606","dist":87.4,"star":"G5IV","planets":[{"n":"HD 134606 c","t":"미니 해왕성","r":3.37,"m":11.31,"temp":528,"esi":0.55}],"ang":200.64},{"id":"gj-3473","name":"GJ 3473","en":"GJ 3473","dist":89.3,"star":"M4","planets":[{"n":"GJ 3473 b","t":"지구형 암석","r":1.26,"m":1.86,"temp":773,"esi":0.66},{"n":"GJ 3473 c","t":"미니 해왕성","r":2.63,"m":7.41,"temp":329,"esi":0.69}],"ang":115.66},{"id":"hd-179949","name":"HD 179949","en":"HD 179949","dist":89.6,"star":"F8 V","planets":[{"n":"HD 179949 b","t":"가스 거인","r":13.9,"m":291.12,"temp":1591,"esi":0.19}],"ang":253.16},{"id":"toi-836","name":"TOI-836","en":"TOI-836","dist":89.7,"star":"K V","planets":[{"n":"TOI-836 b","t":"슈퍼지구","r":1.7,"m":4.53,"temp":871,"esi":0.58},{"n":"TOI-836.01","t":"미니 해왕성","r":2.59,"m":9.6,"temp":665,"esi":0.56}],"ang":30.67},{"id":"toi-1231","name":"TOI-1231","en":"TOI-1231","dist":90.1,"star":"M3 V","planets":[{"n":"TOI-1231 b","t":"미니 해왕성","r":3.65,"m":15.4,"temp":330,"esi":0.61}],"ang":168.18},{"id":"hd-176986","name":"HD 176986","en":"HD 176986","dist":90.6,"star":"K2.5 V","planets":[{"n":"HD 176986 c","t":"가스 거인","r":8.51,"m":2097.99,"temp":558,"esi":0.36}],"ang":305.69},{"id":"hd-207897","name":"HD 207897","en":"HD 207897","dist":92.3,"star":"K0 V","planets":[{"n":"HD 207897 b","t":"슈퍼지구","r":2.34,"m":14.8,"temp":582,"esi":0.6}],"ang":220.7},{"id":"wolf-327","name":"Wolf 327","en":"Wolf 327","dist":93.1,"star":"M2.5 V","planets":[{"n":"Wolf 327 b","t":"지구형 암석","r":1.24,"m":2.53,"temp":996,"esi":0.6}],"ang":358.21},{"id":"hd-21411","name":"HD 21411","en":"HD 21411","dist":95,"star":"G8 V","planets":[{"n":"HD 21411 b","t":"가스 거인","r":9.52,"m":65.9,"temp":408,"esi":0.38}],"ang":135.72},{"id":"hd-219077","name":"HD 219077","en":"HD 219077","dist":95.2,"star":"G8 V+","planets":[{"n":"HD 219077 b","t":"가스 거인","r":12.5,"m":3057.51,"temp":147,"esi":0.33}],"ang":273.23},{"id":"gj-3470","name":"GJ 3470","en":"GJ 3470","dist":96,"star":"M1.5","planets":[{"n":"GJ 3470 b","t":"미니 해왕성","r":4.57,"m":13.9,"temp":594,"esi":0.46}],"ang":50.74},{"id":"hd-46375","name":"HD 46375","en":"HD 46375","dist":96.4,"star":"K1 IV-V","planets":[{"n":"HD 46375 b","t":"가스 거인","r":10,"m":71.8,"temp":1221,"esi":0.25}],"ang":188.24},{"id":"toi-1801","name":"TOI-1801","en":"TOI-1801","dist":100.1,"star":"M0.5+/-0.5 V","planets":[{"n":"TOI-1801 b","t":"슈퍼지구","r":2.08,"m":5.74,"temp":494,"esi":0.66}],"ang":240.77},{"id":"hd-29985","name":"HD 29985","en":"HD 29985","dist":102,"star":"M V","planets":[{"n":"HD 29985 b","t":"가스 거인","r":12.8,"m":1739.47,"temp":47,"esi":0.21}],"ang":155.78},{"id":"hd-185283","name":"HD 185283","en":"HD 185283","dist":102.4,"star":"K3 V","planets":[{"n":"HD 185283 b","t":"가스 거인","r":13.6,"m":413.18,"temp":94,"esi":0.27}],"ang":293.29},{"id":"hd-12235","name":"HD 12235","en":"HD 12235","dist":103.6,"star":"M V","planets":[{"n":"HD 12235 b","t":"미니 해왕성","r":3.23,"m":10.49,"temp":1667,"esi":0.35}],"ang":70.8},{"id":"hd-110067","name":"HD 110067","en":"HD 110067","dist":104.9,"star":"K0.0 V","planets":[{"n":"HD 110067 e","t":"슈퍼지구","r":1.94,"m":3.9,"temp":533,"esi":0.66},{"n":"HD 110067 g","t":"미니 해왕성","r":2.61,"m":8.4,"temp":440,"esi":0.64},{"n":"HD 110067 f","t":"미니 해왕성","r":2.6,"m":5.04,"temp":489,"esi":0.62},{"n":"HD 110067 d","t":"미니 해왕성","r":2.85,"m":8.52,"temp":602,"esi":0.56},{"n":"HD 110067 c","t":"슈퍼지구","r":2.39,"m":6.3,"temp":699,"esi":0.56},{"n":"HD 110067 b","t":"슈퍼지구","r":2.2,"m":5.69,"temp":800,"esi":0.55}],"ang":208.31},{"id":"toi-431","name":"TOI-431","en":"TOI-431","dist":106.2,"star":"M V","planets":[{"n":"TOI-431 c","t":"지구형 암석","r":1.49,"m":2.83,"temp":867,"esi":0.6},{"n":"TOI-431 b","t":"지구형 암석","r":1.28,"m":3.07,"temp":1862,"esi":0.46},{"n":"TOI-431 d","t":"미니 해왕성","r":3.29,"m":9.9,"temp":633,"esi":0.52}],"ang":123.32},{"id":"hd-88986","name":"HD 88986","en":"HD 88986","dist":108.5,"star":"G2 V","planets":[{"n":"HD 88986 b","t":"슈퍼지구","r":2.49,"m":17.2,"temp":460,"esi":0.64}],"ang":260.83},{"id":"hr-2562","name":"HR 2562","en":"HR 2562","dist":110.9,"star":"F5 V","planets":[{"n":"HR 2562 b","t":"가스 거인","r":12.44,"m":6992.22,"temp":1255,"esi":0.22}],"ang":38.34},{"id":"hd-51608","name":"HD 51608","en":"HD 51608","dist":114.3,"star":"G7 V","planets":[{"n":"HD 51608 c","t":"미니 해왕성","r":3.87,"m":14.31,"temp":401,"esi":0.57},{"n":"HD 51608 b","t":"미니 해왕성","r":3.62,"m":12.77,"temp":760,"esi":0.47}],"ang":175.85},{"id":"hd-65216","name":"HD 65216","en":"HD 65216","dist":114.5,"star":"G5 V","planets":[{"n":"HD 65216 b","t":"가스 거인","r":13.6,"m":411.59,"temp":223,"esi":0.36}],"ang":313.36},{"id":"hd-142415","name":"HD 142415","en":"HD 142415","dist":115.9,"star":"G1 V","planets":[{"n":"HD 142415 b","t":"가스 거인","r":13.5,"m":530.78,"temp":284,"esi":0.36}],"ang":90.86},{"id":"hd-20782","name":"HD 20782","en":"HD 20782","dist":117.4,"star":"G1.5 V","planets":[{"n":"HD 20782 b","t":"가스 거인","r":13.6,"m":472.83,"temp":253,"esi":0.37}],"ang":5.88},{"id":"toi-2431","name":"TOI-2431","en":"TOI-2431","dist":117.6,"star":"K7 V","planets":[{"n":"TOI-2431 b","t":"지구형 암석","r":1.53,"m":6.2,"temp":2063,"esi":0.42}],"ang":280.9},{"id":"kepler-444","name":"Kepler-444","en":"Kepler-444","dist":118.8,"star":"K","planets":[{"n":"Kepler-444 c","t":"지구형 암석","r":0.5,"m":0.08,"temp":868,"esi":0.55},{"n":"Kepler-444 f","t":"지구형 암석","r":0.74,"m":0.33,"temp":673,"esi":0.68}],"ang":58.4},{"id":"toi-2459","name":"TOI-2459","en":"TOI-2459","dist":119.4,"star":"M V","planets":[{"n":"TOI-2459 b","t":"미니 해왕성","r":2.95,"m":9.03,"temp":445,"esi":0.61}],"ang":195.91},{"id":"hd-73256","name":"HD 73256","en":"HD 73256","dist":119.7,"star":"G8 IV","planets":[{"n":"HD 73256 c","t":"가스 거인","r":12.2,"m":5085.25,"temp":134,"esi":0.32}],"ang":333.42},{"id":"hd-141399","name":"HD 141399","en":"HD 141399","dist":120.7,"star":"K0","planets":[{"n":"HD 141399 e","t":"가스 거인","r":14.1,"m":209.77,"temp":142,"esi":0.31}],"ang":110.93},{"id":"toi-1685","name":"TOI-1685","en":"TOI-1685","dist":122.7,"star":"M3 V","planets":[{"n":"TOI-1685 b","t":"지구형 암석","r":1.42,"m":3.07,"temp":1000,"esi":0.58}],"ang":248.44},{"id":"hat-p-11","name":"HAT-P-11","en":"HAT-P-11","dist":123.2,"star":"K4","planets":[{"n":"HAT-P-11 b","t":"미니 해왕성","r":4.36,"m":25,"temp":838,"esi":0.42},{"n":"HAT-P-11 c","t":"가스 거인","r":13.2,"m":851.78,"temp":92,"esi":0.27}],"ang":25.94},{"id":"hd-12661","name":"HD 12661","en":"HD 12661","dist":123.4,"star":"K0","planets":[{"n":"HD 12661 c","t":"가스 거인","r":13.2,"m":899.45,"temp":174,"esi":0.34}],"ang":163.45},{"id":"hd-31527","name":"HD 31527","en":"HD 31527","dist":125.4,"star":"G2 V","planets":[{"n":"HD 31527 c","t":"미니 해왕성","r":3.85,"m":14.16,"temp":571,"esi":0.5}],"ang":78.47},{"id":"hd-196067","name":"HD 196067","en":"HD 196067","dist":130.2,"star":"G0 V","planets":[{"n":"HD 196067 b","t":"가스 거인","r":12.4,"m":3623.24,"temp":176,"esi":0.35}],"ang":215.98},{"id":"toi-1759","name":"TOI-1759","en":"TOI-1759","dist":130.7,"star":"M0.0 V","planets":[{"n":"TOI-1759 b","t":"미니 해왕성","r":3.14,"m":10.8,"temp":443,"esi":0.59}],"ang":353.48},{"id":"hd-206893","name":"HD 206893","en":"HD 206893","dist":132.9,"star":"F5 V","planets":[{"n":"HD 206893 c","t":"가스 거인","r":16.37,"m":3527.9,"temp":1182,"esi":0.2}],"ang":130.99},{"id":"toi-544","name":"TOI-544","en":"TOI-544","dist":134.1,"star":"M V","planets":[{"n":"TOI-544 c","t":"미니 해왕성","r":4.92,"m":21.5,"temp":null,"esi":0.24}],"ang":268.5},{"id":"toi-1442","name":"TOI-1442","en":"TOI-1442","dist":134.3,"star":"M V","planets":[{"n":"TOI-1442 b","t":"지구형 암석","r":1.17,"m":1.71,"temp":1072,"esi":0.6}],"ang":46.01},{"id":"toi-2076","name":"TOI-2076","en":"TOI-2076","dist":136.7,"star":"K V","planets":[{"n":"TOI-2076 d","t":"미니 해왕성","r":3.27,"m":7.3,"temp":490,"esi":0.57},{"n":"TOI-2076 b","t":"미니 해왕성","r":2.59,"m":6.7,"temp":736,"esi":0.54},{"n":"TOI-2076 e","t":"지구형 암석","r":1.3,"m":4.7,"temp":1110,"esi":0.57},{"n":"TOI-2076 c","t":"미니 해왕성","r":3.54,"m":7.2,"temp":581,"esi":0.52}],"ang":183.52},{"id":"toi-1807","name":"TOI-1807","en":"TOI-1807","dist":138.9,"star":"M V","planets":[{"n":"TOI-1807 b","t":"지구형 암석","r":1.5,"m":2.44,"temp":1694,"esi":0.46}],"ang":98.53},{"id":"toi-3884","name":"TOI-3884","en":"TOI-3884","dist":140.7,"star":"M4","planets":[{"n":"TOI-3884 b","t":"가스 거인","r":6.43,"m":32.59,"temp":441,"esi":0.44}],"ang":236.04},{"id":"hd-93385","name":"HD 93385","en":"HD 93385","dist":141.4,"star":"G2/G3 V","planets":[{"n":"HD 93385 c","t":"미니 해왕성","r":2.56,"m":7.1,"temp":937,"esi":0.49}],"ang":13.55},{"id":"bd-05-4868-a","name":"BD+05 4868 A","en":"BD+05 4868 A","dist":142.1,"star":"K V","planets":[{"n":"BD+05 4868 A b","t":"슈퍼지구","r":1.67,"m":6.2,"temp":1820,"esi":0.43}],"ang":151.06},{"id":"hip-81991","name":"HIP 81991","en":"HIP 81991","dist":143.2,"star":"G8 V","planets":[{"n":"HIP 81991 b","t":"가스 거인","r":12.5,"m":3019.37,"temp":163,"esi":0.34}],"ang":288.56},{"id":"hd-15337","name":"HD 15337","en":"HD 15337","dist":146.2,"star":"K1 V","planets":[{"n":"HD 15337 c","t":"미니 해왕성","r":2.53,"m":6.79,"temp":656,"esi":0.56},{"n":"HD 15337 b","t":"슈퍼지구","r":1.77,"m":6.52,"temp":1001,"esi":0.54}],"ang":66.07},{"id":"hd-86226","name":"HD 86226","en":"HD 86226","dist":149,"star":"G1 V","planets":[{"n":"HD 86226 c","t":"슈퍼지구","r":2.16,"m":7.25,"temp":1311,"esi":0.45},{"n":"HD 86226 b","t":"가스 거인","r":14.3,"m":143.02,"temp":176,"esi":0.33}],"ang":203.58},{"id":"hd-202206","name":"HD 202206","en":"HD 202206","dist":149.9,"star":"G2 V","planets":[{"n":"HD 202206 c","t":"가스 거인","r":13.1,"m":982.09,"temp":183,"esi":0.34},{"n":"HD 202206 b","t":"가스 거인","r":12.1,"m":6849.2,"temp":315,"esi":0.37}],"ang":341.09},{"id":"toi-674","name":"TOI-674","en":"TOI-674","dist":150.3,"star":"M2 V","planets":[{"n":"TOI-674 b","t":"미니 해왕성","r":5.25,"m":23.6,"temp":635,"esi":0.43}],"ang":118.6},{"id":"hd-50499","name":"HD 50499","en":"HD 50499","dist":151,"star":"G1 V","planets":[{"n":"HD 50499 c","t":"가스 거인","r":13.2,"m":931.24,"temp":117,"esi":0.3}],"ang":256.1},{"id":"hd-37605","name":"HD 37605","en":"HD 37605","dist":152.6,"star":"K0","planets":[{"n":"HD 37605 c","t":"가스 거인","r":13.1,"m":1013.88,"temp":127,"esi":0.31}],"ang":33.61},{"id":"hd-3167","name":"HD 3167","en":"HD 3167","dist":154.2,"star":"K0 V","planets":[{"n":"HD 3167 e","t":"미니 해왕성","r":3.97,"m":14.9,"temp":389,"esi":0.56},{"n":"HD 3167 c","t":"미니 해왕성","r":2.98,"m":11.41,"temp":567,"esi":0.56},{"n":"HD 3167 b","t":"슈퍼지구","r":1.6,"m":4.84,"temp":1781,"esi":0.44},{"n":"HD 3167 d","t":"미니 해왕성","r":2.61,"m":7.3,"temp":865,"esi":0.5}],"ang":171.12},{"id":"toi-500","name":"TOI-500","en":"TOI-500","dist":154.6,"star":"K6 V","planets":[{"n":"TOI-500 b","t":"지구형 암석","r":1.17,"m":1.42,"temp":1617,"esi":0.5},{"n":"TOI-500 e","t":"미니 해왕성","r":3.99,"m":15.05,"temp":null,"esi":0.28},{"n":"TOI-500 d","t":"가스 거인","r":6.35,"m":33.12,"temp":null,"esi":0.19},{"n":"TOI-500 c","t":"슈퍼지구","r":2.09,"m":5.03,"temp":null,"esi":0.45}],"ang":308.63},{"id":"hd-209458","name":"HD 209458","en":"HD 209458","dist":157.5,"star":"G0 V","planets":[{"n":"HD 209458 b","t":"가스 거인","r":15.58,"m":232.02,"temp":1459,"esi":0.19}],"ang":86.14},{"id":"hd-153950","name":"HD 153950","en":"HD 153950","dist":158,"star":"F8 V","planets":[{"n":"HD 153950 b","t":"가스 거인","r":13.2,"m":937.6,"temp":295,"esi":0.36}],"ang":223.64},{"id":"toi-2445","name":"TOI-2445","en":"TOI-2445","dist":158.5,"star":"M V","planets":[{"n":"TOI-2445 b","t":"지구형 암석","r":1.25,"m":2.1,"temp":1060,"esi":0.59}],"ang":1.15},{"id":"hd-63935","name":"HD 63935","en":"HD 63935","dist":159.7,"star":"M V","planets":[{"n":"HD 63935 b","t":"미니 해왕성","r":2.92,"m":10.5,"temp":825,"esi":0.49},{"n":"HD 63935 c","t":"미니 해왕성","r":3.06,"m":11.1,"temp":620,"esi":0.54}],"ang":138.66},{"id":"hd-107148","name":"HD 107148","en":"HD 107148","dist":161.2,"star":"G5 V","planets":[{"n":"HD 107148 b","t":"가스 거인","r":9.6,"m":66.74,"temp":583,"esi":0.34}],"ang":276.17},{"id":"wasp-80","name":"WASP-80","en":"WASP-80","dist":162.4,"star":"K7-M0 V","planets":[{"n":"WASP-80 b","t":"가스 거인","r":11.2,"m":170.99,"temp":825,"esi":0.28}],"ang":53.68},{"id":"wasp-69","name":"WASP-69","en":"WASP-69","dist":162.9,"star":"K","planets":[{"n":"WASP-69 b","t":"가스 거인","r":11.21,"m":82.58,"temp":971,"esi":0.26}],"ang":191.18},{"id":"kap-and","name":"kap And","en":"kap And","dist":163.1,"star":"B9 IVn","planets":[{"n":"kap And b","t":"가스 거인","r":15.92,"m":5498.43,"temp":1791,"esi":0.17}],"ang":328.69},{"id":"ab-pic","name":"AB Pic","en":"AB Pic","dist":163.2,"star":"K2 V","planets":[{"n":"AB Pic b","t":"가스 거인","r":12.3,"m":4290.5,"temp":16,"esi":0.13}],"ang":106.2},{"id":"hd-9446","name":"HD 9446","en":"HD 9446","dist":164.2,"star":"G5 V","planets":[{"n":"HD 9446 b","t":"가스 거인","r":14,"m":222.47,"temp":643,"esi":0.28}],"ang":243.71},{"id":"hd-73267","name":"HD 73267","en":"HD 73267","dist":164.4,"star":"K0 V","planets":[{"n":"HD 73267 c","t":"가스 거인","r":12.8,"m":1630.78,"temp":70,"esi":0.25}],"ang":21.22},{"id":"hip-14810","name":"HIP 14810","en":"HIP 14810","dist":164.6,"star":"G5","planets":[{"n":"HIP 14810 d","t":"가스 거인","r":14.1,"m":187.52,"temp":199,"esi":0.34},{"n":"HIP 14810 b","t":"가스 거인","r":13,"m":1239.54,"temp":1048,"esi":0.24}],"ang":158.72},{"id":"hd-188015","name":"HD 188015","en":"HD 188015","dist":165.3,"star":"G5 IV","planets":[{"n":"HD 188015 b","t":"가스 거인","r":13.6,"m":476.72,"temp":268,"esi":0.37}],"ang":296.23},{"id":"hd-196050","name":"HD 196050","en":"HD 196050","dist":165.3,"star":"G3 V","planets":[{"n":"HD 196050 b","t":"가스 거인","r":12.9,"m":1493.79,"temp":208,"esi":0.36}],"ang":73.74},{"id":"toi-2068","name":"TOI-2068","en":"TOI-2068","dist":172.6,"star":"M V","planets":[{"n":"TOI-2068 b","t":"슈퍼지구","r":1.82,"m":3.97,"temp":521,"esi":0.68}],"ang":211.25},{"id":"toi-1416","name":"TOI-1416","en":"TOI-1416","dist":179.4,"star":"G9 V","planets":[{"n":"TOI-1416 b","t":"슈퍼지구","r":1.62,"m":3.48,"temp":1517,"esi":0.47}],"ang":348.76},{"id":"hd-457","name":"HD 457","en":"HD 457","dist":179.5,"star":"M V","planets":[{"n":"HD 457 b","t":"가스 거인","r":11.9,"m":8445.34,"temp":85,"esi":0.28}],"ang":126.26},{"id":"toi-2406","name":"TOI-2406","en":"TOI-2406","dist":180.8,"star":"M4 V","planets":[{"n":"TOI-2406 b","t":"미니 해왕성","r":2.86,"m":15.6,"temp":449,"esi":0.61}],"ang":263.77},{"id":"hd-221287","name":"HD 221287","en":"HD 221287","dist":182.4,"star":"F7 V","planets":[{"n":"HD 221287 b","t":"가스 거인","r":13.1,"m":982.05,"temp":290,"esi":0.36}],"ang":41.28},{"id":"hd-135625","name":"HD 135625","en":"HD 135625","dist":184.3,"star":"G3 IV/V","planets":[{"n":"HD 135625 b","t":"가스 거인","r":13.3,"m":731.01,"temp":146,"esi":0.32}],"ang":178.79},{"id":"hd-89839","name":"HD 89839","en":"HD 89839","dist":186.9,"star":"F7 V","planets":[{"n":"HD 89839 b","t":"가스 거인","r":12.8,"m":1748.06,"temp":159,"esi":0.33}],"ang":316.3},{"id":"hd-5278","name":"HD 5278","en":"HD 5278","dist":187.8,"star":"F V","planets":[{"n":"HD 5278 b","t":"슈퍼지구","r":2.45,"m":7.8,"temp":943,"esi":0.5},{"n":"HD 5278 c","t":"미니 해왕성","r":4.49,"m":18.4,"temp":665,"esi":0.45}],"ang":93.8},{"id":"toi-1130","name":"TOI-1130","en":"TOI-1130","dist":190,"star":"K6-K7","planets":[{"n":"TOI-1130 b","t":"미니 해왕성","r":3.66,"m":19.8,"temp":825,"esi":0.45},{"n":"TOI-1130 c","t":"가스 거인","r":13,"m":336,"temp":650,"esi":0.28}],"ang":231.31},{"id":"hd-207832","name":"HD 207832","en":"HD 207832","dist":192.2,"star":"G5 V","planets":[{"n":"HD 207832 b","t":"가스 거인","r":14.2,"m":177.98,"temp":340,"esi":0.34}],"ang":8.82},{"id":"toi-286","name":"TOI-286","en":"TOI-286","dist":193.2,"star":"K3 V","planets":[{"n":"TOI-286 b","t":"지구형 암석","r":1.42,"m":4.53,"temp":979,"esi":0.58}],"ang":146.33},{"id":"toi-880","name":"TOI-880","en":"TOI-880","dist":197.9,"star":"K","planets":[{"n":"TOI-880 c","t":"미니 해왕성","r":4.95,"m":21.7,"temp":805,"esi":0.4}],"ang":198.85},{"id":"hd-184010","name":"HD 184010","en":"HD 184010","dist":198.3,"star":"K0 III-IV","planets":[{"n":"HD 184010 c","t":"가스 거인","r":11.8,"m":95.35,"temp":458,"esi":0.33}],"ang":336.36},{"id":"toi-1075","name":"TOI-1075","en":"TOI-1075","dist":200.5,"star":"K9 V/M0 V","planets":[{"n":"TOI-1075 b","t":"슈퍼지구","r":1.79,"m":9.95,"temp":1323,"esi":0.48}],"ang":113.87},{"id":"k2-141","name":"K2-141","en":"K2-141","dist":201.8,"star":"K7 V","planets":[{"n":"K2-141 c","t":"가스 거인","r":7,"m":8,"temp":695,"esi":0.37},{"n":"K2-141 b","t":"지구형 암석","r":1.51,"m":4.97,"temp":2103,"esi":0.42}],"ang":251.38},{"id":"hd-112300","name":"HD 112300","en":"HD 112300","dist":202.5,"star":"M1 III","planets":[{"n":"HD 112300 b","t":"가스 거인","r":12.2,"m":5031.22,"temp":1240,"esi":0.23}],"ang":28.88},{"id":"toi-1799","name":"TOI-1799","en":"TOI-1799","dist":202.6,"star":"M V","planets":[{"n":"TOI-1799 b","t":"슈퍼지구","r":1.64,"m":4,"temp":923,"esi":0.57}],"ang":166.39},{"id":"toi-178","name":"TOI-178","en":"TOI-178","dist":204.5,"star":"K","planets":[{"n":"TOI-178 c","t":"슈퍼지구","r":1.75,"m":4.64,"temp":873,"esi":0.57},{"n":"TOI-178 b","t":"지구형 암석","r":1.2,"m":0.96,"temp":1040,"esi":0.6},{"n":"TOI-178 d","t":"미니 해왕성","r":2.7,"m":5.2,"temp":690,"esi":0.54},{"n":"TOI-178 g","t":"미니 해왕성","r":2.94,"m":4.4,"temp":470,"esi":0.6},{"n":"TOI-178 e","t":"슈퍼지구","r":2.3,"m":3.48,"temp":600,"esi":0.6},{"n":"TOI-178 f","t":"슈퍼지구","r":2.42,"m":5.63,"temp":521,"esi":0.62}],"ang":303.9},{"id":"hd-177830","name":"HD 177830","en":"HD 177830","dist":204.7,"star":"K0","planets":[{"n":"HD 177830 c","t":"가스 거인","r":7.87,"m":47.67,"temp":539,"esi":0.38}],"ang":81.41},{"id":"hd-22946","name":"HD 22946","en":"HD 22946","dist":204.8,"star":"F7/F8V","planets":[{"n":"HD 22946 d","t":"미니 해왕성","r":2.61,"m":26.57,"temp":546,"esi":0.59}],"ang":218.92},{"id":"hd-109749","name":"HD 109749","en":"HD 109749","dist":205.7,"star":"G3 V","planets":[{"n":"HD 109749 b","t":"가스 거인","r":11.1,"m":85.81,"temp":1251,"esi":0.24}],"ang":356.42},{"id":"hd-165155","name":"HD 165155","en":"HD 165155","dist":206.6,"star":"G8 V","planets":[{"n":"HD 165155 b","t":"가스 거인","r":13.2,"m":918.53,"temp":240,"esi":0.37}],"ang":133.93},{"id":"hd-20329","name":"HD 20329","en":"HD 20329","dist":207.7,"star":"M V","planets":[{"n":"HD 20329 b","t":"슈퍼지구","r":1.72,"m":7.42,"temp":2141,"esi":0.4}],"ang":271.44},{"id":"kepler-37","name":"Kepler-37","en":"Kepler-37","dist":208.5,"star":"M V","planets":[{"n":"Kepler-37 b","t":"지구형 암석","r":0.31,"m":0.79,"temp":718,"esi":0.5}],"ang":48.95},{"id":"toi-824","name":"TOI-824","en":"TOI-824","dist":208.5,"star":"K4 V","planets":[{"n":"TOI-824 b","t":"미니 해왕성","r":2.93,"m":18.47,"temp":1253,"esi":0.41}],"ang":186.46},{"id":"hd-108236","name":"HD 108236","en":"HD 108236","dist":210.7,"star":"G3 V","planets":[{"n":"HD 108236 f","t":"슈퍼지구","r":2.02,"m":4.72,"temp":610,"esi":0.62}],"ang":323.96},{"id":"hd-211810","name":"HD 211810","en":"HD 211810","dist":210.8,"star":"G5","planets":[{"n":"HD 211810 b","t":"가스 거인","r":14,"m":212.95,"temp":178,"esi":0.33}],"ang":101.47},{"id":"wasp-107","name":"WASP-107","en":"WASP-107","dist":211.2,"star":"K6","planets":[{"n":"WASP-107 c","t":"가스 거인","r":13,"m":111.24,"temp":null,"esi":0.1},{"n":"WASP-107 b","t":"가스 거인","r":10.54,"m":30.51,"temp":736,"esi":0.3}],"ang":238.98},{"id":"toi-1203","name":"TOI-1203","en":"TOI-1203","dist":212,"star":"G3 V","planets":[{"n":"TOI-1203 e","t":"가스 거인","r":7.31,"m":42.1,"temp":null,"esi":0.17}],"ang":16.49},{"id":"toi-913","name":"TOI-913","en":"TOI-913","dist":212.6,"star":"M V","planets":[{"n":"TOI-913 b","t":"슈퍼지구","r":2.45,"m":6.59,"temp":712,"esi":0.55}],"ang":154.0},{"id":"hd-80606","name":"HD 80606","en":"HD 80606","dist":216.8,"star":"G5","planets":[{"n":"HD 80606 b","t":"가스 거인","r":11.57,"m":1323.47,"temp":405,"esi":0.35}],"ang":291.5},{"id":"toi-512","name":"TOI-512","en":"TOI-512","dist":219.8,"star":"M V","planets":[{"n":"TOI-512 b","t":"지구형 암석","r":1.54,"m":3.57,"temp":1009,"esi":0.56}],"ang":206.52},{"id":"hip-9618","name":"HIP 9618","en":"HIP 9618","dist":220.3,"star":"M V","planets":[{"n":"HIP 9618 c","t":"미니 해왕성","r":3.43,"m":7,"temp":470,"esi":0.56},{"n":"HIP 9618 b","t":"미니 해왕성","r":3.83,"m":8.3,"temp":641,"esi":0.49}],"ang":344.03},{"id":"hd-163607","name":"HD 163607","en":"HD 163607","dist":221.1,"star":"G5","planets":[{"n":"HD 163607 b","t":"가스 거인","r":13.9,"m":249.05,"temp":587,"esi":0.29}],"ang":121.54},{"id":"toi-871","name":"TOI-871","en":"TOI-871","dist":221.9,"star":"M V","planets":[{"n":"TOI-871 b","t":"슈퍼지구","r":1.66,"m":3.41,"temp":621,"esi":0.66}],"ang":259.04},{"id":"2mass-j22362452-4751425","name":"2MASS J22362452+4751425","en":"2MASS J22362452+4751425","dist":226.9,"star":"K7 V","planets":[{"n":"2MASS J22362452+4751425 b","t":"가스 거인","r":12.3,"m":3972.88,"temp":10,"esi":0.11}],"ang":36.55},{"id":"toi-2211","name":"TOI-2211","en":"TOI-2211","dist":229.3,"star":"M V","planets":[{"n":"TOI-2211.01","t":"지구형 암석","r":1.56,"m":3.06,"temp":1057,"esi":0.55}],"ang":174.06},{"id":"toi-1823","name":"TOI-1823","en":"TOI-1823","dist":233.7,"star":"M V","planets":[{"n":"TOI-1823 b","t":"가스 거인","r":7.54,"m":67.4,"temp":424,"esi":0.42}],"ang":311.57},{"id":"24-sex","name":"24 Sex","en":"24 Sex","dist":235.1,"star":"K0 IV","planets":[{"n":"24 Sex b","t":"가스 거인","r":13.4,"m":632.46,"temp":471,"esi":0.31}],"ang":89.08},{"id":"toi-3235","name":"TOI-3235","en":"TOI-3235","dist":237.5,"star":"M V","planets":[{"n":"TOI-3235 b","t":"가스 거인","r":11.4,"m":211.36,"temp":604,"esi":0.31}],"ang":226.58},{"id":"hd-219828","name":"HD 219828","en":"HD 219828","dist":238.5,"star":"G0 IV","planets":[{"n":"HD 219828 b","t":"미니 해왕성","r":4.59,"m":19.07,"temp":1603,"esi":0.31}],"ang":4.09},{"id":"hd-149143","name":"HD 149143","en":"HD 149143","dist":239,"star":"G0","planets":[{"n":"HD 149143 b","t":"가스 거인","r":13.6,"m":422.71,"temp":1472,"esi":0.2}],"ang":141.6},{"id":"toi-1448","name":"TOI-1448","en":"TOI-1448","dist":239.2,"star":"M V","planets":[{"n":"TOI-1448 b","t":"미니 해왕성","r":2.75,"m":19.5,"temp":426,"esi":0.63}],"ang":279.11},{"id":"hd-88133","name":"HD 88133","en":"HD 88133","dist":240.1,"star":"G5","planets":[{"n":"HD 88133 b","t":"가스 거인","r":13.8,"m":324.19,"temp":1762,"esi":0.18}],"ang":56.62},{"id":"hd-128717","name":"HD 128717","en":"HD 128717","dist":240.2,"star":"M V","planets":[{"n":"HD 128717 b","t":"가스 거인","r":12.1,"m":6293,"temp":152,"esi":0.34}],"ang":194.12},{"id":"toi-6894","name":"TOI-6894","en":"TOI-6894","dist":240.7,"star":"M V","planets":[{"n":"TOI-6894 b","t":"가스 거인","r":9.58,"m":53.4,"temp":418,"esi":0.38}],"ang":331.63},{"id":"toi-421","name":"TOI-421","en":"TOI-421","dist":244,"star":"G9 V","planets":[{"n":"TOI-421 c","t":"미니 해왕성","r":5.09,"m":14.1,"temp":635,"esi":0.43},{"n":"TOI-421 b","t":"미니 해왕성","r":2.64,"m":6.7,"temp":922,"esi":0.49}],"ang":109.14},{"id":"toi-2133","name":"TOI-2133","en":"TOI-2133","dist":245.3,"star":"M V","planets":[{"n":"TOI-2133 b","t":"슈퍼지구","r":2.37,"m":6.21,"temp":798,"esi":0.54}],"ang":246.65},{"id":"hd-149026","name":"HD 149026","en":"HD 149026","dist":247.4,"star":"G0","planets":[{"n":"HD 149026 b","t":"가스 거인","r":8.29,"m":120.78,"temp":1626,"esi":0.24}],"ang":24.16},{"id":"dmpp-8","name":"DMPP-8","en":"DMPP-8","dist":248.3,"star":"M V","planets":[{"n":"DMPP-8 b","t":"가스 거인","r":10.8,"m":81.09,"temp":580,"esi":0.32}],"ang":161.66},{"id":"hd-148164","name":"HD 148164","en":"HD 148164","dist":251.8,"star":"F8","planets":[{"n":"HD 148164 c","t":"가스 거인","r":12.8,"m":1640,"temp":136,"esi":0.32}],"ang":299.17},{"id":"toi-2141","name":"TOI-2141","en":"TOI-2141","dist":253.4,"star":"M V","planets":[{"n":"TOI-2141 d","t":"미니 해왕성","r":3.97,"m":14.9,"temp":491,"esi":0.52}],"ang":76.68},{"id":"hd-55696","name":"HD 55696","en":"HD 55696","dist":254.3,"star":"G0 V","planets":[{"n":"HD 55696 b","t":"가스 거인","r":12.9,"m":1357.13,"temp":200,"esi":0.36}],"ang":214.19},{"id":"hd-75898","name":"HD 75898","en":"HD 75898","dist":254.6,"star":"F8 V","planets":[{"n":"HD 75898 c","t":"가스 거인","r":12.6,"m":2698.36,"temp":135,"esi":0.32}],"ang":351.7},{"id":"toi-1453","name":"TOI-1453","en":"TOI-1453","dist":256.8,"star":"M V","planets":[{"n":"TOI-1453 b","t":"지구형 암석","r":1.17,"m":2.32,"temp":944,"esi":0.63}],"ang":129.2},{"id":"toi-3353","name":"TOI-3353","en":"TOI-3353","dist":256.9,"star":"M V","planets":[{"n":"TOI-3353.01","t":"미니 해왕성","r":2.67,"m":7.59,"temp":1264,"esi":0.43}],"ang":266.71},{"id":"toi-1105","name":"TOI-1105","en":"TOI-1105","dist":259.4,"star":"M V","planets":[{"n":"TOI-1105 b","t":"미니 해왕성","r":3.06,"m":9.58,"temp":756,"esi":0.5}],"ang":44.22},{"id":"toi-1898","name":"TOI-1898","en":"TOI-1898","dist":259.8,"star":"M V","planets":[{"n":"TOI-1898 b","t":"가스 거인","r":9.4,"m":129,"temp":675,"esi":0.32}],"ang":181.73},{"id":"ltt-9779","name":"LTT 9779","en":"LTT 9779","dist":262.4,"star":"G7 V","planets":[{"n":"LTT 9779 b","t":"미니 해왕성","r":4.72,"m":29.32,"temp":1978,"esi":0.28}],"ang":319.24},{"id":"hip-75092","name":"HIP 75092","en":"HIP 75092","dist":266.4,"star":"K0 III","planets":[{"n":"HIP 75092 b","t":"가스 거인","r":13.5,"m":568.91,"temp":353,"esi":0.34}],"ang":96.74},{"id":"toi-1062","name":"TOI-1062","en":"TOI-1062","dist":268,"star":"G9 V","planets":[{"n":"TOI-1062 b","t":"슈퍼지구","r":2.27,"m":10.15,"temp":1077,"esi":0.48},{"n":"TOI-1062 c","t":"미니 해왕성","r":3.1,"m":9.78,"temp":859,"esi":0.47}],"ang":234.25},{"id":"hip-10090","name":"HIP 10090","en":"HIP 10090","dist":268.7,"star":"K0","planets":[{"n":"HIP 10090 c","t":"가스 거인","r":13.9,"m":270.15,"temp":338,"esi":0.34}],"ang":11.76},{"id":"toi-2093","name":"TOI-2093","en":"TOI-2093","dist":270.1,"star":"K5 V","planets":[{"n":"TOI-2093 b","t":"미니 해왕성","r":3.25,"m":10.6,"temp":535,"esi":0.55}],"ang":149.27},{"id":"toi-1136","name":"TOI-1136","en":"TOI-1136","dist":275.7,"star":"M V","planets":[{"n":"TOI-1136 d","t":"미니 해왕성","r":4.63,"m":8.35,"temp":843,"esi":0.41},{"n":"TOI-1136 c","t":"미니 해왕성","r":2.88,"m":6.32,"temp":1062,"esi":0.45},{"n":"TOI-1136 f","t":"미니 해왕성","r":3.74,"m":9.7,"temp":658,"esi":0.49},{"n":"TOI-1136 e","t":"미니 해왕성","r":2.64,"m":6.07,"temp":737,"esi":0.53},{"n":"TOI-1136 b","t":"슈퍼지구","r":1.9,"m":3.5,"temp":1216,"esi":0.49},{"n":"TOI-1136 g","t":"미니 해왕성","r":2.53,"m":5.6,"temp":574,"esi":0.59}],"ang":286.78},{"id":"hd-127195","name":"HD 127195","en":"HD 127195","dist":276.3,"star":"M V","planets":[{"n":"HD 127195 b","t":"가스 거인","r":14,"m":212.95,"temp":null,"esi":0.09}],"ang":64.28},{"id":"hd-75784","name":"HD 75784","en":"HD 75784","dist":278.6,"star":"G5","planets":[{"n":"HD 75784 b","t":"가스 거인","r":13.8,"m":317.83,"temp":426,"esi":0.32}],"ang":201.79},{"id":"hd-2039","name":"HD 2039","en":"HD 2039","dist":279.5,"star":"G2/G3 IV/V","planets":[{"n":"HD 2039 b","t":"가스 거인","r":12.7,"m":1999.15,"temp":211,"esi":0.36}],"ang":339.3},{"id":"toi-561","name":"TOI-561","en":"TOI-561","dist":279.8,"star":"G9 V","planets":[{"n":"TOI-561 e","t":"미니 해왕성","r":2.52,"m":12.4,"temp":416,"esi":0.66},{"n":"TOI-561 d","t":"미니 해왕성","r":2.62,"m":13.33,"temp":600,"esi":0.57},{"n":"TOI-561 b","t":"지구형 암석","r":1.4,"m":2.02,"temp":2319,"esi":0.41},{"n":"TOI-561 c","t":"미니 해왕성","r":2.87,"m":5.93,"temp":802,"esi":0.5}],"ang":116.81},{"id":"toi-5205","name":"TOI-5205","en":"TOI-5205","dist":282,"star":"M4.0","planets":[{"n":"TOI-5205 b","t":"가스 거인","r":11.6,"m":343,"temp":737,"esi":0.29}],"ang":254.32},{"id":"hd-205158","name":"HD 205158","en":"HD 205158","dist":282.5,"star":"M V","planets":[{"n":"HD 205158 b","t":"가스 거인","r":13.9,"m":124.59,"temp":963,"esi":0.24}],"ang":31.82},{"id":"wasp-43","name":"WASP-43","en":"WASP-43","dist":282.9,"star":"K7 V","planets":[{"n":"WASP-43 b","t":"가스 거인","r":10.42,"m":565.71,"temp":1427,"esi":0.23}],"ang":169.33},{"id":"hd-1605","name":"HD 1605","en":"HD 1605","dist":289.6,"star":"K1 IV","planets":[{"n":"HD 1605 c","t":"가스 거인","r":13,"m":1150.54,"temp":234,"esi":0.37}],"ang":306.84},{"id":"toi-5704","name":"TOI-5704","en":"TOI-5704","dist":292.4,"star":"M V","planets":[{"n":"TOI-5704 b","t":"미니 해왕성","r":3.23,"m":10.5,"temp":949,"esi":0.45}],"ang":84.35},{"id":"tic-46432937","name":"TIC 46432937","en":"TIC 46432937","dist":295.3,"star":"M V","planets":[{"n":"TIC 46432937 b","t":"가스 거인","r":13.32,"m":1017.05,"temp":872,"esi":0.25}],"ang":221.86},{"id":"toi-220","name":"TOI-220","en":"TOI-220","dist":296,"star":"K0 V","planets":[{"n":"TOI-220 b","t":"미니 해왕성","r":3.03,"m":13.8,"temp":805,"esi":0.49}],"ang":359.36},{"id":"hat-p-17","name":"HAT-P-17","en":"HAT-P-17","dist":301.3,"star":"K","planets":[{"n":"HAT-P-17 b","t":"가스 거인","r":11.77,"m":184.34,"temp":800,"esi":0.28},{"n":"HAT-P-17 c","t":"가스 거인","r":13.1,"m":1080.6,"temp":100,"esi":0.28}],"ang":136.87},{"id":"hd-205739","name":"HD 205739","en":"HD 205739","dist":301.7,"star":"F7 V","planets":[{"n":"HD 205739 b","t":"가스 거인","r":13.6,"m":435.41,"temp":363,"esi":0.34}],"ang":274.38},{"id":"hd-224693","name":"HD 224693","en":"HD 224693","dist":305,"star":"G2 V","planets":[{"n":"HD 224693 b","t":"가스 거인","r":14,"m":222.48,"temp":903,"esi":0.24}],"ang":51.89},{"id":"hd-106270","name":"HD 106270","en":"HD 106270","dist":306,"star":"G5 IV","planets":[{"n":"HD 106270 b","t":"가스 거인","r":12.4,"m":3623.24,"temp":237,"esi":0.38}],"ang":189.4},{"id":"hd-221416","name":"HD 221416","en":"HD 221416","dist":311.6,"star":"K0 IV/V","planets":[{"n":"HD 221416 b","t":"가스 거인","r":9.17,"m":60.5,"temp":1315,"esi":0.25}],"ang":326.9},{"id":"toi-181","name":"TOI-181","en":"TOI-181","dist":313.9,"star":"K","planets":[{"n":"TOI-181 b","t":"가스 거인","r":6.96,"m":46.17,"temp":895,"esi":0.33}],"ang":104.41},{"id":"k2-85","name":"K2-85","en":"K2-85","dist":317.1,"star":"M V","planets":[{"n":"K2-85 b","t":"지구형 암석","r":1.4,"m":3.2,"temp":1355,"esi":0.51}],"ang":241.92},{"id":"hd-73526","name":"HD 73526","en":"HD 73526","dist":317.2,"star":"G6 V","planets":[{"n":"HD 73526 b","t":"가스 거인","r":13.1,"m":978.92,"temp":414,"esi":0.33}],"ang":19.43},{"id":"toi-4898","name":"TOI-4898","en":"TOI-4898","dist":321.6,"star":"M V","planets":[{"n":"TOI-4898 b","t":"미니 해왕성","r":3.72,"m":13.4,"temp":667,"esi":0.48}],"ang":156.94},{"id":"kelt-11","name":"KELT-11","en":"KELT-11","dist":323.4,"star":"G8/K0 IV","planets":[{"n":"KELT-11 b","t":"가스 거인","r":15.13,"m":65.15,"temp":1712,"esi":0.18}],"ang":294.44},{"id":"wasp-189","name":"WASP-189","en":"WASP-189","dist":325.3,"star":"M V","planets":[{"n":"WASP-189 b","t":"가스 거인","r":18.15,"m":632.48,"temp":3353,"esi":0.12}],"ang":71.95},{"id":"wasp-84","name":"WASP-84","en":"WASP-84","dist":328.1,"star":"K0","planets":[{"n":"WASP-84 c","t":"슈퍼지구","r":1.95,"m":15.2,"temp":1329,"esi":0.47},{"n":"WASP-84 b","t":"가스 거인","r":10.72,"m":220,"temp":732,"esi":0.3}],"ang":209.46},{"id":"toi-2260","name":"TOI-2260","en":"TOI-2260","dist":330.2,"star":"G V","planets":[{"n":"TOI-2260 b","t":"슈퍼지구","r":1.62,"m":3.26,"temp":2609,"esi":0.37}],"ang":346.97},{"id":"hip-114933","name":"HIP 114933","en":"HIP 114933","dist":331.9,"star":"K0 III","planets":[{"n":"HIP 114933 b","t":"가스 거인","r":13.4,"m":616.59,"temp":317,"esi":0.35}],"ang":124.48},{"id":"toi-5624","name":"TOI-5624","en":"TOI-5624","dist":332.4,"star":"M V","planets":[{"n":"TOI-5624 e","t":"미니 해왕성","r":3.25,"m":8.9,"temp":614,"esi":0.53},{"n":"TOI-5624 f","t":"미니 해왕성","r":3.66,"m":13,"temp":479,"esi":0.55}],"ang":261.98},{"id":"toi-199","name":"TOI-199","en":"TOI-199","dist":333.6,"star":"G9 V","planets":[{"n":"TOI-199 c","t":"가스 거인","r":11.4,"m":88.99,"temp":255,"esi":0.4},{"n":"TOI-199 b","t":"가스 거인","r":9.08,"m":54.03,"temp":325,"esi":0.42}],"ang":39.49},{"id":"k2-229","name":"K2-229","en":"K2-229","dist":334.5,"star":"G9","planets":[{"n":"K2-229 c","t":"슈퍼지구","r":2.03,"m":7,"temp":750,"esi":0.58}],"ang":177.0},{"id":"k2-126","name":"K2-126","en":"K2-126","dist":335.8,"star":"M V","planets":[{"n":"K2-126 b","t":"슈퍼지구","r":1.97,"m":4.54,"temp":601,"esi":0.63}],"ang":314.51},{"id":"hd-120084","name":"HD 120084","en":"HD 120084","dist":336.1,"star":"G7 III","planets":[{"n":"HD 120084 b","t":"가스 거인","r":12.7,"m":2034.1,"temp":369,"esi":0.35}],"ang":92.02},{"id":"hd-180902","name":"HD 180902","en":"HD 180902","dist":341.1,"star":"K0 III/IV","planets":[{"n":"HD 180902 b","t":"가스 거인","r":13.5,"m":535.54,"temp":412,"esi":0.32}],"ang":229.52},{"id":"wasp-77-a","name":"WASP-77 A","en":"WASP-77 A","dist":343,"star":"G8 V","planets":[{"n":"WASP-77 A b","t":"가스 거인","r":13.56,"m":529.31,"temp":1674,"esi":0.19}],"ang":7.03}];
 
 /* ============ 밸런스 ============ */
-const START = {energy:110, minerals:110, goods:130, research:0, alloy:60};
+const START = {energy:28, minerals:28, goods:33, research:0, alloy:15};
 const BASE_REACH = 6, REACH_PER_LVL = 8;   // 사거리는 지수형(항행 Lv당 약 2배)
-const BASE_HOUSING = 3;                 // 식민지 기본 주거
+const BASE_HOUSING = 5;                 // 식민지 기본 주거
 const GOAL_PRIME = 3;
 
 /* 구역(District) = 일자리를 만드는 건물. Stellaris 방식: 구역이 일자리를 제공하고 인구가 채운다.
-   yld=고용 1천명당 생산 / upkeep=구역 1개당 유지비(놀리는 구역도 비용 발생) / cost=건설 1회 비용
    ★ 밸런스 원칙: 만실 가동 시 [순이익 = yld×jobs − 유지비 합]이 기초 구역 +0.7~0.9,
      고급 구역 +1.4~1.8 이 되도록 맞춘다. 고급 구역은 건설·유지에 철괴를 요구한다. */
+/* 구역(District)
+   ★ 이 파일의 밸런스 수치는 전부 '한 달' 기준이다. 내부 계산은 초 단위라
+     PER_MO() 로 나눠 쓰지만, 여기 적힌 숫자는 화면에 보이는 값과 같다.
+   jobs = 일자리(천명) · upkeep = 월 유지비 · cost = 건설 1회 비용
+   생산량은 구역마다 다르지 않다. 1천명이 한 달에 BASE_YIELD 를 만들고,
+   구역 차이는 '일자리 수'로만 표현한다. */
+const BASE_YIELD = 1;              // 1천명이 한 달에 만드는 양
 const DISTRICTS = {
-  housing: {name:"거주 구역", icon:"🏙", housing:4,                       upkeep:{energy:0.25}, cost:{minerals:20,energy:10}, prod:"주거 +4천명", up:"에너지"},
-  agri:    {name:"생활재 구역", icon:"❀", job:"farmer",     jobs:2, res:"goods",     yld:0.55, upkeep:{energy:0.25},            cost:{minerals:18,energy:16}, prod:"소비재", up:"에너지"},
-  energy:  {name:"발전 구역", icon:"⚡", job:"technician", jobs:2, res:"energy",   yld:0.60, upkeep:{minerals:0.30},          cost:{minerals:22,energy:8},  prod:"에너지", up:"광물"},
-  mining:  {name:"채굴 구역", icon:"⛏", job:"miner",      jobs:2, res:"minerals", yld:0.65, upkeep:{energy:0.35},            cost:{minerals:24,energy:14}, prod:"광물", up:"에너지"},
-  lab:     {name:"연구소",   icon:"⚛", job:"researcher", jobs:2, res:"research", yld:0.70, upkeep:{energy:0.35,goods:0.30},  cost:{minerals:26,energy:24}, prod:"연구", up:"에너지·소비재"},
-  refinery:{name:"제련소",   icon:"🔩", job:"refiner",    jobs:2, res:"alloy",     yld:0.70, upkeep:{minerals:0.45,energy:0.20},cost:{minerals:28,energy:26}, prod:"철괴", up:"광물·에너지"},
-  /* 기술로 해금되는 상위 구역 — 건설·유지에 철괴가 든다 */
-  fusion:  {name:"융합로",   icon:"☢", job:"technician", jobs:3, res:"energy",   yld:0.85, upkeep:{minerals:0.7,alloy:0.25}, cost:{minerals:70,energy:50,alloy:40}, prod:"에너지(대량)", up:"광물·철괴", req:"fusion"},
-  orbital: {name:"궤도 거주구",icon:"🛸", housing:9,                              upkeep:{energy:0.55,alloy:0.25},  cost:{minerals:65,energy:55,alloy:35}, prod:"주거 +9천명", up:"에너지·철괴", req:"orbital"},
+  housing: {name:"거주 구역",  icon:"🏙", housing:6,                              upkeep:{energy:0.25},              cost:{minerals:5,   energy:2.5},            prod:"주거 +6,000명", up:"에너지"},
+  agri:    {name:"소비재 구역",icon:"📦", job:"farmer",     jobs:2, res:"goods",   upkeep:{energy:0.25},              cost:{minerals:5.5, energy:5},              prod:"소비재(고효율)",  up:"에너지"},
+  energy:  {name:"발전 구역",  icon:"⚡", job:"technician", jobs:2, res:"energy",  upkeep:{minerals:0.25},            cost:{minerals:4.5, energy:1.5},            prod:"에너지",  up:"광물"},
+  mining:  {name:"채굴 구역",  icon:"⛏", job:"miner",      jobs:3, res:"minerals",upkeep:{energy:0.25},              cost:{minerals:6,   energy:4},              prod:"광물",    up:"에너지"},
+  lab:     {name:"연구소",    icon:"⚛", job:"researcher", jobs:3, res:"research",upkeep:{energy:0.25,goods:0.25},    cost:{minerals:6.5, energy:6},              prod:"연구",    up:"에너지·소비재"},
+  refinery:{name:"제련소",    icon:"🔩", job:"refiner",    jobs:2, res:"alloy",   upkeep:{minerals:0.25,energy:0.2},cost:{minerals:7,   energy:6.5},            prod:"철괴",    up:"광물·에너지"},
+  /* 기술로 해금되는 상위 구역 — 일자리가 많아 슬롯 하나를 더 알차게 쓴다 */
+  fusion:  {name:"융합로",    icon:"☢", job:"technician", jobs:5, res:"energy",  upkeep:{minerals:0.55,alloy:0.3},  cost:{minerals:17.5,energy:12.5,alloy:10}, prod:"에너지(대량)", up:"광물·철괴", req:"fusion"},
+  orbital: {name:"궤도 거주구",icon:"🛸", housing:13,                              upkeep:{energy:0.45,alloy:0.3},   cost:{minerals:17,  energy:14,  alloy:9},   prod:"주거 +13,000명", up:"에너지·철괴", req:"orbital"},
 };
+/* 구역별 '고용 1천명당 산출' 배수. 기본은 1.0 — 인원 수가 곧 생산량이다.
+   소비재 구역만 1.5인 이유: 소비재는 인구가 매달 먹어치우는 자원이라, 1.0이면
+   먹여살리는 인원보다 밭에 묶이는 인원이 더 빨리 늘어 슬롯이 전부 주거·소비재로 잠긴다. */
+const DIST_YIELD = {agri:1.5, energy:1, mining:1, lab:1, refinery:1, fusion:1};
 const DKEYS_ALL = Object.keys(DISTRICTS);
 const distUnlocked = dk => !DISTRICTS[dk].req || hasUnlock(DISTRICTS[dk].req);
 const DKEYS_OF = () => DKEYS_ALL.filter(distUnlocked);
 const JOB_NAME = {farmer:"생산공",technician:"기술자",miner:"광부",researcher:"연구원",refiner:"제련공"};
-const JOB_ICON = {farmer:"❀",technician:"⚡",miner:"⛏",researcher:"⚛",refiner:"🔩"};
+const JOB_ICON = {farmer:"📦",technician:"⚡",miner:"⛏",researcher:"⚛",refiner:"🔩"};
 const JOB_ORDER = ["farmer","technician","miner","refiner","researcher"];
 /* 고용 우선순위는 무작위다. 인구가 어느 일자리로 갈지 플레이어가 정하지 않는다.
    행성마다 고정된 순서를 갖되(같은 행성은 매번 같은 순서 — 화면이 튀지 않게),
@@ -734,15 +789,15 @@ const POL_ORDER = ["balanced","energy","minerals","goods","research","alloy","gr
      → 테라포밍 같은 고급 기술이 구조적으로 초반에 나올 수 없다.
    효과는 문장이 아니라 eff 객체로 적는다. 모든 소비처는 techMods() 한 곳에서 읽는다. */
 const ERAS = [null,
-  {n:"원시 공학", rn:"Ⅰ", base:24,  mb:26},
-  {n:"궤도 시대", rn:"Ⅱ", base:90,  mb:70},
+  {n:"원시 공학", rn:"Ⅰ", base:6,   mb:6.5},
+  {n:"궤도 시대", rn:"Ⅱ", base:22,  mb:17},
 ];
 const ERA_GATE = [0,0,20];        // 시대 Ⅱ 진입: 시대 Ⅰ 기술 20종 (전체 40종의 절반)
 const LINES = {
   prop:{n:"추진",br:"확장"}, nav:{n:"항법",br:"확장"}, obs:{n:"관측",br:"확장"},
   life:{n:"생명유지",br:"확장"}, col:{n:"개척",br:"확장"}, geo:{n:"지질조사",br:"확장"},
   pow:{n:"발전",br:"생산"}, min:{n:"채광",br:"생산"}, met:{n:"야금",br:"생산"},
-  gds:{n:"생활재",br:"생산"}, inf:{n:"기반시설",br:"생산"}, log:{n:"물류",br:"생산"},
+  gds:{n:"소비재",br:"생산"}, inf:{n:"기반시설",br:"생산"}, log:{n:"물류",br:"생산"},
   urb:{n:"도시",br:"사회"}, adm:{n:"행정",br:"사회"}, bio:{n:"생명공학",br:"사회"},
   gov:{n:"통치",br:"사회"}, cul:{n:"문화",br:"사회"}, edu:{n:"교육",br:"사회"},
 };
@@ -804,8 +859,8 @@ const TECH_DEF = [
 ["t_blast","고로 개량","🏭",2,"met",4,{prod:{alloy:0.08}}],
 ["t_vac","진공 제련","🌑",2,"met",3,{prod:{alloy:0.08}}],
 ["t_cast","연속 주조","🧱",2,"met",3,{upkeep:0.05}],
-// ── 생산 · 생활재 ──────────────────────────────────────────
-["t_farm","집약 농법","❀",1,"gds",3,{prod:{goods:0.06}}],
+// ── 생산 · 소비재 ──────────────────────────────────────────
+["t_farm","집약 농법","📦",1,"gds",3,{prod:{goods:0.06}}],
 ["t_pres","식품 보존","🥫",1,"gds",3,{prod:{goods:0.06}}],
 ["t_hydro","수경 재배","💧",2,"gds",4,{prod:{goods:0.07}}],
 ["t_prot","합성 단백질","🧬",2,"gds",3,{prod:{goods:0.07}}],
@@ -923,7 +978,7 @@ const hasUnlock = u => !!techMods().unlock[u];
 /* ── 효과를 사람이 읽는 문장으로 ── */
 const RES_KO={energy:"에너지",minerals:"광물",goods:"소비재",research:"연구",alloy:"철괴"};
 const UNLOCK_TXT={probe:"사거리 내 미탐사 항성계를 <b>자동 스캔</b>",
-                  terra:"식민 행성의 ESI를 <b>영구 개조</b> 가능",
+                  terra:"식민 행성의 ESI를 <b>영구 개조</b> — 행성 등급 승격",
                   fusion:"구역 <b>융합로</b> 건설 가능",
                   orbital:"구역 <b>궤도 거주구</b> 건설 가능"};
 const pctS = v => (v>=0?"+":"−")+Math.round(Math.abs(v)*100)+"%";
@@ -954,7 +1009,7 @@ function effText(k,l){
 /* ============ 저장 상한 (창고) ============
    무한 적립을 막는다. 넘치는 자원은 버려지므로 '모으기'보다 '쓰기'가 강제된다.
    한도는 식민지 수와 물류 창고 기술로 늘어난다. */
-const STORE_BASE = 800, STORE_PER_COLONY = 600;
+const STORE_BASE = 200, STORE_PER_COLONY = 150;
 function storageCap(){
   const n=Object.keys((S&&S.colonies)||{}).length;
   return Math.round((STORE_BASE + n*STORE_PER_COLONY) * (1 + techMods().storage));
@@ -1009,7 +1064,7 @@ function megaBonus(){
 const TIERS = [
   {n:"개척 시대",  d:"첫 식민지를 세우고 자립하세요.",                ok:()=>true},
   {n:"항성 연합",  d:"거주 가능 행성 3곳 개척",                       ok:()=>primeCount()>=3},
-  {n:"성간 국가",  d:"식민지 10곳 · 총 인구 80천명",                  ok:()=>Object.keys(S.colonies).length>=10&&totalPop()>=80},
+  {n:"성간 국가",  d:"식민지 10곳 · 총 인구 80,000명",                  ok:()=>Object.keys(S.colonies).length>=10&&totalPop()>=80},
   {n:"은하 세력",  d:"항성계 60곳 탐사 · 메가구조물 1단계",            ok:()=>Object.keys(S.surveyed).length>=60&&megaTotal()>=1},
   {n:"은하 문명",  d:"거주 가능 8곳 · 메가구조물 8단계",              ok:()=>primeCount()>=8&&megaTotal()>=8},
 ];
@@ -1064,7 +1119,7 @@ function startResearch(k){
   pushLog(`${TECHS[k].icon} ${TECHS[k].name} 연구 시작 — 목표 ⚛${c.research} · 광물 ${c.minerals} 투입`,"good");
   save(); renderAll(); if($("modal").classList.contains("on")) openEmpire();
 }
-function researchGoal(){ return S.ractive?techCost(S.ractive).research:0; }
+function researchGoal(){ if(S.ractive&&!TECHS[S.ractive]){S.ractive=null;S.rprog=0;} return S.ractive?techCost(S.ractive).research:0; }
 function finishResearch(){
   const k=S.ractive; if(!k)return;
   if(!S.tech)S.tech={}; S.tech[k]=techLvl(k)+1;
@@ -1106,11 +1161,11 @@ function durStr(sec){
   const y=Math.floor(d/365), mo=Math.round((d%365)/30.4);
   return mo?`${y}년 ${mo}개월`:`${y}년`;
 }
-const fmtPop = n => Math.floor(n).toLocaleString('en-US')+"천명";
+/* 인구는 내부적으로 '천명' 단위 소수다 (4.306 = 4,306명). 화면에는 사람 수로 보여준다. */
+const fmtPop = n => Math.round(n*1000).toLocaleString('en-US')+"명";
 const sysById = id => SYSTEMS.find(s=>s.id===id);
 const tierOf = e => e>=0.999?"home":e>=0.8?"prime":e>=0.5?"marg":"host";
 const tierName = {home:"본거지",prime:"거주 가능",marg:"개척 필요",host:"자원 전용"};
-const slotsOf = p => clamp(Math.round(p.r*1.6)+4 + planetTraits(p).slot + techMods().slots, 4, 18);
 const colKey=(s,pi)=>s+"|"+pi;
 /* ── 테라포밍: 식민 행성의 ESI를 영구히 끌어올린다. 광물의 대형 배출구이자 척박한 행성의 구제 수단. ── */
 const TERRA_STEP=0.08, TERRA_MAX=6;
@@ -1135,43 +1190,120 @@ function doTerra(key){
 /* ============ 행성 특성 (실제 NASA 데이터 → 운영 효과) ============
    타입·온도·크기·특수광맥이 생산/거주/슬롯에 실제로 곱해짐. 결정론적(같은 행성=항상 같은 특성). */
 function _hstr(s){let h=0;for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h;}
+/* 행성 특성 — 배율(×)이 아니라 덧셈 %로 정의한다.
+   여러 특성이 겹칠 때 곱셈은 폭주하거나 0에 붙어버리지만, %는 더해서 읽기 쉽고 예측 가능하다.
+   합계는 −40% ~ +60% 로 잘라 어떤 행성도 '지으면 손해'가 되지 않게 한다.
+   housing 만 배율로 남는다 (주거 정원은 생산 공식과 별개). */
+const TRAIT_MIN=-0.40, TRAIT_MAX=0.60;
 function planetTraits(p){
-  const mods={goods:1,energy:1,minerals:1,research:1,alloy:1,housing:1}, tags=[]; let slot=0;
-  const T=p.temp;
+  const pct={goods:0,energy:0,minerals:0,research:0,alloy:0};
+  const mods={housing:1}; const tags=[]; let slotPen=0;
+  const add=(o)=>{ for(const k in o) pct[k]=(pct[k]||0)+o[k]; };
+
+  // ── ① 온도 — 실제 평형온도로 결정. 망원경으로 관측되므로 스캔만 해도 보인다 ──
+  const T=p.temp; let tempPen=0;
   if(T!=null){
-    if(T>=400){mods.energy*=1.3;mods.goods*=0.6;mods.housing*=0.85;mods.research*=0.9;tags.push({ic:"🔥",t:"고온",tip:"고온(≥400K): 에너지 ×1.3 · 소비재 ×0.6 · 거주 ×0.85 · 연구 ×0.9(장비 열화)"});}
-    else if(T>=320){mods.energy*=1.15;mods.goods*=0.8;tags.push({ic:"🌡",t:"온난",tip:"온난(320–400K): 에너지 ×1.15 · 소비재 ×0.8"});}
-    else if(T>=240){tags.push({ic:"☀",t:"온화",tip:"온화(240–320K): 최적 거주 — 페널티 없음"});}
-    else if(T>=180){mods.goods*=0.8;mods.minerals*=1.15;tags.push({ic:"❄",t:"저온",tip:"저온(180–240K): 광물 ×1.15 · 소비재 ×0.8"});}
-    else {mods.goods*=0.6;mods.minerals*=1.25;mods.energy*=0.8;mods.research*=1.25;tags.push({ic:"🧊",t:"극저온",tip:"극저온(<180K): 광물 ×1.25 · 연구 ×1.25(극저온 실험) · 소비재 ×0.6 · 에너지 ×0.8"});}
+    if(T>=400){      add({energy:.30,goods:-.35,research:-.10}); mods.housing*=0.85; tempPen=2;
+      tags.push({ic:"🔥",t:"고온",k:"temp",tip:"고온(≥400K) — 에너지 +30% · 소비재 −35% · 연구 −10% · 구역 슬롯 −2"});}
+    else if(T>=320){ add({energy:.15,goods:-.20}); tempPen=1;
+      tags.push({ic:"🌡",t:"온난",k:"temp",tip:"온난(320–400K) — 에너지 +15% · 소비재 −20% · 구역 슬롯 −1"});}
+    else if(T>=240){ tempPen=0;
+      tags.push({ic:"☀",t:"온화",k:"temp",tip:"온화(240–320K) — 최적 거주 · 보정 없음 · 구역 슬롯 감소 없음"});}
+    else if(T>=180){ add({minerals:.15,goods:-.20}); tempPen=1;
+      tags.push({ic:"❄",t:"저온",k:"temp",tip:"저온(180–240K) — 광물 +15% · 소비재 −20% · 구역 슬롯 −1"});}
+    else {           add({minerals:.25,research:.25,goods:-.35,energy:-.20}); tempPen=2;
+      tags.push({ic:"🧊",t:"극저온",k:"temp",tip:"극저온(<180K) — 광물 +25% · 연구 +25% · 소비재 −35% · 에너지 −20% · 구역 슬롯 −2"});}
   }
-  switch(p.t){
-    case "슈퍼지구": mods.minerals*=1.25;mods.housing*=0.9;slot-=2;tags.push({ic:"🪨",t:"슈퍼지구",tip:"중력 높음: 광물 ×1.25 · 슬롯 −2 · 거주 ×0.9"});break;
-    case "미니 해왕성": mods.goods*=0.35;mods.alloy*=1.4;mods.energy*=1.2;mods.housing*=0.8;mods.research*=1.15;tags.push({ic:"🌫",t:"미니해왕성",tip:"지표 빈약: 철괴 ×1.4 · 에너지 ×1.2 · 연구 ×1.15(대기 관측) · 생활재 생산난 · 거주 ×0.8"});break;
-    case "가스 거인": mods.goods*=0.2;mods.minerals*=0.5;mods.alloy*=1.6;mods.energy*=1.3;mods.housing*=0.5;mods.research*=1.2;slot-=3;tags.push({ic:"🪐",t:"가스거인",tip:"거주 극난: 철괴 ×1.6 · 에너지 ×1.3 · 연구 ×1.2(심대기 관측) · 슬롯 −3 · 거주 ×0.5"});break;
-    default: break;   // 지구형 암석 = 균형(모드 없음)
+
+  // ── ② 두 번째 특성 — 행성 조사로만 밝혀진다. 타입 또는 광맥 중 최대 1개 ──
+  //    없음 35% / 타입 40% / 광맥 25%  (행성 이름으로 고정 — 세이브 리롤로 못 바꿈)
+  //    ※ 슬롯 수는 확률과 무관하게 '온도 + 실제 행성 유형'으로 항상 결정된다.
+  //      가스 거인에 발 디딜 땅이 없는 건 운이 아니라 사실이기 때문.
+  const roll=_hstr(p.n)%100; let deposit=null, second=null;
+  const TYPE={
+    "지구형 암석":  {ic:"🌏",t:"지구형",    slot:0,  fx:{goods:.20,minerals:.10}, house:1.1,
+      tip:"단단한 지표와 안정된 대기 — 소비재 +20% · 광물 +10% · 거주 정원 ×1.1"},
+    "슈퍼지구":     {ic:"🪨",t:"슈퍼지구",  slot:-1, fx:{minerals:.25}, house:0.9,
+      tip:"넓은 지표·높은 중력 — 광물 +25% · 거주 정원 ×0.9 · 구역 슬롯 +1"},
+    "미니 해왕성":  {ic:"🌫",t:"미니해왕성",slot:3,  fx:{goods:-.40,alloy:.40,energy:.20,research:.15}, house:0.8,
+      tip:"지표 빈약 — 철괴 +40% · 에너지 +20% · 연구 +15% · 소비재 −40% · 거주 정원 ×0.8 · 구역 슬롯 −3"},
+    "가스 거인":    {ic:"🪐",t:"가스거인",  slot:5,  fx:{goods:-.55,minerals:-.40,alloy:.55,energy:.30,research:.20}, house:0.5,
+      tip:"거주 극난 — 철괴 +55% · 에너지 +30% · 연구 +20% · 소비재 −55% · 광물 −40% · 거주 정원 ×0.5 · 구역 슬롯 −5"},
+  };
+  slotPen += (TYPE[p.t] ? TYPE[p.t].slot : 0);   // 슬롯은 항상 유형대로
+  const DEP=[
+    {ic:"⚡",t:"지열 지대",     res:"energy",  v:.50, tip:"특수 자원 — 에너지 +50%"},
+    {ic:"⛏",t:"광물 대광맥",   res:"minerals",v:.50, tip:"특수 자원 — 광물 +50%"},
+    {ic:"🌾",t:"비옥한 토양",   res:"goods",   v:.60, tip:"특수 자원 — 소비재 +60%"},
+    {ic:"🔩",t:"희귀 금속 광맥",res:"alloy",   v:.50, tip:"특수 자원 — 철괴 +50%"},
+    {ic:"📡",t:"이상 신호원",   res:"research",v:.70, tip:"특수 자원 — 정체불명의 신호 · 연구 +70%"},
+  ];
+  if(roll>=35 && roll<75){                       // 40% — 타입 특성
+    const t=TYPE[p.t];
+    if(t){ add(t.fx); mods.housing*=t.house;
+      second={ic:t.ic,t:t.t,k:"type",tip:t.tip}; }
+  } else if(roll>=75){                            // 25% — 특수 광맥
+    const D=DEP[_hstr(p.n+"d")%5];
+    pct[D.res]+=D.v; deposit=D;
+    second={ic:D.ic,t:D.t,k:"dep",tip:D.tip};
   }
-  // 특수 광맥 (~28% 확률, 결정론적)
-  const h=_hstr(p.n)%100; let deposit=null;
-  if(h>=72){
-    const D=[
-      {ic:"⚡",t:"지열 지대",res:"energy",mul:1.5,tip:"특수 자원 — 에너지 생산 ×1.5"},
-      {ic:"⛏",t:"광물 대광맥",res:"minerals",mul:1.5,tip:"특수 자원 — 광물 생산 ×1.5"},
-      {ic:"🌾",t:"비옥한 토양",res:"goods",mul:1.6,tip:"특수 자원 — 소비재 생산 ×1.6"},
-      {ic:"🔩",t:"희귀 금속 광맥",res:"alloy",mul:1.5,tip:"특수 자원 — 철괴 생산 ×1.5"},
-      {ic:"📡",t:"이상 신호원",res:"research",mul:1.7,tip:"특수 자원 — 정체불명의 신호. 연구 생산 ×1.7"},
-    ][h%5];
-    mods[D.res]*=D.mul; deposit=D;
-  }
-  return {mods,tags,slot,deposit};
+  if(second) tags.push(second);
+
+  for(const k in pct) pct[k]=clamp(pct[k],TRAIT_MIN,TRAIT_MAX);   // 합계는 −40%~+60%
+  return {pct,mods,tags,tempPen,slotPen,deposit,second};
+}
+/* 구역 슬롯 — 최적 행성(온화·지구형)이 10칸. 살기 나쁠수록 줄어든다.
+   실제 슬롯 수는 '행성 조사'를 마쳐야 확정된다. */
+const SLOT_BASE = 10;
+function slotsOf(p){
+  const t=planetTraits(p);
+  return clamp(SLOT_BASE - t.tempPen - t.slotPen + techMods().slots, 3, 18);
 }
 const maxReach=()=>Math.round(BASE_REACH*techMods().reachMul);   // 추진·항법 계열 기술의 누적 배율
 const scanCost=sys=>Math.max(1,Math.ceil((3+Math.sqrt(sys.dist)*1.6)*techMods().scanMul));
 const isSurveyed=id=>!!S.surveyed[id];
+/* ── 행성 조사 ─────────────────────────────────────────────
+   스캔은 '행성이 있다'까지만 알려준다. 어떤 땅인지(타입·광맥·구역 슬롯)는
+   직접 조사선을 보내야 밝혀지고, 조사를 마쳐야 식민지를 세울 수 있다.
+   항성계 단위로 조사하며, 제국 전체에서 한 번에 한 곳만 진행된다. */
+const PROBE_DAYS = 90;                      // 3개월
+const probeCost = sys => Math.max(2, Math.ceil((4+Math.sqrt(sys.dist)*1.2)*techMods().scanMul));
+const isProbed = id => !!(S.probed&&S.probed[id]);
+const probeJob = () => (S&&S.probe)||null;
+function probeDaysFor(){ return Math.max(30, Math.round(PROBE_DAYS*(1-techMods().survey*0.20))); }
+function startProbe(sysId){
+  if(S.probe){ toast(`이미 ${sysById(S.probe.id).name}을(를) 조사 중입니다.`,"warn"); return; }
+  if(!isSurveyed(sysId)){ toast("먼저 항성계를 스캔해야 합니다.","warn"); return; }
+  if(isProbed(sysId)){ return; }
+  const sys=sysById(sysId), c=probeCost(sys);
+  if(S.res.alloy<c){ toast("철괴 부족 (필요 "+c+")","warn"); return; }
+  S.res.alloy-=c;
+  const d=probeDaysFor();
+  S.probe={id:sysId, left:d, total:d, cost:c};
+  pushLog(`🔬 ${sys.name} 행성 조사 시작 — ${Math.round(d/30)}개월 뒤 완료`,"");
+  save(); renderAll();
+}
+function cancelProbe(){
+  if(!S.probe)return; const sys=sysById(S.probe.id);
+  S.res.alloy=Math.min(storageCap(), S.res.alloy+(S.probe.cost||0));
+  pushLog(`🔬 ${sys.name} 조사 취소 — 철괴 ${S.probe.cost} 반환`,"");
+  S.probe=null; save(); renderAll();
+}
+function probeTick(){
+  if(!S.probe)return;
+  S.probe.left--;
+  if(S.probe.left<=0){
+    const id=S.probe.id, sys=sysById(id);
+    if(!S.probed)S.probed={}; S.probed[id]=true; S.probe=null;
+    const n=sys.planets.length;
+    pushLog(`🔬 ${sys.name} 조사 완료 — 행성 ${n}곳의 지질과 구역 슬롯이 밝혀졌습니다`,"good");
+    initMap();
+  }
+}
 const inReach=sys=>sys.dist<=maxReach()+0.001;
 
 function newGame(){
-  S={t:0,speed:1,res:Object.assign({},START),tech:{},terra:{},probeT:0,mega:{},rcards:[],ractive:null,rprog:0,rseed:0,anom:{},brownout:false,mshort:false,surveyed:{sol:true},colonies:{},log:[],dep:{energy:0,minerals:0,goods:0},day:0,lastMK:undefined};
+  S={t:0,speed:1,res:Object.assign({},START),tech:{},terra:{},probeT:0,mega:{},rcards:[],ractive:null,rprog:0,rseed:0,anom:{},brownout:false,mshort:false,surveyed:{sol:true},probed:{sol:true},probe:null,colonies:{},log:[],dep:{energy:0,minerals:0,goods:0},day:0,lastMK:undefined};
   S.colonies["sol|0"]={districts:{housing:1,agri:1,energy:1,mining:1}, pops:5, growth:0, policy:"balanced"};
   pushLog("본거지 지구에서 은하 개척을 시작합니다.","good");
   selSys="sol"; won=false; save();
@@ -1220,16 +1352,26 @@ function colonyInfo(key){
     if(def.housing) housing+=def.housing*c;
     if(def.job) totalJobs[def.job]+=def.jobs*c;
   }
-  housing=Math.max(2, Math.round(housing*traits.mods.housing*(1+techMods().housing)) + megaLvl('ring')*3);   // 행성 특성 + 도시 계획 + 궤도 고리
+  housing=Math.max(2, Math.round(housing*(traits.mods.housing||1)*(1+techMods().housing)) + megaLvl('ring')*3);   // 행성 특성 + 도시 계획 + 궤도 고리
   let rem=col.pops, employed={farmer:0,technician:0,miner:0,researcher:0,refiner:0};
   const pri=jobOrderFor(key);   // 행성별 무작위 배정 순서
-  // 생존 우선 배정: 생활재 일자리가 있는데 아무도 안 가면 소비재 생산이 0이 되어
-  // 인구가 굶어 죽고 되돌릴 방법이 없다. 그래서 딱 1천명만 먼저 밭으로 보낸다.
-  if(totalJobs.farmer>0 && rem>0){ employed.farmer=1; rem-=1; }
-  for(const t of pri){ const f=Math.min(totalJobs[t]-employed[t],rem); employed[t]+=f; rem-=f; }
-  const used=Object.values(col.districts).reduce((a,b)=>a+b,0);
-  // 안정도: 과밀 → 범죄 → 행복 (서로 맞물림)
   const polKey=col.policy||"balanced", pol=POLICIES[polKey];
+  /* 생존 우선 배정 — 여기가 무작위 배정보다 먼저다.
+     일자리가 인구보다 많으면(후반부엔 늘 그렇다) 무작위 배정이 소비재 밭을 비워버리고,
+     인구가 굶어 → 더 줄고 → 더 못 채우는 되돌릴 수 없는 나선에 빠진다.
+     그래서 '이 행성이 이번 달 먹을 만큼'의 인원만 먼저 밭에 넣고, 나머지를 무작위로 돌린다. */
+  if(totalJobs.farmer>0 && rem>0){
+    const tp=traits.pct.goods||0, pm=(pol.mult&&pol.mult.goods)?pol.mult.goods-1:0;
+    const perPop=Math.max(0.3, BASE_YIELD*DIST_YIELD.agri*Math.max(0.2,1+tp+pm));   // 1천명이 만드는 소비재
+    let need=col.pops*POP_GOODS;                                                     // 인구가 먹는 양
+    for(const dk in col.districts){ const u=DISTRICTS[dk].upkeep;                    // 소비재를 쓰는 구역 유지비
+      if(u&&u.goods) need+=u.goods*col.districts[dk]; }
+    const want=Math.min(totalJobs.farmer, rem, Math.ceil(need/perPop*10)/10);
+    employed.farmer=want; rem-=want;
+  }
+  for(const t of pri){ const f=Math.min(totalJobs[t]-employed[t],rem); employed[t]+=f; rem-=f; }
+  const used=Object.values(col.districts).reduce((a,b)=>a+b,0) + (col.bld?1:0);   // 공사 중인 구역도 슬롯을 차지
+  // 안정도: 과밀 → 범죄 → 행복 (서로 맞물림)
   const excess=Math.max(0, col.pops-housing);                       // 주거 초과 인구 (과밀)
   const hardCap=Math.max(housing+2, Math.round(housing*1.2));        // 절대 상한(구조적) — 실질 정원은 주거(100%)
   const crime=clamp(Math.round(3 + rem*8 + excess*9 + col.pops*0.3 + (pol.crimeMod||0) - techMods().crime), 0, 100);
@@ -1239,8 +1381,8 @@ function colonyInfo(key){
 /* 전역 가동률(OPR): 에너지 재고가 바닥나면 '소비' 구역이 자동 정전(가동 중단)된다.
    발전 구역은 항상 가동 + 식민지마다 비상 발전기(BASE_ENERGY) → 전면 정전에서도 반드시 회복 가능.
    ※ 이 구조가 없으면 에너지 0 + 순생산 음수 상태에서 아무것도 못 지어 영구 소프트락에 빠진다. */
-const BASE_ENERGY = 0.15;    // 식민지 1곳당 비상 발전기 (정전 회복 보장)
-const BASE_MINERALS = 0.2;  // 식민지 1곳당 기본 채취 — 광물 0 + 적자 상태의 소프트락 방지
+const BASE_ENERGY = 0.23;    // 식민지 1곳당 비상 발전기 (정전 회복 보장)
+const BASE_MINERALS = 0.3;  // 식민지 1곳당 기본 채취 — 광물 0 + 적자 상태의 소프트락 방지
 const BROWNOUT_EXIT = 30;    // 이만큼 비축되면 정전 해제 (발전 구역 재건 가능선)
 let OPR = 1, MPR = 1;   // OPR=에너지 가동률, MPR=광물 가동률
 /* ============ 이벤트 시스템 ============
@@ -1350,6 +1492,7 @@ function fireEvent(ev){
   const e=evState();
   const opts=ev.opts.filter(o=>!o.when||o.when());
   if(!opts.length) return;
+  evMarkSeen(ev.id);                                          // 쿨다운·가중치 기록
   if(ev.imp){ evResume=S.speed; S.speed=0; syncSpeed(); }     // 중요 사건은 일시정지
   let h=`<div class="ev-h"><span class="ev-i">${ev.icon}</span><div><div class="ev-t">${ev.title}</div>
     <div class="ev-tag">${ev.imp?'<b class="imp">일시정지</b> · ':''}${ev.kind||"사건"}</div></div></div>`;
@@ -1401,6 +1544,11 @@ const SITUATIONS={
       return "호황이 정점에 달해 대량의 자원과 생산 보너스를 얻었습니다."; },
     onClear:()=>"호황이 평상 수준으로 돌아갔습니다." },
 };
+/* 상황도 마찬가지. 경제 호황은 종료 직후 조건(행복도)이 그대로라 다음 틱에 곧장 다시 시작됐다. */
+const SIT_COOLDOWN_MO = 72;    // 같은 상황은 최소 72개월(6년) 뒤에나 다시
+function sitEnded(id){ const e=evState(); if(!e.sitSeen)e.sitSeen={}; e.sitSeen[id]=S.t; }
+function sitReady(id){ const e=evState(); const t=(e.sitSeen||{})[id];
+  return !t || S.t-t >= SIT_COOLDOWN_MO*SEC_PER_MONTH; }
 function sitStart(id){
   const e=evState(); if(e.sit) return;
   const S2=SITUATIONS[id]; if(!S2) return;
@@ -1415,9 +1563,9 @@ function sitTick(dt){
   if(ap.drain){ for(const k in ap.drain){ if(S.res[k]<ap.drain[k]*dt) { /* 자원 없으면 효과 없음 */ }
       S.res[k]=Math.max(0,S.res[k]-ap.drain[k]*dt); } }
   e.sit.prog=clamp(e.sit.prog+ap.rate*dt,0,100);
-  if(e.sit.prog>=100){ const msg=def.onFull(); const ic=def.icon,nm=def.name; e.sit=null;
+  if(e.sit.prog>=100){ const msg=def.onFull(); const ic=def.icon,nm=def.name; const id=e.sit.id; e.sit=null; sitEnded(id);
     evResume=S.speed; S.speed=0; syncSpeed(); showEvResult({icon:ic,title:nm},msg); }
-  else if(e.sit.prog<=0){ const msg=def.onClear?def.onClear():"상황이 종료됐습니다."; const ic=def.icon,nm=def.name; e.sit=null;
+  else if(e.sit.prog<=0){ const msg=def.onClear?def.onClear():"상황이 종료됐습니다."; const ic=def.icon,nm=def.name; const id=e.sit.id; e.sit=null; sitEnded(id);
     pushLog(`${ic} ${nm} — ${msg}`,"good"); }
 }
 function openSituation(first){
@@ -1534,17 +1682,32 @@ function chainAdvance(){
 const chainTarget = () => { const c=chainState(); return c.done?null:c.target; };
 
 /* ── 랜덤 이벤트 판정 ── */
+/* 같은 이벤트가 연달아 나오지 않도록: 쿨다운 + 볼 때마다 확률 절반.
+   예전에는 조건만 통과하면 매번 같은 후보에서 뽑아, 초반에 '이주 선단'만 반복됐다. */
+const EV_COOLDOWN_MO = 54;     // 같은 이벤트는 최소 54개월(4.5년) 뒤에나 다시
+function evSeen(id){ const e=evState(); return (e.seen&&e.seen[id])||null; }
+function evWeight(v){
+  const s=evSeen(v.id); if(!s) return 1;
+  if(S.t-s.t < EV_COOLDOWN_MO*SEC_PER_MONTH) return 0;      // 쿨다운 중
+  return 1/Math.pow(2, Math.min(s.n||1, 4));                 // 반복될수록 희박해짐
+}
+function evMarkSeen(id){
+  const e=evState(); if(!e.seen)e.seen={};
+  const s=e.seen[id]||{n:0}; s.n=(s.n||0)+1; s.t=S.t; e.seen[id]=s;
+}
 function rollEvents(dt){
   const e=evState();
   e.next=(e.next||EV_INTERVAL)-dt;
   if(e.next>0) return;
   e.next=EV_INTERVAL;
   if($("modal").classList.contains("on")) return;      // 이미 창이 떠 있으면 미룸
-  const pool=EVENTS.filter(v=>!v.when||v.when());
+  const pool=EVENTS.filter(v=>(!v.when||v.when()) && evWeight(v)>0);
   if(!pool.length) return;
   const h=_hstr("roll"+Math.floor(S.t))%1000/1000;
   if(h>EV_CHANCE) return;
-  const pick=pool[_hstr("pick"+Math.floor(S.t))%pool.length];
+  const tot=pool.reduce((a,v)=>a+evWeight(v),0);
+  let r=(_hstr("pick"+Math.floor(S.t))%10000/10000)*tot, pick=pool[pool.length-1];
+  for(const v of pool){ r-=evWeight(v); if(r<=0){ pick=v; break; } }
   fireEvent(pick);
 }
 
@@ -1615,13 +1778,11 @@ function supplyInfo(sysId){
 }
 function supplyMult(info){ return info&&info.sys ? supplyInfo(info.sys.id).mult : 1; }
 function energyProdOf(info){
-  const {sys,employed,happiness,pol,traits,col}=info, sf=STAR_FACTOR(sys.star);
-  const eff=0.7+happiness/100*0.5, m=pol.mult||{};
-  // 기술자는 발전 구역과 융합로에 나뉘어 배치된다 — 융합로 자리를 먼저 채운 것으로 계산(산출이 높음)
+  const {employed,col}=info;
+  // 기술자는 발전 구역과 융합로에 나뉜다 — 융합로 자리를 먼저 채운 것으로 계산
   const fuJobs=(col.districts.fusion||0)*DISTRICTS.fusion.jobs;
   const inFu=Math.min(employed.technician,fuJobs), inEn=employed.technician-inFu;
-  const yld=inFu*DISTRICTS.fusion.yld + inEn*DISTRICTS.energy.yld;
-  return BASE_ENERGY + yld*sf*(m.energy||1)*eff*traits.mods.energy;
+  return PER_MO(BASE_ENERGY) + PER_MO((inFu+inEn)*BASE_YIELD*modTotal(info,'energy')*STAR_FACTOR(info.sys.star));
 }
 /* 구역이 무엇을 유지비로 쓰는지 → 어느 가동률에 묶이는지 */
 const DIST_UP_RES={housing:"energy",agri:"energy",energy:"minerals",mining:"energy",lab:"energy",refinery:"minerals",fusion:"minerals",orbital:"energy"};
@@ -1629,10 +1790,10 @@ const DFAC=(o,mr)=>{const f={};for(const dk in DISTRICTS)f[dk]=DIST_UP_RES[dk]==
 function mineralProdOf(info){
   const {employed,happiness,pol,traits}=info;
   const eff=0.7+happiness/100*0.5, m=pol.mult||{};
-  return employed.miner*DISTRICTS.mining.yld*(m.minerals||1)*eff*traits.mods.minerals;
+  return PER_MO(employed.miner*BASE_YIELD*modTotal(info,'minerals'));
 }
 /* 자원별 가동률을 함께 푼다.
-   에너지 소비 구역(주거·생활재·채굴·연구소)은 OPR, 광물 소비 구역(발전·제련소)은 MPR로 감산된다.
+   에너지 소비 구역(주거·소비재·채굴·연구소)은 OPR, 광물 소비 구역(발전·제련소)은 MPR로 감산된다.
    발전량은 MPR에, 채굴량은 OPR에 묶여 서로 물리므로 반복 대입으로 수렴시킨다. */
 function computeRatios(){
   if(!S||!S.colonies){OPR=1;MPR=1;return;}
@@ -1661,40 +1822,89 @@ function computeRatios(){
   }
   OPR=o; MPR=mr;
 }
-function colonyRates(info){
-  const {p,sys,employed,col,pops,housing,happiness,excess,pol,traits,key}=info, sf=STAR_FACTOR(sys.star), hab=clamp(key?esiOf(key.split('|')[0],+key.split('|')[1]):p.esi,0.25,1);
-  const eff=0.7+happiness/100*0.5;   // 행복도 → 생산 효율 (0.7~1.2배). 요청: 행복도가 채굴/생산 효율에 연동
-  const m=pol.mult||{}, tm=(traits||planetTraits(p)).mods;   // tm = 행성 특성 배율
-  const o=OPR, mr=MPR, sup=supplyMult(info);   // o=에너지 가동률, mr=광물 가동률, sup=보급 효율
-  const TX=techMods(), au=(1+TX.prodAll)*(1+modSum('prod'));   // 기술 전체 생산 배율 + 이벤트 일시효과
-  const gr=TX.upkeepMul;                     // 유지비 절감 기술
-  const F=DFAC(o,mr);                        // 구역별 가동 계수 (소비 자원에 따라 결정)
-  const su=scaleUpkeep();                    // 제국 규모에 따른 유지비 가중
-  const dp=depProdMul(), da=depProdMul()*depAlloyMul();   // 고갈 게이지 페널티
-  const r={
-    goods:     employed.farmer*DISTRICTS.agri.yld*hab*(m.goods||1)*eff*tm.goods*F.agri*sup*au*dp - (pops*0.1 + excess*0.15),
-    energy:   (BASE_ENERGY + (energyProdOf(info)-BASE_ENERGY)*F.energy*dp)*sup*au,   // 비상 발전기는 항상 가동
-    minerals: BASE_MINERALS + employed.miner*DISTRICTS.mining.yld*(m.minerals||1)*eff*tm.minerals*F.mining*sup*au*dp,
-    research: employed.researcher*DISTRICTS.lab.yld*(m.research||1)*eff*tm.research*F.lab*sup*au*dp,
-    alloy:     employed.refiner*DISTRICTS.refinery.yld*(m.alloy||1)*eff*tm.alloy*F.refinery*sup*au*da,
+/* 인구가 매달 먹는 소비재 (1천명당, 월 기준) */
+const POP_GOODS = 0.25, POP_GOODS_CROWD = 0.35;
+/* 인구 증감 (명/월)
+   성장은 175~225 사이에서 행복도가 결정한다 (행복 0 → 175, 100 → 225).
+   행복도의 진짜 힘은 감소 쪽에 있다 — 40 아래로 떨어지면 사람이 빠져나가고,
+   20 부근에서 성장을 앞질러 순감소로 뒤집힌다. */
+const POP_GROW_MIN = 175, POP_GROW_MAX = 225;
+const POP_UNREST_AT = 40, POP_UNREST_PER = 10;   // 행복 40 미만 → (40−행복)×10명 감소
+const POP_CROWD_LOSS = 0.05;                     // 주거 초과 인원의 5%가 매달 이탈
+const POP_STARVE = 250;                          // 소비재가 바닥나면 추가 감소
+
+/* 식민지 수지 — 이 함수가 유일한 계산 근거다.
+   B(내역 객체)를 넘기면 계산하면서 항목별로 기록한다.
+   예전에는 툴팁이 같은 수식을 따로 구현해서, 비상 생산·행성 특성·기술 배율이
+   빠진 채 표시돼 합계와 내역이 서로 맞지 않았다. */
+/* ── 상황 보정 (덧셈 %) ───────────────────────────────────
+   정책·행성특성·보급을 %로 더한다. 곱하면 몇 개만 겹쳐도 폭주하거나 0에 붙는데,
+   더하면 "정책 +50% · 특성 −20% · 보급 −8% = 122%" 처럼 그대로 읽힌다.
+   페널티 최대는 특성 −40% + 보급 −50% = −90% → 최저 10%. 0 밑으로는 못 내려간다.
+   행복도는 여기 없다 — 생산이 아니라 '인구 증감'에만 작용한다. */
+function modParts(info, res){
+  const pol=info.pol, tr=info.traits||planetTraits(info.p);
+  return {
+    정책: (pol.mult&&pol.mult[res]) ? pol.mult[res]-1 : 0,
+    특성: tr.pct[res]||0,
+    보급: supplyMult(info)-1,
   };
-  // 구역 유지비 — 멈춘 구역은 유지비도 그만큼 줄어든다
+}
+function modTotal(info,res){ const q=modParts(info,res);
+  return Math.max(0, 1 + q.정책 + q.특성 + q.보급); }
+
+/* 월 기준 상수를 내부(초) 단위로 */
+const PER_MO = v => v/SEC_PER_MONTH;
+
+/* 식민지 수지 — 이 함수가 유일한 계산 근거다. B를 넘기면 항목별로 기록한다.
+   월 생산 = 고용 인원(천명) × BASE_YIELD × [상황 보정 %] × 기술 × 가동률 × 고갈 */
+function colonyRates(info, B){
+  const {p,sys,employed,col,pops,excess,pol,key}=info;
+  const sf=STAR_FACTOR(sys.star);
+  const TX=techMods(), gr=TX.upkeepMul, su=scaleUpkeep();
+  const F=DFAC(OPR,MPR);
+  const dp=depProdMul(), da=depProdMul()*depAlloyMul();
+  const au=r=>(1+TX.prodAll+TX.prod[r])*(1+modSum('prod'));
+  const rec = B ? (res,cat,v)=>{ if(v>0.0001) B[res].prod[cat]=(B[res].prod[cat]||0)+v;
+                                 else if(v<-0.0001) B[res].cons[cat]=(B[res].cons[cat]||0)-v; } : null;
+
+  const Y = (job,res,extra)=>PER_MO(employed[job]*BASE_YIELD*modTotal(info,res)*(extra||1));
+  const gProd = Y('farmer','goods',DIST_YIELD.agri)*F.agri*au('goods')*dp;
+  const eBase = PER_MO(BASE_ENERGY);
+  const eVar  = (energyProdOf(info)-PER_MO(BASE_ENERGY))*F.energy*au('energy')*dp;
+  const mBase = PER_MO(BASE_MINERALS);
+  const mVar  = Y('miner','minerals')    *F.mining   *au('minerals')*dp;
+  const rVar  = Y('researcher','research')*F.lab     *au('research')*dp;
+  const aVar  = Y('refiner','alloy')     *F.refinery *au('alloy')   *da;
+  const gPop  = PER_MO(pops*POP_GOODS), gCrowd = PER_MO(excess*POP_GOODS_CROWD);
+  if(rec){
+    rec('goods','소비재 구역(생산공)', gProd);
+    rec('goods','인구 소비재', -gPop);
+    rec('goods','과밀 추가', -gCrowd);
+    rec('energy','비상 발전기', eBase);
+    rec('energy','발전 구역(기술자)', eVar);
+    rec('minerals','비상 채굴', mBase);
+    rec('minerals','채굴 구역(광부)', mVar);
+    rec('research','연구소(연구원)', rVar);
+    rec('alloy','제련소(제련공)', aVar);
+  }
+  const r={ goods:gProd-gPop-gCrowd, energy:eBase+eVar, minerals:mBase+mVar, research:rVar, alloy:aVar };
   for(const dk in col.districts){ const d=DISTRICTS[dk], c=col.districts[dk];
-    if(d.upkeep) for(const k in d.upkeep) r[k]-=d.upkeep[k]*c*F[dk]*gr*su; }
-  // 정책 유지비
-  if(pol.drain) for(const k in pol.drain) r[k]-=pol.drain[k]*(k==="energy"?o:k==="minerals"?mr:1);
+    if(d.upkeep) for(const k in d.upkeep){ const v=PER_MO(d.upkeep[k])*c*F[dk]*gr*su; r[k]-=v; if(rec)rec(k,'구역 유지비',-v); } }
+  if(pol.drain) for(const k in pol.drain){ const v=PER_MO(pol.drain[k])*(k==="energy"?OPR:k==="minerals"?MPR:1);
+    r[k]-=v; if(rec)rec(k,'정책 유지('+pol.name+')',-v); }
   return r;
 }
 /* 행정 부담: 식민지가 늘수록 연구 인력이 관료 업무에 묶인다.
    연구는 쌓이지 않는 자원이라, 이 소모가 생산을 넘으면 순수치가 음수가 되고 연구가 멈춘다. */
-const ADMIN_FREE_COL=4, ADMIN_RES_PER=0.35;
+const ADMIN_FREE_COL=4, ADMIN_RES_PER=0.5;
 function adminResearchCost(){
   const n=Object.keys((S&&S.colonies)||{}).length;
   return Math.max(0, n-ADMIN_FREE_COL) * ADMIN_RES_PER * techMods().adminMul;
 }
 /* 수도의 중앙 기록소 — 연구소가 하나도 없어도 아주 느리게는 진행된다.
    (연구가 구조적으로 0에 묶여 아무 기술도 못 얻는 상태를 막는 안전장치) */
-const BASE_RESEARCH = 0.30;
+const BASE_RESEARCH = 0.45;
 function totalRates(){
   const r={energy:0,minerals:0,goods:0,research:0,alloy:0};
   for(const key in S.colonies){ const cr=colonyRates(colonyInfo(key)); for(const k in cr)r[k]+=cr[k]; }
@@ -1704,24 +1914,13 @@ function totalRates(){
   return r;
 }
 /* 자원별 생산·소비 내역 (툴팁용) — 카테고리별로 합산 */
+/* 자원별 생산·소비 내역 (툴팁용) — 계산은 colonyRates 가 하고 여기서는 모으기만 한다 */
 function breakdown(){
   const B={energy:{prod:{},cons:{}},minerals:{prod:{},cons:{}},goods:{prod:{},cons:{}},research:{prod:{},cons:{}},alloy:{prod:{},cons:{}}};
-  const addP=(r,c,v)=>{if(v>0.001)B[r].prod[c]=(B[r].prod[c]||0)+v;};
-  const addC=(r,c,v)=>{if(v>0.001)B[r].cons[c]=(B[r].cons[c]||0)+v;};
-  for(const key in S.colonies){
-    const info=colonyInfo(key), {employed,pops,excess,sys,p,pol}=info;
-    const sf=STAR_FACTOR(sys.star), hab=clamp(p.esi,0.25,1), eff=0.7+info.happiness/100*0.5, m=pol.mult||{};
-    addP('energy','발전 구역(기술자)', employed.technician*DISTRICTS.energy.yld*sf*(m.energy||1)*eff);
-    addP('minerals','채굴 구역(광부)', employed.miner*DISTRICTS.mining.yld*(m.minerals||1)*eff);
-    addP('goods','생활재 구역(생산공)', employed.farmer*DISTRICTS.agri.yld*hab*(m.goods||1)*eff);
-    addP('research','연구소(연구원)', employed.researcher*DISTRICTS.lab.yld*(m.research||1)*eff);
-    addP('alloy','제련소(제련공)', employed.refiner*DISTRICTS.refinery.yld*(m.alloy||1)*eff);
-    addC('goods','인구 소비재', pops*0.1); addC('goods','과밀 추가', excess*0.15);
-    for(const dk in info.col.districts){const d=DISTRICTS[dk],c=info.col.districts[dk]; if(d.upkeep)for(const k in d.upkeep)addC(k,'구역 유지비',d.upkeep[k]*c);}
-    if(pol.drain)for(const k in pol.drain)addC(k,'정책 유지('+pol.name+')',pol.drain[k]);
-  }
-  addP('research','중앙 기록소', BASE_RESEARCH);
-  addC('research','제국 행정 부담', adminResearchCost());
+  for(const key in S.colonies) colonyRates(colonyInfo(key), B);
+  const mb=megaBonus(); for(const k in mb) if(mb[k]>0.0001) B[k].prod['메가구조물']=(B[k].prod['메가구조물']||0)+mb[k];
+  B.research.prod['중앙 기록소']=(B.research.prod['중앙 기록소']||0)+BASE_RESEARCH;
+  const ac=adminResearchCost(); if(ac>0.0001) B.research.cons['제국 행정 부담']=ac;
   return B;
 }
 
@@ -1739,15 +1938,18 @@ function doScan(sys){
   pushLog("["+sys.name+"] 스캔 완료 · 행성 "+sys.planets.length+"개"+(pr?" · 거주후보 "+pr:""), pr?"good":"");
   save(); renderAll();
 }
-function colonizeCost(sys,p){const h=1-p.esi,d=techMods().colonyMul;   // 개척·생명유지 계열 할인
-  return{minerals:Math.round((50+h*150)*d),energy:Math.round((40+h*110)*d),alloy:Math.max(1,Math.round((Math.ceil(Math.sqrt(sys.dist)*1.5)+4)*d))};}
+/* 식민지 비용 — '얼마나 먼가'로만 정한다. 척박함은 이미 슬롯·특성이 벌하고 있으므로
+   ESI로 또 비싸게 받으면 낮은 ESI 행성은 갈 이유가 영영 사라진다. */
+function colonizeCost(sys,p){const q=Math.pow(sys.dist||0,0.4), d=techMods().colonyMul;   // 개척·생명유지 계열 할인
+  return{minerals:Math.round((45+q*9)*d),energy:Math.round((35+q*7)*d),alloy:Math.max(1,Math.round((Math.ceil(Math.sqrt(sys.dist||0)*1.5)+4)*d))};}
 function doColonize(sys,pi){
   const p=sys.planets[pi], key=colKey(sys.id,pi);
   if(S.colonies[key])return;
+  if(!isProbed(sys.id)){ toast("행성 조사를 먼저 마쳐야 식민지를 세울 수 있습니다.","warn"); return; }
   const c=colonizeCost(sys,p);
   if(!canAfford(c)){toast("자원 부족 — 식민지선을 보낼 수 없습니다.","warn");return;}
   pay(c);
-  S.colonies[key]={districts: p.esi>=0.5?{housing:1,agri:1}:{housing:1,mining:1}, pops:2, growth:0, policy:"balanced"};
+  S.colonies[key]={districts: slotsOf(p)>=7?{housing:1,agri:1}:{housing:1,mining:1}, pops:1, growth:0, decline:0, policy:"balanced"};
   pushLog("["+p.n+"] 식민지 건설! ("+tierName[tierOf(p.esi)]+")", p.esi>=0.8?"good":"");
   if(!S.surveyed[sys.id])S.surveyed[sys.id]=true;
   save(); renderAll();
@@ -1767,17 +1969,72 @@ function buildCost(dk){const c=DISTRICTS[dk].cost,a=adminMult();
   if(c.alloy) o.alloy=Math.round(c.alloy*a);                                    // 고급 구역은 철괴도 요구
   return o;}
 const costStr = c => Object.keys(c).map(k=>`${RES_TIC[k]}${c[k]}`).join(" · ");
+/* 구역은 즉시 생기지 않는다 — 착공 후 1개월(30일)이 지나야 완공된다.
+   비용은 착공 시점에 빠지고, 완공 전에는 취소해서 전액 돌려받을 수 있다.
+   식민지 한 곳당 동시에 하나만 짓는다. */
+const BUILD_DAYS = 30;
 function doBuild(key,dk){
+  const col=S.colonies[key]; if(!col)return;
+  if(col.bld){toast(`이미 ${DISTRICTS[col.bld.dk].name}을(를) 짓는 중입니다.`,"warn");return;}
   const info=colonyInfo(key);
   if(info.used>=info.slots){toast("건설 슬롯이 가득 찼습니다.","warn");return;}
   const cost=buildCost(dk);
   if(!canAfford(cost)){toast("자원 부족","warn");return;}
-  pay(cost); S.colonies[key].districts[dk]=(S.colonies[key].districts[dk]||0)+1;
+  pay(cost);
+  col.bld={dk, left:BUILD_DAYS, total:BUILD_DAYS, cost};
+  pushLog(`${DISTRICTS[dk].icon} ${DISTRICTS[dk].name} 착공 — 1개월 뒤 완공`, "");
   save(); renderPanel(); renderTop(); renderScore();
 }
+function cancelBuild(key){
+  const col=S.colonies[key]; if(!col||!col.bld)return;
+  const c=col.bld.cost||buildCost(col.bld.dk), cap=storageCap();
+  for(const k in c) S.res[k]=Math.min(cap, S.res[k]+c[k]);          // 착공 취소는 전액 환급
+  pushLog(`${DISTRICTS[col.bld.dk].icon} ${DISTRICTS[col.bld.dk].name} 착공 취소 — ${costStr(c)} 반환`,"");
+  col.bld=null; save(); renderPanel(); renderTop(); renderScore();
+}
+/* 하루가 지날 때마다 공사를 진행시킨다 */
+function buildTick(){
+  for(const key in S.colonies){ const col=S.colonies[key]; if(!col.bld)continue;
+    col.bld.left--;
+    if(col.bld.left<=0){ const dk=col.bld.dk;
+      col.districts[dk]=(col.districts[dk]||0)+1; col.bld=null;
+      pushLog(`${DISTRICTS[dk].icon} ${DISTRICTS[dk].name} 완공`,"good"); } }
+}
+/* 정책은 한 번 바꾸면 6개월간 다시 못 바꾼다.
+   즉석에서 이리저리 갈아끼우며 이득만 챙기는 것을 막고, 선택에 무게를 준다. */
+const POL_COOLDOWN_MO = 6, POL_COOLDOWN_DAYS = POL_COOLDOWN_MO*BUILD_DAYS;   // 건설과 같은 30일=1개월 기준
+function polLeft(key){                       // 남은 '개월' (0이면 변경 가능)
+  const col=S.colonies[key]; if(!col||col.polAtDay===undefined) return 0;
+  const passed = gameDays()-col.polAtDay;
+  return Math.max(0, Math.ceil((POL_COOLDOWN_DAYS-passed)/BUILD_DAYS));
+}
+/* 정책을 누르면 바로 바뀌지 않고, 효과·유지비·잠금 기간을 보여준 뒤 확인을 받는다 */
+function askPolicy(key,pk){
+  const col=S.colonies[key]; if(!col)return;
+  if(col.policy===pk){ toast("이미 적용 중인 정책입니다.",""); return; }
+  const left=polLeft(key);
+  if(left>0){ toast(`정책 변경 잠금 중 — ${left}개월 남음`,"warn"); return; }
+  const P=POLICIES[pk], cur=POLICIES[col.policy||"balanced"];
+  const M=SEC_PER_MONTH;
+  const eff = P.mult ? Object.keys(P.mult).map(k=>`<div class="pw-r"><span>${RES_TIC[k]} ${RES_LABEL[k]} 생산</span><b class="g">×${P.mult[k]}</b></div>`).join("")
+            : P.growthMult ? `<div class="pw-r"><span>📈 인구 성장</span><b class="g">×${P.growthMult}</b></div>` : `<div class="pw-r"><span>효과</span><b>없음</b></div>`;
+  const drain = P.drain ? Object.keys(P.drain).map(k=>`<div class="pw-r"><span>${RES_TIC[k]} ${RES_LABEL[k]} 유지비</span><b class="b">−${(P.drain[k]*M).toFixed(1)}/월</b></div>`).join("")
+            : `<div class="pw-r"><span>유지비</span><b>없음</b></div>`;
+  showModal(`<h2>${P.icon} ${P.name}</h2>
+    <p style="margin-bottom:14px">이 행성의 정책을 <b>${cur.icon} ${cur.name}</b>에서 <b style="color:var(--amber-2)">${P.icon} ${P.name}</b>(으)로 바꿉니다.</p>
+    <div class="pw-box"><div class="pw-h">효과</div>${eff}</div>
+    <div class="pw-box"><div class="pw-h">유지비 <small>이 행성에서 매달 빠져나갑니다</small></div>${drain}</div>
+    <div class="pw-warn">⚠ 한 번 바꾸면 <b>${POL_COOLDOWN_MO}개월간 다시 바꿀 수 없습니다.</b>
+      유지비를 감당하지 못하면 자원이 마이너스로 돌아설 수 있으니 순생산을 먼저 확인하세요.</div>
+    <div class="row"><button class="act solid" id="mYes">${P.name}으로 변경</button><button class="act ghost" id="mNo">취소</button></div>`);
+  $("mYes").onclick=()=>{ doPolicy(key,pk); $("modal").classList.remove("on"); };
+  $("mNo").onclick=()=>$("modal").classList.remove("on");
+}
 function doPolicy(key,pol){
-  if(!S.colonies[key]||S.colonies[key].policy===pol)return;
-  S.colonies[key].policy=pol;
+  const col=S.colonies[key]; if(!col||col.policy===pol)return;
+  if(polLeft(key)>0)return;
+  col.policy=pol; col.polAtDay=gameDays();
+  pushLog(`${POLICIES[pol].icon} 정책 변경 — ${POLICIES[pol].name} (${POL_COOLDOWN_MO}개월 잠금)`,"");
   save(); renderPanel(); renderTop();
 }
 
@@ -1817,27 +2074,28 @@ function applyMonth(span){
       pushLog(`${DEF_ICON[k]} ${RES_LABEL[k]} 고갈 100% — 페널티 최대치 도달! ${DEP_FX[k].desc}`,"bad");
   }
 
-  // 인구: 성장 / 이주
+  // ── 인구: 성장과 감소 (명 단위, 연속값) ──
+  //   성장 = (175~225, 행복도로 결정) × 주거 여유 × 거주 적합도 × 정책
+  //   감소 = 행복 40 미만 페널티 + 과밀 + 소비재 고갈
+  //   pops 는 '천명' 단위 소수다 (4.306 = 4,306명).
   for(const key in S.colonies){
     const info=colonyInfo(key), col=info.col;
-    const foodLow=S.res.goods<=info.pops*0.5;
-    const over=info.pops-info.housing, freeHouse=info.housing-info.pops;
-    const declining=(over>0) || S.res.goods<=0.5;
-    if(declining && info.pops>1){
-      col.growth=0;
-      const unhappy=info.happiness<35?1.8:1;
-      col.decline=(col.decline||0)+(over>0 ? (0.04+over*0.05)*unhappy : 0.10)*span;
-      while(col.decline>=1 && col.pops>1){ col.decline-=1; col.pops--; }
-    } else {
-      col.decline=0;
-      let gm = info.happiness<25 ? 0 : clamp((info.happiness-25)/40,0,1.5)*(info.happiness>=80?1.25:1);
-      gm *= (info.pol.growthMult||1);
-      const press=clamp(freeHouse/Math.max(1.5,info.housing*0.6),0,1);
-      if(gm>0 && press>0 && !foodLow){
-        col.growth+=0.03*span*(0.4+info.p.esi)*gm*press;
-        while(col.growth>=1 && info.pops+0<info.housing+2){ col.growth-=1; col.pops++; }
-      }
-    }
+    const H=info.housing, P=col.pops;
+    const room = H>0 ? clamp((H-P)/H, 0, 1) : 0;             // 주거 여유 (꽉 찰수록 0)
+    const hab  = 1;   // ESI는 성장 속도에 관여하지 않는다 — 주거 여유(room)와 행복도만으로 결정
+    const hRatio = clamp(info.happiness/100, 0, 1);
+    const growPerMo = (POP_GROW_MIN + (POP_GROW_MAX-POP_GROW_MIN)*hRatio)
+                      * room * hab * (info.pol.growthMult||1);
+
+    let dropPerMo = 0;
+    if(info.happiness < POP_UNREST_AT) dropPerMo += (POP_UNREST_AT-info.happiness)*POP_UNREST_PER;
+    const over = Math.max(0, P - H);
+    if(over>0)                dropPerMo += over*1000*POP_CROWD_LOSS;   // 초과 인원의 5%
+    if(S.res.goods<=0.01)     dropPerMo += POP_STARVE;                 // 소비재 고갈
+
+    const net = (growPerMo - dropPerMo) * months / 1000;      // 명 → 천명
+    col.pops = Math.max(0.2, P + net);                        // 최소 200명은 남는다
+    col.growth = growPerMo; col.decline = dropPerMo;          // 화면 표시용
   }
 }
 
@@ -1867,10 +2125,13 @@ function stepDay(){
     S.monthFlash=16;                  // 정산 표시(실시간 약 0.8초)
   }
 
+  buildTick();                        // 구역 공사 진행 (하루 단위)
+  probeTick();                        // 행성 조사 진행
+
   // ── 이벤트·상황·위기는 시점이 중요하므로 매일 흐른다
   rollEvents(DAY_SEC); sitTick(DAY_SEC); crisisTick(DAY_SEC);
   {const e=evState();
-   if(!e.sit&&!$("modal").classList.contains("on")) for(const id in SITUATIONS){ if(SITUATIONS[id].start()){ sitStart(id); break; } }
+   if(!e.sit&&!$("modal").classList.contains("on")) for(const id in SITUATIONS){ if(sitReady(id)&&SITUATIONS[id].start()){ sitStart(id); break; } }
    if(!e.crisis&&!e.crisisDone&&tierIndex()>=2&&!$("modal").classList.contains("on")){ e.crisisDone=true; crisisStart(); }}
 }
 
@@ -1913,10 +2174,10 @@ function computeNext(){
    if(ct&&!isSurveyed(ct)) return {tag:"단서",cls:"",msg:`<b>${CHAIN.icon} ${CHAIN.name}</b> — 단서가 <b>${sysById(ct).name}</b>를 가리킵니다. 그곳을 스캔하세요.`,target:ct,sel:ct};}
   // 0-2) 자원 고갈(디버프 발동)
   const dep=depletedList();
-  if(dep.length){ const k=dep[0], jobFix={energy:"발전 구역",minerals:"채굴 구역",goods:"생활재 구역",alloy:"제련소",research:"연구소"}[k];
+  if(dep.length){ const k=dep[0], jobFix={energy:"발전 구역",minerals:"채굴 구역",goods:"소비재 구역",alloy:"제련소",research:"연구소"}[k];
     return {tag:"경고",cls:"warn",msg:`<b>${DEF_ICON[k]} ${RES_LABEL[k]} 고갈 ${depPct(k)}%</b> — ${DEP_FX[k].desc} (100%까지 24개월). <b>${jobFix}</b>를 짓거나 소비를 줄이면 게이지가 빠집니다.`,target:firstColonySys()};}
   // 1) 소비재 위기
-  if(r.goods<-0.05 && S.res.goods<30) return {tag:"경고",cls:"warn",msg:"<b>소비재이 부족</b>합니다. 식민지에 <b>생활재 구역</b>을 지어 생산공를 늘리세요.",target:firstColonySys()};
+  if(r.goods<-0.05 && S.res.goods<30) return {tag:"경고",cls:"warn",msg:"<b>소비재이 부족</b>합니다. 식민지에 <b>소비재 구역</b>을 지어 생산공를 늘리세요.",target:firstColonySys()};
   // 1-2) 에너지 위기 (구역 유지비 > 발전)
   if(r.energy<-0.05 && S.res.energy<30) return {tag:"경고",cls:"warn",msg:"<b>에너지가 부족</b>합니다. 구역 유지비가 발전량을 넘었어요 — <b>발전 구역</b>을 지으세요.",target:firstColonySys()};
   // 1-3) 불안정 (행복도 낮음 / 범죄 높음)
@@ -1928,6 +2189,11 @@ function computeNext(){
   // 3) 식민지화 가능한 거주후보
   const col=colonizable();
   if(col) return {tag:"확장",cls:"",msg:"<b>"+col.pname+"</b>("+tierName[col.tier]+")에 <b>식민지</b>를 건설할 수 있습니다.",target:col.sysId,sel:col.sysId};
+  // 3-1) 조사가 먼저 필요한 거주 후보
+  {const pb=probable();
+   if(pb) return {tag:"조사",cls:"",msg:"<b>"+pb.pname+"</b>에 식민지를 세우려면 먼저 <b>🔬 행성 조사</b>가 필요합니다 (철괴 "+pb.cost+").",target:pb.sysId,sel:pb.sysId};}
+  // 3-1b) 조사 진행 중
+  if(S.probe) return {tag:"조사",cls:"",msg:"<b>🔬 "+sysById(S.probe.id).name+"</b> 조사 중 — "+S.probe.left+"일 남았습니다. 끝나면 지질 특성과 구역 슬롯이 밝혀집니다.",target:S.probe.id};
   // 3-2) 조사하지 않은 이상 현상
   {const ap=anomPending().filter(sy=>S.res.alloy>=anomCost(sy));
    if(ap.length){ const sy=ap[0], a=anomalyOf(sy);
@@ -1953,7 +2219,16 @@ function colonizable(){
   for(const s of SYSTEMS){ if(!isSurveyed(s.id))continue;
     for(let i=0;i<s.planets.length;i++){const p=s.planets[i];
       if(p.home||S.colonies[colKey(s.id,i)])continue;
-      if(p.esi>=0.5 && canAfford(colonizeCost(s,p))) return {sysId:s.id,pname:p.n,tier:tierOf(p.esi)};}}
+      if(slotsOf(p)>=7 && isProbed(s.id) && canAfford(colonizeCost(s,p))) return {sysId:s.id,pname:p.n,tier:tierOf(p.esi)};}}
+  return null;
+}
+/* 스캔은 끝났지만 아직 조사하지 않은 거주 후보 — 식민지 앞 단계 */
+function probable(){
+  if(S.probe) return null;
+  for(const s of SYSTEMS){ if(!isSurveyed(s.id)||isProbed(s.id))continue;
+    for(let i=0;i<s.planets.length;i++){const p=s.planets[i];
+      if(p.home)continue;
+      if(p.esi>=0.5 && S.res.alloy>=probeCost(s)) return {sysId:s.id,pname:p.n,cost:probeCost(s)};}}
   return null;
 }
 function scannable(){
@@ -1975,7 +2250,7 @@ function renderCoach(){
 const RES_META=[
   {k:"energy",lbl:"에너지",ic:"⚡",tip:"건물 가동과 건설에 쓰는 기본 에너지. 발전 구역(기술자)에서 생산."},
   {k:"minerals",lbl:"광물",ic:"⛏",tip:"건설의 핵심 재료. 채굴 구역(광부)에서 생산."},
-  {k:"goods",lbl:"소비재",ic:"📦",tip:"인구가 매달 소모하는 생필품. 생활재 구역(생산공)에서 생산. 부족하면 인구가 안 늘고 전 구역 생산이 떨어집니다."},
+  {k:"goods",lbl:"소비재",ic:"📦",tip:"인구가 매달 소모하는 생필품. 소비재 구역(생산공)에서 생산. 부족하면 인구가 안 늘고 전 구역 생산이 떨어집니다."},
   {k:"research",lbl:"연구",ic:"⚛",tip:"쌓이지 않는 자원 — 매달의 순수치가 그대로 연구 진행에 들어갑니다. 연구소가 생산하고, 식민지 수만큼 행정 부담으로 소모됩니다. 순수치가 0 이하면 연구가 멈춥니다."},
   {k:"alloy",lbl:"철괴",ic:"🔩",tip:"광물을 제련해 만드는 고급 자재. ①고급 구역 건설 ②탐사·식민지 확장 ③고급 구역 유지비에 쓰입니다. 제련소(제련공)에서 생산."},
 ];
@@ -2077,7 +2352,7 @@ function showTip(el){
 }
 /* 마우스: 올리면 뜸 / 터치: 길게 눌러야 뜸(짧게 누르면 원래 동작)
    단, 버튼이 아닌 정보 표시용 요소는 터치에서도 한 번 탭하면 뜬다. */
-const TIP_ACTIVE="button,a,[data-build],[data-demo],[data-pol],[data-col],[data-anom],[data-start],[data-mega],[data-s],#scanBtn";
+const TIP_ACTIVE="button,a,[data-build],[data-demo],[data-cancel],[data-probe],[data-pol],[data-col],[data-anom],[data-start],[data-mega],[data-s],#scanBtn";
 function initTips(){
   let holdT=null, held=false, anchor=null, lastTouch=0;
   const canHover=()=>window.matchMedia("(hover:hover) and (pointer:fine)").matches;
@@ -2312,19 +2587,32 @@ function renderPanel(){
       </button>`;
     if(open){
       h+=`<div class="pbody">
-        <div class="ptype" data-tip="ESI = 지구 유사 지수(0~1). 1에 가까울수록 살기 좋음.">${p.t} · ESI ${esiOf(sys.id,i).toFixed(2)}${terraLv(key)?' <span style="color:var(--habit)">🌍개조</span>':''}</div>
+        <div class="ptype" data-tip="ESI = 지구 유사 지수(0~1). 생산·성장·비용에는 영향이 없습니다. 행성 등급과 시대 목표(거주 가능 행성 N곳), 테라포밍 목표치를 정하는 지표입니다.">${p.t} · ESI ${esiOf(sys.id,i).toFixed(2)}${terraLv(key)?' <span style="color:var(--habit)">🌍개조</span>':''}</div>
         <div class="pstats">
           <div class="pstat" data-tip="지구 반지름 대비 크기. 클수록 건설 슬롯이 많음."><div class="pv">${p.r}</div><div class="pl">반지름 R⊕</div></div>
           <div class="pstat" data-tip="질량 — 지구 질량 대비"><div class="pv">${p.m}</div><div class="pl">질량 M⊕</div></div>
           <div class="pstat" data-tip="행성 평형 온도(켈빈). 288K ≈ 지구."><div class="pv">${p.temp}K</div><div class="pl">평형온도</div></div>
         </div>`;
-      {const tr=planetTraits(p);
-       let tg=tr.tags.map(t=>`<span class="ptag" data-tip="${t.tip}">${t.ic} ${t.t}</span>`).join("");
-       if(tr.deposit) tg+=`<span class="ptag dep" data-tip="${tr.deposit.tip}">${tr.deposit.ic} ${tr.deposit.t}</span>`;
-       if(tg) h+=`<div class="ptags">${tg}</div>`;}
+      {const tr=planetTraits(p), done=isProbed(sys.id);
+       // 온도는 망원경으로 보이고, 두 번째 특성과 슬롯은 조사해야 밝혀진다
+       let tg=tr.tags.filter(t=>t.k==="temp"||done)
+         .map(t=>`<span class="ptag${t.k!=="temp"?' dep':''}" data-tip="${t.tip}">${t.ic} ${t.t}</span>`).join("");
+       if(!done) tg+=`<span class="ptag unk" data-tip="행성 조사를 마치면 지질 특성과 구역 슬롯이 밝혀집니다">❓ 미조사</span>`;
+       tg+=`<span class="ptag" data-tip="이 행성에 지을 수 있는 구역 수${done?'':' — 조사해야 확정됩니다'}">▦ 슬롯 ${done?slotsOf(p):"?"}</span>`;
+       h+=`<div class="ptags">${tg}</div>`;}
       if(col) h+=renderColony(key);
+      else if(!isProbed(sys.id)){
+        const pj=probeJob(), mine=pj&&pj.id===sys.id, c=probeCost(sys), ok=!pj&&S.res.alloy>=c;
+        if(mine){ const pctv=Math.round((1-pj.left/pj.total)*100);
+          h+=`<div class="probing"><div class="pb-t">🔬 조사 중 · ${pj.left}일 남음</div>
+            <div class="pbar"><i style="width:${pctv}%"></i></div>
+            <button class="act ghost" id="probeCancel" data-tip="조사 취소 — 철괴 ${pj.cost} 전액 반환">취소</button></div>`; }
+        else h+=`<button class="act ${ok?'solid':''}" data-probe="${sys.id}" ${ok?'':'disabled'}>🔬 행성 조사</button>
+          <div class="cost ${S.res.alloy<c?'bad':''}">철괴 ${c} · ${Math.round(probeDaysFor()/30)}개월 소요${pj?' · 다른 곳 조사 중':''}</div>
+          <div class="cost">조사를 마쳐야 식민지를 세울 수 있습니다</div>`;
+      }
       else{const c=colonizeCost(sys,p),ok=canAfford(c);
-        h+=`<button class="act" data-col="${key}" ${ok?'':'disabled'}>＋ 식민지 건설</button><div class="cost ${ok?'':'bad'}">광물 ${c.minerals} · 에너지 ${c.energy} · 철괴 ${c.alloy}</div>`;}
+        h+=`<button class="act ${ok?'solid':''}" data-col="${key}" ${ok?'':'disabled'}>＋ 식민지 건설</button><div class="cost ${ok?'':'bad'}">광물 ${c.minerals} · 에너지 ${c.energy} · 철괴 ${c.alloy}</div>`;}
       h+=`</div>`;
     }
     h+=`</div>`;
@@ -2335,7 +2623,10 @@ function renderPanel(){
   panel.querySelectorAll("[data-col]").forEach(b=>b.onclick=()=>{const[s,pi]=b.dataset.col.split("|");doColonize(sysById(s),+pi);});
   panel.querySelectorAll("[data-build]").forEach(b=>b.onclick=()=>doBuild(b.dataset.key,b.dataset.build));
   panel.querySelectorAll("[data-demo]").forEach(b=>b.onclick=()=>doDemolish(b.dataset.key,b.dataset.demo));
-  panel.querySelectorAll("[data-pol]").forEach(b=>b.onclick=()=>doPolicy(b.dataset.key,b.dataset.pol));
+  panel.querySelectorAll("[data-cancel]").forEach(b=>b.onclick=()=>cancelBuild(b.dataset.cancel));
+  panel.querySelectorAll("[data-probe]").forEach(b=>b.onclick=()=>startProbe(b.dataset.probe));
+  {const pc=panel.querySelector("#probeCancel"); if(pc)pc.onclick=cancelProbe;}
+  panel.querySelectorAll("[data-pol]").forEach(b=>b.onclick=()=>askPolicy(b.dataset.key,b.dataset.pol));
   panel.querySelectorAll("[data-terra]").forEach(b=>b.onclick=()=>doTerra(b.dataset.terra));
   panel.querySelectorAll("[data-anom]").forEach(b=>b.onclick=()=>doAnomaly(b.dataset.anom));
 }
@@ -2377,9 +2668,9 @@ function renderColony(key){
   if(hasUnlock("terra")){
     const tl=terraLv(key), cur=esiOf(info.sys.id,+key.split("|")[1]), done=tl>=TERRA_MAX||cur>=1;
     const tc=terraCost(key), okT=!done&&S.res.minerals>=tc.minerals&&S.res.energy>=tc.energy&&S.res.goods>=tc.goods;
-    h+=`<div class="box-h"><span>테라포밍</span><span class="slotbar">${Array.from({length:TERRA_MAX},(_,i)=>`<i class="${i<tl?'on':''}"></i>`).join("")}</span></div>`;
+    h+=`<div class="box-h"><span data-tip="ESI를 영구히 올려 행성 등급을 승격시킵니다. 생산량은 바뀌지 않고, 시대 목표(거주 가능 행성 N곳)와 점수에 반영됩니다.">테라포밍</span><span class="slotbar">${Array.from({length:TERRA_MAX},(_,i)=>`<i class="${i<tl?'on':''}"></i>`).join("")}</span></div>`;
     h+=`<div class="terra">
-      <div class="tr-now">ESI <b>${cur.toFixed(2)}</b>${tl?` <small>(개조 +${(tl*TERRA_STEP).toFixed(2)})</small>`:""}${done?"":` <span class="tr-nx">→ ${Math.min(1,cur+TERRA_STEP).toFixed(2)}</span>`}</div>
+      <div class="tr-now">ESI <b>${cur.toFixed(2)}</b>${tl?` <small>(개조 +${(tl*TERRA_STEP).toFixed(2)})</small>`:""}${done?"":` <span class="tr-nx">→ ${Math.min(1,cur+TERRA_STEP).toFixed(2)}</span>`}${(!done&&tierOf(Math.min(1,cur+TERRA_STEP))!==tierOf(cur))?` <span class="tr-up">▲ ${tierName[tierOf(Math.min(1,cur+TERRA_STEP))]} 승격</span>`:""}</div>
       ${done?`<div class="tmax">개조 완료 — 더 올릴 수 없습니다</div>`
             :`<button class="act ${okT?"solid":""}" data-terra="${key}" ${okT?"":"disabled"}>🌍 행성 개조</button>
               <div class="cost ${okT?"":"bad"}">광물 ${tc.minerals} · 에너지 ${tc.energy} · 소비재 ${tc.goods}</div>`}
@@ -2387,29 +2678,43 @@ function renderColony(key){
   }
   // ── 행성 정책 ──
   h+=`<div class="box-h"><span>행성 정책</span></div>`;
-  h+=`<div class="pols">`+POL_ORDER.map(pk=>{const P=POLICIES[pk];return `<button class="pol ${policy===pk?'on':''}" data-pol="${pk}" data-key="${key}" data-tip="${P.icon} ${P.name} — ${P.desc}">${P.icon} ${P.name}</button>`;}).join("")+`</div>`;
+  {const pl=polLeft(key);
+   h+=`<div class="box-h" style="margin-top:2px"><span></span>${pl?`<span class="pol-lock">🔒 ${pl}개월 뒤 변경 가능</span>`:''}</div>`;
+   h+=`<div class="pols">`+POL_ORDER.map(pk=>{const P=POLICIES[pk];
+     const on=policy===pk, lock=pl>0&&!on;
+     return `<button class="pol ${on?'on':''}${lock?' lock':''}" data-pol="${pk}" data-key="${key}" ${lock?'disabled':''} data-tip="${P.icon} ${P.name} — ${P.desc}${lock?` · 🔒 ${pl}개월 뒤 변경 가능`:on?' · 적용 중':' · 누르면 효과를 확인한 뒤 변경합니다'}">${P.icon} ${P.name}</button>`;}).join("")+`</div>`;}
 
   // ── 구역 (타일 그리드 + 슬롯 세그먼트) ──
-  let seg=''; for(let i=0;i<slots;i++) seg+=`<i class="${i<used?'on':''}"></i>`;
+  const bldSlot=!!S.colonies[key].bld;
+  let seg=''; for(let i=0;i<slots;i++) seg+=`<i class="${i<used-(bldSlot?1:0)?'on':i<used?'wip':''}"></i>`;
   h+=`<div class="box-h"><span>구역</span><span class="slotbar" data-tip="구역 슬롯 — 사용 ${used} / ${slots} · 슬롯 수는 행성 크기에 비례합니다">${seg}</span></div>`;
   h+=`<div class="dtiles">`;
-  DKEYS_OF().forEach(dk=>{const d=DISTRICTS[dk],cnt=S.colonies[key].districts[dk]||0,cost=buildCost(dk),dis=used>=slots||!canAfford(cost);
-    const jobtxt=d.job?`${JOB_NAME[d.job]} ${d.jobs}천명`:`주거 +${d.housing}천명`;
+  const bld=S.colonies[key].bld;
+  DKEYS_OF().forEach(dk=>{const d=DISTRICTS[dk],cnt=S.colonies[key].districts[dk]||0,cost=buildCost(dk);
+    const building=bld&&bld.dk===dk;
+    const dis=used>=slots||!canAfford(cost)||!!bld;
+    const jobtxt=d.job?`${JOB_NAME[d.job]} ${(d.jobs*1000).toLocaleString('en-US')}명`:`주거 +${(d.housing*1000).toLocaleString('en-US')}명`;
+    // 고용 1천명이 한 달에 만드는 양 — 화면 표기는 전부 '월' 기준이라 여기서도 월로 환산한다
+    const perMo=d.job?`${(d.yld*SEC_PER_MONTH).toFixed(1)}/월 (1천명당)`:`주거 +${d.housing}천명`;
     const rf={}; for(const rk in cost) rf[rk]=Math.round(cost[rk]*DEMO_REFUND);
-    h+=`<div class="dwrap">
-      <button class="dtile ${cnt?'built':''}" data-build="${dk}" data-key="${key}" ${dis?'disabled':''} data-tip="${d.icon} ${d.name} — 일자리 ${jobtxt} · 생산 ${d.prod} · 유지비 ${d.up} · 건설비 ${costStr(cost)}">
+    const pct=building?Math.round((1-bld.left/bld.total)*100):0;
+    h+=`<div class="dwrap${building?' building':''}">
+      <button class="dtile ${cnt?'built':''}" data-build="${dk}" data-key="${key}" ${dis?'disabled':''} data-tip="${d.icon} ${d.name} — 일자리 ${jobtxt} · 생산 ${perMo} · 유지비 ${d.up} · 건설비 ${costStr(cost)} · 공사 기간 1개월">
         <span class="dt-ic">${d.icon}</span>
-        <span class="dt-b"><span class="dt-n">${d.name}${cnt?` <b>×${cnt}</b>`:''}</span><span class="dt-io"><span class="up-good">＋${d.prod}</span> <span class="up-bad">－${d.up}</span></span></span>
-        <span class="dt-add">＋</span></button>
-      ${cnt?`<button class="dt-del" data-demo="${dk}" data-key="${key}" data-tip="구역 철거 — 회수 ${costStr(rf)} · 건설비의 50%를 돌려받습니다">－</button>`:''}
+        <span class="dt-b"><span class="dt-n">${d.name}${cnt?` <b>×${cnt}</b>`:''}</span>
+          <span class="dt-io"><span class="up-good">＋${d.prod}</span> <span class="up-bad">－${d.up}</span></span>
+          ${building?`<span class="dt-bar" data-tip="공사 중 — ${bld.left}일 남음"><i style="width:${pct}%"></i></span><span class="dt-bt">공사 중 · ${bld.left}일 남음</span>`:''}</span>
+        ${building?'':'<span class="dt-add">＋</span>'}</button>
+      ${building?`<button class="dt-del" data-cancel="${key}" data-tip="착공 취소 — ${costStr(cost)} 전액 반환">✕</button>`
+        :cnt?`<button class="dt-del" data-demo="${dk}" data-key="${key}" data-tip="구역 철거 — 회수 ${costStr(rf)} · 건설비의 50%를 돌려받습니다">－</button>`:''}
     </div>`;});
   h+=`</div>`;
 
   // ── 일자리 요약 ──
   const jobTypes=JOB_ORDER.filter(t=>totalJobs[t]>0);
-  if(jobTypes.length){h+=`<div class="jline"><span class="jl-lab" data-tip="일자리 배정 — 순서는 행성마다 무작위입니다 · 단, 생활재 일자리에는 항상 1천명이 먼저 배정됩니다(굶주림 방지) · 남는 인구는 실업(생산 0)">일자리 ⓘ</span>`+jobTypes.map(t=>{
+  if(jobTypes.length){h+=`<div class="jline"><span class="jl-lab" data-tip="일자리 배정 — 순서는 행성마다 무작위입니다 · 단, 소비재 일자리에는 항상 1천명이 먼저 배정됩니다(굶주림 방지) · 남는 인구는 실업(생산 0)">일자리 ⓘ</span>`+jobTypes.map(t=>{
     const f=employed[t],tot=totalJobs[t];
-    return `<span class="jchip ${f>=tot?'full':(tot-f>0?'open':'')}" data-tip="${JOB_ICON[t]} ${JOB_NAME[t]} — 고용 ${fmtPop(f)} / ${fmtPop(tot)}">${JOB_ICON[t]} ${f}/${tot}<small>천명</small></span>`;
+    return `<span class="jchip ${f>=tot?'full':(tot-f>0?'open':'')}" data-tip="${JOB_ICON[t]} ${JOB_NAME[t]} — 고용 ${fmtPop(f)} / ${fmtPop(tot)}">${JOB_ICON[t]} ${Math.round(f*1000).toLocaleString('en-US')}/${Math.round(tot*1000).toLocaleString('en-US')}</span>`;
   }).join("")+`</div>`;}
 
   // ── 순생산 박스 (아이콘+숫자) ──
@@ -2599,7 +2904,8 @@ function refreshEmpireLive(){
   const er=$("empRes");
   if(er) er.innerHTML=`<span class="chip">⚛ 연구 ${rate>=0?'+':''}${(rate*SEC_PER_MONTH).toFixed(1)}/월</span><span class="chip">⛏ 광물 ${fmt(S.res.minerals)}</span><span class="chip">🏛 행정 부담 ${adminPct()}%</span>`;
 }
-function openHelp(){
+function openHelp(intro){
+  intro = (intro===true);
   showModal(`<h2>게임 가이드</h2>
   <p style="margin-bottom:16px">별을 <b>스캔</b>해 행성을 찾고 → 좋은 행성에 <b>식민지</b>를 세우고 → <b>구역</b>을 지어 인구에게 일자리를 주면 자원이 늘어납니다. 상단 <b style="color:var(--amber-2)">🎯 코치</b>가 늘 다음 할 일을 알려줍니다.</p>
   <div class="gloss">
@@ -2612,13 +2918,40 @@ function openHelp(){
     <div class="gterm"><div class="t">🏛 행정 부담</div><div class="d">식민지가 <b>5곳을 넘으면</b> 1곳당 연구·건설 비용이 <b>+6%</b>씩 올라갑니다. 무작정 늘리기보다 <b>확장 속도를 조절</b>하는 게 중요해요.</div></div>
     <div class="gterm"><div class="t">😊 행복도·범죄</div><div class="d"><b>범죄율</b>은 실업·과밀·인구가 높이고, <b>행복도</b>를 깎습니다. 행복도가 높으면 <b>생산·성장 효율↑</b>, 낮으면↓. 관리 잘하면 선순환, 방치하면 악순환. <b>치안 정책</b>으로 범죄를 눌러 안정시킬 수 있어요.</div></div>
     <div class="gterm"><div class="t">🎛 행성 정책</div><div class="d">행성마다 1개 선택: <b>균형·성장·연구·산업·치안</b>. 특정 자원을 더 소비하는 대신 강한 보너스를 줍니다 (예: 성장 중점 = 인구 ×1.6, 대신 에너지·광물·소비재 소모). 언제든 변경 가능.</div></div>
-    <div class="gterm"><div class="t">⚖ 유지비(손익)</div><div class="d">모든 구역은 매달 <b style="color:var(--hostile)">유지비</b>를 먹습니다 — 채굴·생활재·연구소·거주는 <b>에너지</b>를, 발전·제련소는 <b>광물</b>을, 고급 구역은 <b>철괴</b>를 소모. <b>인구 없이 놀리는 구역도 유지비가 나가요.</b> 그래서 무작정 지으면 손해. 특히 에너지가 마이너스면 발전 구역이 필요합니다. 패널의 '순생산'이 실제 손익입니다.</div></div>
+    <div class="gterm"><div class="t">⚖ 유지비(손익)</div><div class="d">모든 구역은 매달 <b style="color:var(--hostile)">유지비</b>를 먹습니다 — 채굴·소비재·연구소·거주는 <b>에너지</b>를, 발전·제련소는 <b>광물</b>을, 고급 구역은 <b>철괴</b>를 소모. <b>인구 없이 놀리는 구역도 유지비가 나가요.</b> 그래서 무작정 지으면 손해. 특히 에너지가 마이너스면 발전 구역이 필요합니다. 패널의 '순생산'이 실제 손익입니다.</div></div>
     <div class="gterm"><div class="t">🔭 스캔 조건</div><div class="d">별을 스캔하려면 ①<b>사거리 이내</b>(항행 기술로 결정)여야 하고 ②<b>철괴</b>가 있어야 합니다. 철괴는 <b>거리에 비례</b>(멀수록 많이 듬). 사거리 밖이면 <b>항행 기술</b>(연구)을 올리세요.</div></div>
     <div class="gterm"><div class="t">ESI</div><div class="d">지구 유사 지수(0~1). 높을수록 <b style="color:var(--habit)">거주 가능</b>, 낮으면 <b style="color:var(--hostile)">자원 전용</b>. 식민지화 비용·인구 성장 속도에 영향.</div></div>
     <div class="gterm"><div class="t">🎯 목표</div><div class="d"><b style="color:var(--habit)">거주 가능 행성(초록) ${GOAL_PRIME}곳</b>을 개척하면 클리어.</div></div>
   </div>
-  <div class="row"><button class="act solid" id="mOk">시작하기</button></div>`);
+  ${intro?"":`<div class="gsys">
+    <div class="gsys-h">게임 관리</div>
+    <div class="gsys-b">
+      <button class="act" id="hSave">💾 저장</button>
+      <button class="act" id="hIO">🔑 세이브 코드</button>
+      <button class="act danger" id="hReset">↺ 새 게임</button>
+    </div>
+    <div class="gsys-n">진행 상황은 5초마다 자동 저장됩니다. <b>새 게임</b>을 누르면 현재 진행이 사라집니다.</div>
+  </div>`}
+  <div class="row"><button class="act solid" id="mOk">${intro?"시작하기":"닫기"}</button></div>`);
   $("mOk").onclick=()=>{$("modal").classList.remove("on");if(S){S.seenHelp=true;save();}};
+  {const a=$("hSave"), b2=$("hIO"), c=$("hReset");
+   if(a)a.onclick=()=>{save();toast("저장 완료","good");};
+   if(b2)b2.onclick=()=>openSaveCode();
+   if(c)c.onclick=()=>askReset();}
+}
+/* 폰에서는 상단바의 저장·세이브코드·새 게임 버튼이 자리 때문에 숨겨져 있다.
+   같은 기능을 도움말 화면에서 쓸 수 있도록 따로 빼 둔다. */
+function askReset(){
+  showModal(`<h2>새 게임을 시작할까요?</h2><p>현재 진행 상황이 사라집니다. 되돌릴 수 없습니다.</p>
+    <div class="row"><button class="act danger" id="mYes">새로 시작</button><button class="act ghost" id="mNo">취소</button></div>`,true);
+  $("mYes").onclick=()=>{newGame();initMap();renderAll();$("modal").classList.remove("on");openHelp(true);};
+  $("mNo").onclick=()=>$("modal").classList.remove("on");
+}
+function openSaveCode(){
+  showModal(`<h2>세이브 코드</h2><p>이 코드를 복사해두면 어디서든 이어서 할 수 있어요. 붙여넣고 '불러오기'를 누르면 복원됩니다.</p><textarea id="ioTa">${exportSave()}</textarea><div class="row"><button class="act solid" id="mCopy">복사</button><button class="act" id="mLoad">불러오기</button><button class="act ghost" id="mCancel">닫기</button></div>`);
+  $("mCopy").onclick=()=>{const t=$("ioTa");t.select();try{document.execCommand("copy");}catch(e){}toast("복사됨","good");};
+  $("mLoad").onclick=()=>{if(importSave($("ioTa").value)){$("modal").classList.remove("on");toast("불러오기 완료","good");}else toast("잘못된 코드","warn");};
+  $("mCancel").onclick=()=>$("modal").classList.remove("on");
 }
 
 /* ============ 스피드 / 배경 ============ */
@@ -2707,7 +3040,7 @@ function boot(){
   window.addEventListener("resize",function(){try{drawNebula();}catch(e){}});
   document.querySelectorAll("#speed button").forEach(b=>b.onclick=()=>{S.speed=+b.dataset.s;syncSpeed();save();});
   syncSpeed();
-  $("helpBtn").onclick=openHelp;
+  $("helpBtn").onclick=()=>openHelp(false);
   $("empBtn").onclick=openEmpire;
   // 바텀 시트(폰): 핸들로 접고 펼치기
   {const app=document.querySelector(".app"), hd=$("sheetHandle");
@@ -2728,14 +3061,10 @@ function boot(){
    if(pn){ ["pointerdown","pointermove","scroll","touchstart","touchmove","wheel"].forEach(ev=>
      pn.addEventListener(ev,markPanelBusy,{passive:true})); }}
   $("saveBtn").onclick=()=>{save();toast("저장 완료","good");};
-  $("resetBtn").onclick=()=>{showModal(`<h2>새 게임을 시작할까요?</h2><p>현재 진행 상황이 사라집니다.</p><div class="row"><button class="act solid" id="mYes">새로 시작</button><button class="act ghost" id="mNo">취소</button></div>`,true);
-    $("mYes").onclick=()=>{newGame();initMap();renderAll();$("modal").classList.remove("on");openHelp();};$("mNo").onclick=()=>$("modal").classList.remove("on");};
-  $("ioBtn").onclick=()=>{showModal(`<h2>세이브 코드</h2><p>이 코드를 복사해두면 어디서든 이어서 할 수 있어요. 붙여넣고 '불러오기'를 누르면 복원됩니다.</p><textarea id="ioTa">${exportSave()}</textarea><div class="row"><button class="act solid" id="mCopy">복사</button><button class="act" id="mLoad">불러오기</button><button class="act ghost" id="mCancel">닫기</button></div>`);
-    $("mCopy").onclick=()=>{const t=$("ioTa");t.select();try{document.execCommand("copy");}catch(e){}toast("복사됨","good");};
-    $("mLoad").onclick=()=>{if(importSave($("ioTa").value)){$("modal").classList.remove("on");toast("불러오기 완료","good");}else toast("잘못된 코드","warn");};
-    $("mCancel").onclick=()=>$("modal").classList.remove("on");};
+  $("resetBtn").onclick=askReset;
+  $("ioBtn").onclick=openSaveCode;
   timer=setInterval(tick,TICK_MS);
-  if(!S.seenHelp)openHelp();
+  if(!S.seenHelp)openHelp(true);
 }
 boot();
 </script>
