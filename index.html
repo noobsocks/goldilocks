@@ -284,7 +284,96 @@
   .polbox[open] .pb-more::after{content:""}
   .polbox[open]>summary{border-bottom:1px solid var(--line-soft)}
   .polbox .pols{padding:9px 10px;margin-bottom:0}
+
+  /* ── 기술 격자 — 갈래마다 3열(계열) × 세로 시대. 위아래로만 스크롤한다. ── */
+  .tg-sec{margin-top:12px}
+  .tg-sec + .tg-sec{border-top:1px dashed var(--line-soft);padding-top:12px}
+  .tg-bt{display:inline-flex;align-items:center;gap:6px;margin-bottom:6px}
+  .tg-bt i{width:3px;height:12px;border-radius:2px;background:var(--bc)}
+  .tg-bt u{font-family:var(--f-m);font-size:9.5px;letter-spacing:.18em;color:var(--bc);text-decoration:none}
+  .tg-g{display:grid;grid-template-columns:24px repeat(3,minmax(0,1fr));column-gap:4px;align-items:start}
+  .tg-ch{text-align:center;padding:0 2px 5px;border-bottom:1px solid var(--line-soft)}
+  .tg-ch b{display:block;font-size:11.5px;font-weight:700;color:var(--ink);line-height:1.2}
+  .tg-ch u{display:block;font-family:var(--f-m);font-size:8px;color:var(--dim);text-decoration:none;
+    line-height:1.2;margin-top:1px}
+  .tg-el{display:flex;align-items:center;justify-content:center;font-family:var(--f-d);
+    font-size:12px;font-weight:700;color:var(--line-2);padding-top:14px}
+  .tg-el.now{color:var(--amber)} .tg-el.on{color:var(--muted)}
+  .tg-el.fk{font-family:var(--f-m);font-size:8px;letter-spacing:.06em}
+  .tg-vc{display:flex;flex-direction:column;align-items:center;gap:2px;padding:5px 0 3px}
+  .tg-vr{grid-column:2 / -1;height:9px;position:relative}
+  .tg-vr i{position:absolute;top:0;bottom:0;width:2px;background:var(--line-soft);
+    left:calc(16.667% - 1px)}
+  .tg-vr i:nth-child(2){left:calc(50% - 1px)}
+  .tg-vr i:nth-child(3){left:calc(83.333% - 1px)}
+  .tg-vr i.lit{background:var(--amber-line)}
+  .tg-node{width:42px;height:42px;border-radius:10px;position:relative;display:grid;place-items:center;
+    border:1.5px solid var(--line-soft);background:var(--panel);font-size:18px;line-height:1;padding:0}
+  .tg-node .ic{filter:grayscale(.7);opacity:.35}
+  .tg-node .fl{position:absolute;left:5px;right:5px;bottom:4px;height:3px;border-radius:2px;
+    background:var(--line-soft);overflow:hidden}
+  .tg-node .fl i{display:block;height:100%;background:var(--amber);border-radius:2px}
+  .tg-cp{font-size:9px;line-height:1.15;text-align:center;color:var(--dim);min-height:21px;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;padding:0 1px}
+  .tg-lv{font-family:var(--f-m);font-size:8.5px;color:var(--line-2);font-variant-numeric:tabular-nums}
+  .tg-node.open{border-color:var(--line-2);background:var(--panel-2)}
+  .tg-node.open .ic{filter:grayscale(.1);opacity:.9}
+  .tg-node.has,.tg-node.max{border-color:var(--amber-line);background:var(--amber-soft)}
+  .tg-node.has .ic,.tg-node.max .ic{filter:none;opacity:1}
+  .tg-node.act{border-color:var(--amber);box-shadow:0 0 0 2px rgba(246,183,60,.2)}
+  .tg-node.barred{border-color:rgba(242,104,95,.4)}
+  .tg-node.barred .ic{filter:grayscale(1);opacity:.16}
+  .tg-node.barred::after{content:"⊘";position:absolute;font-size:15px;color:var(--hostile);opacity:.85}
+  .tg-node.sel{border-color:var(--amber-2);box-shadow:0 0 0 2px rgba(246,183,60,.32)}
+  .tg-vc.has .tg-cp,.tg-vc.max .tg-cp{color:var(--ink);font-weight:700}
+  .tg-vc.has .tg-lv,.tg-vc.max .tg-lv{color:var(--amber)}
+  .tg-vc.open .tg-cp{color:var(--muted)}
+  /* 분기 — 반으로 갈라진 노드 */
+  .tg-fkb{display:flex;border:1.5px dashed var(--line-2);border-radius:11px;background:var(--panel);position:relative}
+  .tg-fkb.dec{border-style:solid;border-color:var(--amber-line)}
+  .tg-fkb .tg-node{border:none;background:none;width:41px;height:42px;border-radius:0;box-shadow:none}
+  .tg-fkb .tg-node + .tg-node{border-left:1.5px dashed var(--line-2)}
+  .tg-fkb.dec .tg-node + .tg-node{border-left-style:solid;border-left-color:var(--amber-line)}
+  .tg-fkb .tg-node.has,.tg-fkb .tg-node.max{background:var(--amber-soft)}
+  .tg-fc{display:flex;width:84px}
+  .tg-fc span{width:42px;flex:none;font-size:8px;line-height:1.15;text-align:center;color:var(--dim);padding:0 1px}
+  .tg-fc span.on{color:var(--amber-2);font-weight:700}
+  .tg-fc span.off{color:var(--line-2);text-decoration:line-through}
+  /* 각인 */
+  .tg-doc{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;margin-top:4px}
+  .tg-d{display:flex;align-items:flex-start;gap:8px;padding:8px 9px;border-radius:9px;
+    border:1px solid var(--line-soft);background:var(--panel);text-align:left;width:100%}
+  .tg-d.has{border-color:rgba(191,144,255,.5);background:rgba(191,144,255,.08)}
+  .tg-d.has b{color:var(--ink)} .tg-d.has u{color:var(--muted)}
+  .tg-d.barred{opacity:.35}
+  .tg-d .ic{font-size:17px;flex:none}
+  .tg-d div{min-width:0}
+  .tg-d b{display:block;font-size:11.5px;color:var(--muted)}
+  .tg-d u{display:-webkit-box;font-size:9.5px;line-height:1.3;color:var(--line-2);text-decoration:none;
+    -webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  /* 상세 — 격자 위에 고정으로 붙는다 */
+  .tg-det{position:sticky;top:0;z-index:4;margin-bottom:2px;border:1px solid var(--line);border-radius:9px;
+    background:var(--void-2);padding:9px 11px;display:flex;gap:10px;align-items:flex-start;flex-wrap:wrap;
+    box-shadow:0 6px 18px rgba(4,6,11,.7)}
+  .tg-det .di{width:38px;height:38px;flex:none;border-radius:9px;display:grid;place-items:center;
+    font-size:19px;border:1.5px solid var(--amber-line);background:var(--amber-soft)}
+  .tg-det .db{flex:1;min-width:140px}
+  .tg-det h4{font-size:13px;font-weight:800;margin-bottom:1px}
+  .tg-det .dm{font-size:10.5px;color:var(--dim);margin-bottom:4px}
+  .tg-det .de{font-size:11.5px;color:var(--amber-2);line-height:1.35}
+  .tg-vs{display:flex;gap:1px;margin-top:6px;border:1px solid var(--line-soft);border-radius:7px;
+    overflow:hidden;background:var(--line-soft)}
+  .tg-vs > div{flex:1;min-width:0;background:var(--panel);padding:5px 8px}
+  .tg-vs u{display:block;font-family:var(--f-m);font-size:8px;letter-spacing:.1em;color:var(--dim);
+    text-transform:uppercase;text-decoration:none;white-space:nowrap}
+  .tg-vs b{display:block;font-size:11px;color:var(--ink);margin-top:1px;line-height:1.3}
+  .tg-vs b.up{color:var(--amber-2)} .tg-vs b.na{color:var(--dim)}
+  .tg-det .dc{flex:none;display:flex;flex-direction:column;gap:3px;align-items:flex-end}
+  .tg-det .dc u{font-family:var(--f-m);font-size:9px;letter-spacing:.1em;color:var(--dim);text-decoration:none}
+  .tg-det .dc b{font-family:var(--f-m);font-size:11.5px;color:var(--ink)}
   .polbox .pol-lock{margin-left:auto}
+  .pb-sub{font-family:var(--f-m);font-size:10px;letter-spacing:.12em;color:var(--dim);margin:8px 0 3px}
+  .pb-sub small{font-family:var(--f-ko);letter-spacing:0;color:var(--line-2);margin-left:6px}
   .pstat .pl{font-family:var(--f-m);font-size:10px;color:var(--dim);letter-spacing:.06em;margin-top:1px}
 
   .act{width:100%;border:1px solid var(--amber-line);background:var(--amber-soft);color:var(--amber-2);border-radius:4px;padding:10px;font-family:var(--f-d);font-weight:600;font-size:13.5px;letter-spacing:.02em;transition:.12s}
@@ -621,7 +710,7 @@
   @keyframes slidein{from{opacity:0;transform:translateX(12px)}to{opacity:1;transform:none}}
 
   .sheet-handle{display:none}
-  .modal{position:fixed;inset:0;z-index:50;background:rgba(4,6,11,.82);display:none;align-items:center;justify-content:center;padding:20px}
+  .modal{position:fixed;inset:0;z-index:90;background:rgba(4,6,11,.82);display:none;align-items:center;justify-content:center;padding:20px}
   .modal.on{display:flex}
   .card{background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--amber-line);border-radius:8px;padding:30px;max-width:560px;width:100%;max-height:86vh;overflow-y:auto}
   /* ── 메인 화면 ── */
@@ -768,7 +857,7 @@
 
   /* 자원 생산/소비 툴팁 */
   .r[data-res]{cursor:help}
-  #restip{position:fixed;z-index:60;min-width:216px;max-width:290px;background:rgba(10,14,22,.98);border:1px solid var(--amber-line);border-radius:7px;padding:11px 13px;font-family:var(--f-m);font-size:12px;color:#c3ccdb;pointer-events:none;opacity:0;transform:translateY(-4px);transition:opacity .12s,transform .12s;box-shadow:0 10px 34px rgba(0,0,0,.55)}
+  #restip{position:fixed;z-index:95;min-width:216px;max-width:290px;background:rgba(10,14,22,.98);border:1px solid var(--amber-line);border-radius:7px;padding:11px 13px;font-family:var(--f-m);font-size:12px;color:#c3ccdb;pointer-events:none;opacity:0;transform:translateY(-4px);transition:opacity .12s,transform .12s;box-shadow:0 10px 34px rgba(0,0,0,.55)}
   #restip.on{opacity:1;transform:none}
   .rt-h{font-family:var(--f-d);font-weight:600;font-size:14px;color:var(--ink);display:flex;justify-content:space-between;gap:10px;align-items:baseline;margin-bottom:7px;padding-bottom:7px;border-bottom:1px solid var(--line)}
   .rt-net.p{color:var(--habit)} .rt-net.n{color:var(--hostile)}
@@ -960,7 +1049,7 @@ SYSTEMS = (()=>{
 const START = {energy:28, minerals:28, goods:33, research:0, alloy:15};
 /* 항행 사거리 = 본거지에서 항로를 따라 달릴 수 있는 총 거리(ly).
    도로는 직선보다 길기 때문에 예전 "반지름 6ly 원" 과 같은 속도가 나오려면 12 에서 시작해야 한다. */
-const BASE_REACH = 12, REACH_PER_LVL = 8;   // 사거리는 지수형(항행 Lv당 약 2배)
+const BASE_REACH = 12;   // 기본 사거리(ly). 추진 계열이 ly 를 그대로 더한다.
 const BASE_HOUSING = 5;                 // 식민지 기본 주거
 const GOAL_PRIME = 3;
 
@@ -1074,448 +1163,294 @@ const POLICIES = {
 };
 const POL_ORDER = ["balanced","energy","minerals","goods","research","alloy","growth"];
 
-/* ============ 기술 트리 ============
-   시대(era) × 갈래(br) × 계열(line) 좌표로 정의한다.
-   - 계열 안에서는 앞 기술을 1레벨이라도 올려야 다음이 열린다(pre).
-   - 시대는 이전 시대 기술을 일정 수 이상 확보해야 열린다(ERA_GATE).
-     → 테라포밍 같은 고급 기술이 구조적으로 초반에 나올 수 없다.
+/* ============ 기술 격자 ============
+   9계열 × 5시대 = 45개 줄기 + 분기 18 + 각인 8 + 반복 6 = 77개.
+   - 계열 하나가 담당 수치를 '단독'으로 가진다. 같은 수치가 두 계열에서 오르지 않는다.
+   - 계산은 전부 덧셈이다. 곱셈·점근식 없음. 상한에 닿으면 거기서 멈춘다.
+   - 계열 만렙이 게임 상한에 맞도록 수치를 잡았다(낭비 레벨 없음).
    효과는 문장이 아니라 eff 객체로 적는다. 모든 소비처는 techMods() 한 곳에서 읽는다. */
 const ERAS = [null,
-  {n:"원시 공학", rn:"Ⅰ", base:6,   mb:6.5},
-  {n:"궤도 시대", rn:"Ⅱ", base:22,  mb:17},
-  {n:"항성 문명", rn:"Ⅲ", base:58,  mb:40},
-  {n:"은하 시대", rn:"Ⅳ", base:150, mb:98},
-  {n:"초월기",   rn:"Ⅴ", base:380, mb:240},
+  {n:"원시 공학", rn:"Ⅰ", max:3, base:34,   mb:22},
+  {n:"궤도 시대", rn:"Ⅱ", max:4, base:213,  mb:138},
+  {n:"항성 문명", rn:"Ⅲ", max:5, base:724,  mb:470},
+  {n:"은하 시대", rn:"Ⅳ", max:6, base:1962, mb:1275},
+  {n:"초월기",   rn:"Ⅴ", max:7, base:3090, mb:2010},
 ];
-/* 각 시대 진입 조건 = 직전 시대 기술을 이만큼 확보 (대략 절반) */
-const ERA_GATE = [0,0,20,26,24,20];
+/* 각 시대 진입 조건 = 직전 시대 기술 9개 중 이만큼 확보 */
+const ERA_GATE = [0,0,6,6,6,6];
+const FORK_ERA = 3;                       // 분기는 시대 Ⅲ 에 하나씩
+const DOCT_ERA = 5, DOCT_PICK = 2;        // 각인은 시대 Ⅴ · 8개 중 2개
+
 const LINES = {
-  prop:{n:"추진",br:"확장"}, nav:{n:"항법",br:"확장"}, obs:{n:"관측",br:"확장"},
-  life:{n:"생명유지",br:"확장"}, col:{n:"개척",br:"확장"}, geo:{n:"지질조사",br:"확장"},
-  pow:{n:"발전",br:"생산"}, min:{n:"채광",br:"생산"}, met:{n:"야금",br:"생산"},
-  gds:{n:"소비재",br:"생산"}, inf:{n:"기반시설",br:"생산"}, log:{n:"물류",br:"생산"},
-  urb:{n:"도시",br:"사회"}, adm:{n:"행정",br:"사회"}, bio:{n:"생명공학",br:"사회"},
-  gov:{n:"통치",br:"사회"}, cul:{n:"문화",br:"사회"}, edu:{n:"교육",br:"사회"},
-  /* 시대 Ⅲ 이후 열리는 신설 계열 — 새 계열의 첫 기술은 싸다(새 분야는 입문이 쉽다) */
-  xeno:{n:"외계생물학",br:"확장"}, hyp:{n:"초공간",br:"확장"},
-  nano:{n:"나노공학",br:"생산"},  fld:{n:"장 공학",br:"생산"},
-  ai:{n:"인공지능",br:"사회"},    psi:{n:"정신과학",br:"사회"},
+  prop:{n:"추진",br:"확장",own:"사거리"},
+  sct: {n:"탐사",br:"확장",own:"스캔 · 조사"},
+  col: {n:"개척",br:"확장",own:"정착 · 보급"},
+  pow: {n:"동력",br:"생산",own:"에너지 · 유지비"},
+  res: {n:"자원",br:"생산",own:"광물 · 철괴"},
+  ind: {n:"산업",br:"생산",own:"소비재 · 건설"},
+  urb: {n:"도시",br:"사회",own:"거주 · 성장"},
+  gov: {n:"통치",br:"사회",own:"행정 · 치안"},
+  sci: {n:"학술",br:"사회",own:"연구 · 초구조물"},
 };
-/* [id, 이름, 아이콘, 시대, 계열, 최대레벨, 효과(레벨당)] — 순서가 곧 계열 내 선행 관계 */
-const TECH_DEF = [
-// ── 확장 · 추진 ────────────────────────────────────────────
-["t_chem","화학 로켓","🚀",1,"prop",3,{reach:0.30}],
-["t_solid","고체 부스터","🔥",1,"prop",3,{reach:0.25}],
-["t_aero","대기권 돌파","🛫",1,"prop",2,{colony:0.07}],
-["t_ion","이온 추진","💠",2,"prop",4,{reach:0.22}],
-["t_nth","핵열 추진","☢",2,"prop",4,{reach:0.24}],
-["t_sling","중력 슬링샷","🌐",2,"prop",3,{supplyFree:1}],
-// ── 확장 · 항법 ────────────────────────────────────────────
-["t_chart","성도 작성","🗺",1,"nav",3,{reach:0.22}],
-["t_inert","관성 항법","🧭",1,"nav",3,{scan:0.08}],
-["t_lane","하이퍼레인 도해","🕸",2,"nav",4,{supplyFree:1}],
-["t_auto","자동 항로","🤖",2,"nav",3,{scan:0.10}],
-["t_beacon","심우주 등대","🔆",2,"nav",4,{reach:0.20}],
-// ── 확장 · 관측 ────────────────────────────────────────────
-["t_scope","광학 망원경","🔭",1,"obs",3,{scan:0.09}],
-["t_radio","전파 관측","📡",1,"obs",3,{prod:{research:0.0495}}],
-["t_interf","간섭계","🛰",2,"obs",3,{scan:0.11}],
-["t_ir","적외선 탐사","🌡",2,"obs",3,{prod:{research:0.0594}}],
-["t_probe","무인 탐사정","📷",2,"obs",1,{},"probe"],
-// ── 확장 · 생명유지 ────────────────────────────────────────
-["t_eco","폐쇄 생태계","🌿",1,"life",3,{colony:0.08}],
-["t_recyc","재활용 계통","♻",1,"life",3,{prod:{goods:0.0544}}],
-["t_grav","인공 중력","🌀",2,"life",3,{happy:2}],
-["t_shield","방사선 차폐","🛡",2,"life",3,{colony:0.08}],
-["t_cryo","동면 기술","❄",2,"life",3,{colony:0.09}],
-// ── 확장 · 개척 ────────────────────────────────────────────
-["t_ship","식민선 설계","🛳",1,"col",3,{colony:0.09}],
-["t_out","전초 기지","🏕",1,"col",3,{supplyFree:1}],
-["t_bigship","대형 식민선","🚢",2,"col",4,{colony:0.08}],
-["t_self","자립 개척지","🏘",2,"col",3,{prodAll:0.0085}],
-["t_drop","궤도 투하","🪂",2,"col",3,{colony:0.09}],
-// ── 확장 · 지질조사 ────────────────────────────────────────
-["t_drill","지표 시추","🕳",1,"geo",3,{prod:{minerals:0.0287}}],
-["t_seis","지진파 탐사","〰",1,"geo",3,{prod:{minerals:0.0287}}],
-["t_deep","심부 탐사","⬇",2,"geo",3,{prod:{minerals:0.0344}}],
-["t_pgeo","행성 지질학","🪨",2,"geo",3,{survey:1}],
-["t_vein","광맥 예측","💎",2,"geo",3,{prod:{minerals:0.0402}}],
-// ── 생산 · 발전 ────────────────────────────────────────────
-["t_therm","화력 발전","🔥",1,"pow",3,{prod:{energy:0.0606}}],
-["t_solar","태양광 집열","☀",1,"pow",3,{prod:{energy:0.0606}}],
-["t_batt","축전 계통","🔋",1,"pow",2,{storage:0.1762}],
-["t_fission","핵분열로","⚛",2,"pow",4,{prod:{energy:0.0807}}],
-["t_super","초전도 송전","⚡",2,"pow",3,{upkeep:0.06}],
-["t_fusion","융합로 개발","☢",2,"pow",1,{},"fusion"],
-// ── 생산 · 채광 ────────────────────────────────────────────
-["t_open","노천 채굴","⛏",1,"min",3,{prod:{minerals:0.0344}}],
-["t_digger","굴착기 개량","🚜",1,"min",3,{prod:{minerals:0.0344}}],
-["t_dmine","심부 채굴","🕳",2,"min",4,{prod:{minerals:0.0402}}],
-["t_amine","자동 채광","🤖",2,"min",3,{prod:{minerals:0.0402}}],
-["t_crush","파쇄 공정","🪓",2,"min",3,{upkeep:0.05}],
-// ── 생산 · 야금 ────────────────────────────────────────────
-["t_smelt","기초 제련","🔩",1,"met",3,{prod:{alloy:0.0548}}],
-["t_alloy","합금 배합","⚙",1,"met",3,{prod:{alloy:0.0548}}],
-["t_blast","고로 개량","🏭",2,"met",4,{prod:{alloy:0.0626}}],
-["t_vac","진공 제련","🌑",2,"met",3,{prod:{alloy:0.0626}}],
-["t_cast","연속 주조","🧱",2,"met",3,{upkeep:0.05}],
-// ── 생산 · 소비재 ──────────────────────────────────────────
-["t_farm","집약 농법","📦",1,"gds",3,{prod:{goods:0.0653}}],
-["t_pres","식품 보존","🥫",1,"gds",3,{prod:{goods:0.0653}}],
-["t_hydro","수경 재배","💧",2,"gds",4,{prod:{goods:0.0762}}],
-["t_prot","합성 단백질","🧬",2,"gds",3,{prod:{goods:0.0762}}],
-["t_mass","대량 생산","🥡",2,"gds",3,{prod:{goods:0.0762}}],
-// ── 생산 · 기반시설 ────────────────────────────────────────
-["t_survey","정지 궤도 측량","📐",1,"inf",1,{slots:1}],
-["t_ground","지반 안정화","🧰",1,"inf",1,{slots:1}],
-["t_crust","지각 공학","🏗",2,"inf",2,{slots:1}],
-["t_grid2","대규모 정지","🔧",2,"inf",3,{upkeep:0.06}],
-["t_terra","테라포밍","🌍",2,"inf",1,{},"terra"],
-// ── 생산 · 물류 ────────────────────────────────────────────
-["t_ware","저장 창고","🏬",1,"log",3,{storage:0.2643}],
-["t_std","화물 규격화","📐",1,"log",3,{storage:0.2349}],
-["t_elev","궤도 엘리베이터","🛗",2,"log",3,{storage:0.3231}],
-["t_supply","보급 네트워크","🔗",2,"log",3,{supplyFree:1}],
-["t_cold","냉동 창고","🧊",2,"log",3,{storage:0.2937}],
-// ── 사회 · 도시 ────────────────────────────────────────────
-["t_plan","도시 계획","🏙",1,"urb",3,{housing:0.031}],
-["t_high","고층 건축","🏢",1,"urb",3,{housing:0.031}],
-["t_water","상하수도","🚰",1,"urb",2,{happy:2}],
-["t_dense","밀집 주거","🏨",2,"urb",4,{housing:0.0349}],
-["t_under","지하 도시","🕳",2,"urb",3,{housing:0.0349}],
-["t_orbital","궤도 거주구","🛸",2,"urb",1,{},"orbital"],
-// ── 사회 · 행정 ────────────────────────────────────────────
-["t_bur","관료 체계","🏛",1,"adm",3,{admin:0.07}],
-["t_doc","문서 표준화","📄",1,"adm",3,{build:0.05}],
-["t_edoc","전자 행정","💾",2,"adm",4,{admin:0.08}],
-["t_decent","분권 통치","🗂",2,"adm",3,{admin:0.08}],
-["t_audit","감사 제도","🔍",2,"adm",3,{build:0.06}],
-// ── 사회 · 생명공학 ────────────────────────────────────────
-["t_med","기초 의학","💊",1,"bio",3,{growth:0.0339}],
-["t_hyg","위생 체계","🧼",1,"bio",3,{growth:0.0339}],
-["t_gene","유전자 치료","🧬",2,"bio",4,{growth:0.0381}],
-["t_life","수명 연장","⏳",2,"bio",3,{growth:0.0381}],
-["t_demo","인구 통계학","📊",2,"bio",3,{growth:0.0339}],
-// ── 사회 · 통치 ────────────────────────────────────────────
-["t_law","법전 편찬","⚖",1,"gov",3,{crime:5}],
-["t_local","지방 자치","🗳",1,"gov",3,{happy:2}],
-["t_think","정책 연구소","🏫",2,"gov",3,{pol:0.06}],
-["t_civic","시민 참여","🤝",2,"gov",3,{happy:2}],
-["t_social","사회 계약","📜",2,"gov",3,{crime:6}],
-// ── 사회 · 문화 ────────────────────────────────────────────
-["t_fest","공공 축제","🎪",1,"cul",3,{happy:2}],
-["t_art","예술 후원","🎨",1,"cul",3,{happy:2}],
-["t_culture","문화 진흥","🎭",2,"cul",4,{happy:2}],
-["t_ideo","통합 이념","🕊",2,"cul",3,{happy:3}],
-// ── 사회 · 교육 ────────────────────────────────────────────
-["t_basic","기초 교육","📖",1,"edu",3,{prod:{research:0.0594}}],
-["t_print","인쇄술","🖨",1,"edu",3,{prod:{research:0.0594}}],
-["t_lib","도서관","📚",1,"edu",2,{prod:{research:0.0495}}],
-["t_univ","대학 설립","🎓",2,"edu",4,{prod:{research:0.0791}}],
-["t_spec","전문 연구","🔬",2,"edu",3,{prod:{research:0.0791}}],
-["t_reform","학제 개편","📐",2,"edu",3,{admin:0.06}],
+const LINE_ORDER = ["prop","sct","col","pow","res","ind","urb","gov","sci"];
 
-/* ══ 시대 Ⅲ · 항성 문명 ══ 항성계 하나를 통째로 다루기 시작한다 ══════ */
-// 확장 · 추진
-["t3_warp","워프 항행","🌌",3,"prop",3,{reach:0.20}],
-["t3_deepmine","초심도 갱도","⛰",3,"min",1,{},"deepmine"],
-["t3_hydro","입체 농장","🌿",3,"gds",1,{},"hydro"],
-["t3_ram","성간 램제트","🌠",3,"prop",3,{supplyFree:2}],
-["t3_qdrv","양자 도약","⚛",3,"prop",3,{reach:0.18}],
-// 확장 · 항법
-["t3_qnav","양자 항법","🧿",3,"nav",3,{scan:0.12}],
-["t3_relay","성간 중계망","📶",3,"nav",3,{supplyFree:2}],
-["t3_geod","은하 측지","🔗",3,"nav",3,{scan:0.12}],
-// 확장 · 관측
-["t3_gwave","중력파 관측","〰",3,"obs",3,{prod:{research:0.0791}}],
-["t3_dfield","심우주 촬영","🌌",3,"obs",3,{scan:0.13}],
-["t3_swarm","탐사정 군집","🔮",3,"obs",2,{survey:1}],
-// 확장 · 생명유지
-["t3_dome","생물권 돔","💉",3,"life",3,{colony:0.10}],
-["t3_nmed","나노 의료","🫧",3,"life",3,{growth:0.0424}],
-["t3_gsim","중력 모사","🧴",3,"life",3,{happy:3}],
-// 확장 · 개척
-["t3_seed","씨앗선","🌱",3,"col",3,{colony:0.10}],
-["t3_autoc","정착 자동화","🤖",3,"col",3,{build:0.07}],
-["t3_front","변경 개척령","🏞",3,"col",3,{supplyFree:2}],
-// 확장 · 지질조사
-["t3_mantle","맨틀 시추","🌋",3,"geo",3,{prod:{minerals:0.0517}}],
-["t3_astsv","소행성대 측량","☄",3,"geo",3,{prod:{minerals:0.0517}}],
-["t3_pcore","행성핵 분석","🧱",3,"geo",2,{survey:1}],
-// 확장 · 외계생물학 (신설)
-["t3_xbio","외계 생화학","🧫",3,"xeno",3,{prod:{goods:0.0979}}],
-["t3_symb","공생 배양","🌾",3,"xeno",3,{prod:{goods:0.0979}}],
-["t3_ximm","이종 면역학","🧬",3,"xeno",3,{growth:0.0424}],
-// 생산 · 발전
-["t3_anti","반물질 격납","💥",3,"pow",4,{prod:{energy:0.1009}}],
-["t3_zpe","영점 에너지","✨",3,"pow",3,{prod:{energy:0.1009}}],
-["t3_grid","항성계 송전망","🌞",3,"pow",3,{upkeep:0.07}],
-// 생산 · 채광
-["t3_belt","소행성대 채굴","☄",3,"min",4,{prod:{minerals:0.0574}}],
-["t3_plsm","플라즈마 굴착","🔥",3,"min",3,{prod:{minerals:0.0574}}],
-["t3_unman","완전 무인 채광","⚫",3,"min",3,{upkeep:0.06}],
-// 생산 · 야금
-["t3_exo","이종 합금","🔗",3,"met",4,{prod:{alloy:0.0783}}],
-["t3_ofound","궤도 주조소","⚫",3,"met",3,{prod:{alloy:0.0783}}],
-["t3_reclm","자원 회수 계통","♻",3,"met",3,{upkeep:0.06}],
-// 생산 · 소비재
-["t3_vat","배양 공장","🧫",3,"gds",4,{prod:{goods:0.1088}}],
-["t3_afab","자동 생산선","🏭",3,"gds",3,{prod:{goods:0.1088}}],
-["t3_fcast","수요 예측","📊",3,"gds",3,{upkeep:0.06}],
-// 생산 · 기반시설
-["t3_land","대지 개조","🌎",3,"inf",2,{slots:1}],
-["t3_dfound","심층 기초","🧊",3,"inf",2,{slots:1}],
-["t3_ecoe","생태 공학","🪜",3,"inf",3,{housing:0.0388}],
-// 생산 · 물류
-["t3_depot","궤도 집적소","🎯",3,"log",3,{storage:0.3818}],
-["t3_mdrv","매스 드라이버","🕳",3,"log",3,{supplyFree:2}],
-["t3_stasis","정지장 보관","📮",3,"log",3,{storage:0.3524}],
-// 생산 · 나노공학 (신설)
-["t3_nasm","나노 조립","🔬",3,"nano",3,{build:0.08}],
-["t3_nrep","자기 복구 재료","🛠",3,"nano",3,{upkeep:0.07}],
-["t3_ndis","나노 분해","💠",3,"nano",3,{prod:{minerals:0.0517}}],
-// 사회 · 도시
-["t3_arco","아르콜로지","🛗",3,"urb",4,{housing:0.0426}],
-["t3_sky","스카이후크 주거","💍",3,"urb",3,{housing:0.0426}],
-["t3_hdome","거주 돔","🏘",3,"urb",3,{housing:0.0388}],
-// 사회 · 행정
-["t3_dnet","행정 데이터망","🖥",3,"adm",4,{admin:0.09}],
-["t3_sect","성역 통치","📇",3,"adm",3,{admin:0.09}],
-["t3_merit","능력주의 인사","🗳",3,"adm",3,{build:0.07}],
-// 사회 · 생명공학
-["t3_clone","복제 의학","🧪",3,"bio",4,{growth:0.0424}],
-["t3_agel","노화 정지","🫀",3,"bio",3,{growth:0.0424}],
-["t3_gdes","유전 설계","🩺",3,"bio",3,{happy:3}],
-// 사회 · 통치
-["t3_counc","항성 의회","🏛",3,"gov",3,{pol:0.08}],
-["t3_just","통합 사법","🕊",3,"gov",3,{crime:8}],
-["t3_chart","자치 헌장","👑",3,"gov",3,{happy:3}],
-// 사회 · 문화
-["t3_holo","홀로 예술","📜",3,"cul",3,{happy:3}],
-["t3_myth","건국 신화","🏛",3,"cul",3,{crime:8}],
-["t3_exch","문화 교류","🤝",3,"cul",3,{pol:0.07}],
-// 사회 · 교육
-["t3_neur","신경 교육","🧠",3,"edu",4,{prod:{research:0.0989}}],
-["t3_acad","은하 학회","⚡",3,"edu",3,{prod:{research:0.0989}}],
-["t3_open","공개 과학","📝",3,"edu",3,{admin:0.07}],
-// 사회 · 인공지능 (신설)
-["t3_acore","연산 핵","🖥",3,"ai",3,{prod:{research:0.0989}}],
-["t3_aadm","자율 행정","🤖",3,"ai",3,{admin:0.10}],
-["t3_alog","자율 물류","📦",3,"ai",3,{upkeep:0.07}],
-
-/* ══ 시대 Ⅳ · 은하 시대 ══ 항성계 사이를 하나의 제국으로 묶는다 ══════ */
-// 확장
-["t4_jump","도약 관문","🎇",4,"prop",4,{reach:0.20}],
-["t4_campus","연구 단지 설계","🏫",4,"edu",1,{},"campus"],
-["t4_foundry","대형 주조 단지","🏗",4,"met",1,{},"foundry"],
-["t4_fold","공간 접기","🕳",4,"prop",3,{supplyFree:3}],
-["t4_tach","타키온 항행","💫",4,"prop",3,{supplyFree:3}],
-["t4_qent","얽힘 항법","📐",4,"nav",3,{scan:0.14}],
-["t4_gnet","은하 항로망","🎯",4,"nav",3,{supplyFree:3}],
-["t4_beacon2","은하 등대","🛜",4,"nav",3,{scan:0.13}],
-["t4_omni","전천 관측망","👁",4,"obs",3,{prod:{research:0.1088}}],
-["t4_pred","사건 예측","🪞",4,"obs",3,{scan:0.14}],
-["t4_ageless","무결 생명유지","🌱",4,"life",3,{colony:0.12}],
-["t4_ark","방주 함대","🚀",4,"col",4,{colony:0.11}],
-["t4_instant","즉시 정착","🏗",4,"col",3,{build:0.08}],
-["t4_pcrack","행성 해체","💥",4,"geo",3,{prod:{minerals:0.0631}}],
-["t4_dcore","심층 지각 분석","🔎",4,"geo",3,{survey:1}],
-["t4_uplift","지성화 계획","🧠",4,"xeno",3,{growth:0.0466}],
-["t4_bioforge","생체 공장","🦠",4,"xeno",3,{prod:{goods:0.1197}}],
-// 초공간 (신설)
-["t4_hgate","초공간 관문","🌌",4,"hyp",3,{reach:0.22}],
-["t4_hlane","초공간 항로","🕸",4,"hyp",3,{supplyFree:3}],
-["t4_hstab","초공간 안정화","✳",4,"hyp",3,{scan:0.15}],
-// 생산
-["t4_star","항성 채광","🌟",4,"pow",4,{prod:{energy:0.1211}}],
-["t4_sing","특이점 발전","🕳",4,"pow",3,{prod:{energy:0.1211}}],
-["t4_grid4","무선 송전","📡",4,"pow",3,{upkeep:0.08}],
-["t4_dsm","다이슨 채집","🌟",4,"min",4,{prod:{minerals:0.0689}}],
-["t4_tport","전송 채굴","🌀",4,"min",3,{prod:{minerals:0.0689}}],
-["t4_neut","중성자 압축","⬛",4,"met",4,{prod:{alloy:0.0939}}],
-["t4_transm","원소 변환","🪙",4,"met",3,{prod:{alloy:0.0939}}],
-["t4_repl","물질 복제기","🖨",4,"gds",4,{prod:{goods:0.1306}}],
-["t4_asup","완전 자동 공급","🤖",4,"gds",3,{upkeep:0.08}],
-["t4_shell","행성 껍질","🌐",4,"inf",1,{slots:1}],
-["t4_gstab","중력 정지","🧲",4,"inf",3,{housing:0.0465}],
-["t4_wormh","웜홀 물류","🚛",4,"log",3,{storage:0.4405}],
-["t4_qstore","양자 저장고","🗄",4,"log",3,{storage:0.4112}],
-["t4_grey","자기 복제 군체","🦠",4,"nano",3,{build:0.09}],
-["t4_nanof","나노 제련","🪛",4,"nano",3,{prod:{alloy:0.0861}}],
-["t4_nmega","나노 시공","🏗",4,"nano",3,{megaCost:0.10}],
-// 장 공학 (신설)
-["t4_fshield","관성 제어장","🛡",4,"fld",3,{upkeep:0.09}],
-["t4_fgrav","중력장 공학","🌀",4,"fld",3,{housing:0.0465}],
-["t4_fstab","시공간 안정화","✳",4,"fld",3,{megaCost:0.10}],
-// 사회
-["t4_ecum","에큐메노폴리스","🏰",4,"urb",4,{housing:0.0504}],
-["t4_hive","초밀집 거주","🏯",4,"urb",3,{housing:0.0504}],
-["t4_ctrl","통합 관제","🧾",4,"adm",4,{admin:0.11}],
-["t4_deleg","완전 위임","📋",4,"adm",3,{admin:0.11}],
-["t4_immort","생물학적 불멸","🕰",4,"bio",4,{growth:0.0508}],
-["t4_perf","신체 개조","🦴",4,"bio",3,{prodAll:0.0128}],
-["t4_senate","은하 원로원","🛡",4,"gov",3,{pol:0.10}],
-["t4_unicode","통합 법전","🏵",4,"gov",3,{crime:10}],
-["t4_diplo","은하 외교","🎗",4,"gov",3,{pol:0.10}],
-["t4_transc","초월 예술","🎼",4,"cul",3,{happy:4}],
-["t4_legend","은하 전설","🏺",4,"cul",3,{crime:12}],
-["t4_museum","은하 박물관","🗿",4,"cul",3,{prod:{research:0.0989}}],
-["t4_learn","전지 학습","💡",4,"edu",4,{prod:{research:0.1187}}],
-["t4_think","사고 가속","⏩",4,"edu",3,{prod:{research:0.1187}}],
-["t4_archive","대기록 보관소","🖋",4,"edu",3,{prod:{research:0.1088}}],
-["t4_asi","초지능","🧠",4,"ai",4,{prod:{research:0.1286}}],
-["t4_agov","자율 통치","🏛",4,"ai",3,{admin:0.12}],
-// 정신과학 (신설)
-["t4_psi","정신 감응","🧿",4,"psi",3,{happy:4}],
-["t4_pcoord","집단 지성","🕊",4,"psi",3,{pol:0.10}],
-["t4_pfore","예지","🔮",4,"psi",3,{prod:{research:0.1088}}],
-
-/* ══ 시대 Ⅴ · 초월기 ══ 물리 법칙 자체를 만지는 마지막 단계 ══════════ */
-["t5_omniw","편재 항행","🪐",5,"prop",3,{reach:0.25}],
-["t5_arcology","전면 도시화 공법","🌇",5,"urb",1,{},"arcology"],
-["t5_singular","사건 지평 발전","🌀",5,"pow",1,{},"singular"],
-["t5_step","순간 이동","🛸",5,"prop",3,{supplyFree:4}],
-["t5_allmap","은하 전도","🌐",5,"nav",2,{scan:0.18}],
-["t5_akash","우주 기록 열람","📖",5,"obs",3,{prod:{research:0.1484}}],
-["t5_genesis","창세 계획","🌠",5,"col",3,{colony:0.14}],
-["t5_ascend","종의 승천","🦋",5,"xeno",3,{growth:0.0593}],
-["t5_hweave","시공 직조","🌀",5,"hyp",3,{colony:0.13}],
-["t5_inf","무한 동력","♾",5,"pow",4,{prod:{energy:0.1514}}],
-["t5_multi","다중우주 발전","🌌",5,"pow",3,{prod:{energy:0.1514}}],
-["t5_void","공허 채굴","🪨",5,"min",4,{prod:{minerals:0.0861}}],
-["t5_pharv","행성핵 수확","🌋",5,"min",3,{prod:{minerals:0.0861}}],
-["t5_prime","원질 제련","✨",5,"met",4,{prod:{alloy:0.1174}}],
-["t5_abund","풍요 경제","🎁",5,"gds",4,{prod:{goods:0.1632}}],
-["t5_world","세계 공학","🚧",5,"inf",1,{slots:1}],
-["t5_mega","초구조물 공학","🏙",5,"inf",3,{megaCost:0.14}],
-["t5_ostore","편재 창고","🛒",5,"log",3,{storage:0.514}],
-["t5_fleet","건설 함대","🚢",5,"log",3,{megaCost:0.12}],
-["t5_femto","펨토 공학","🪡",5,"nano",3,{megaCost:0.12}],
-["t5_reality","물리 상수 조정","🧲",5,"fld",3,{prodAll:0.0213}],
-["t5_ring","고리 거주","🌆",5,"urb",4,{housing:0.0581}],
-["t5_endless","무한 거주","🏦",5,"urb",3,{housing:0.0581}],
-["t5_perfadm","완전 행정","🗒",5,"adm",4,{admin:0.13}],
-["t5_eternal","영원한 생","🧿",5,"bio",3,{growth:0.0593}],
-["t5_body","완성체","💤",5,"bio",3,{growth:0.0593}],
-["t5_harmony","완전한 조화","🪶",5,"gov",3,{happy:5}],
-["t5_immcul","불멸의 문화","🎻",5,"cul",3,{pol:0.12}],
-["t5_omnisci","전지","🎒",5,"edu",4,{prod:{research:0.1484}}],
-["t5_god","신격 지성","🌞",5,"ai",4,{prod:{research:0.1583}}],
-["t5_over","초월 의식","👁",5,"psi",3,{prodAll:0.0213}],
-
-// ── 반복형 (연구할 것이 떨어지지 않게 — 각 시대가 열리면 함께 열린다) ──
-["r_opt","생산 최적화","🪟",2,"inf",Infinity,{prodAll:0.0128},null,true],
-["r_unity","사회 통합","🎬",2,"cul",Infinity,{happy:2},null,true],
-["r_hyper","초공간 도약","🌀",2,"prop",Infinity,{reach:0.10},null,true],
-["r_refine","정제 심화","🧲",3,"min",Infinity,{prod:{minerals:0.023}},null,true],
-["r_theory","이론 심화","🧮",3,"edu",Infinity,{prod:{research:0.0396}},null,true],
-["r_effi","효율 개선","⚙",4,"nano",Infinity,{upkeep:0.03},null,true],
-["r_megaop","초구조 공정 개선","🏗",4,"fld",Infinity,{megaCost:0.05},null,true],
-["r_transc","초월 연구","🫧",5,"psi",Infinity,{prodAll:0.0171},null,true],
+/* ── 줄기 45개 ── [id, 이름, 아이콘, 시대, 계열, 효과(레벨당), 해금] */
+const TRUNK = [
+// 확장 · 추진 — 사거리 (기본 12ly → 만렙 4,806ly, 은하 끝 4,671ly)
+["p1","화학 로켓","🚀",1,"prop",{reachAdd:6}],
+["p2","이온 추진","💠",2,"prop",{reachAdd:29}],
+["p3","중력 도약","🌐",3,"prop",{reachAdd:120}],
+["p4","공간 접기","🕳",4,"prop",{reachAdd:210}],
+["p5","편재 항행","🪐",5,"prop",{reachAdd:400}],
+// 확장 · 탐사 — 스캔 비용(100%→20%) · 조사 기간(90일→20일)
+["s1","광학 망원경","🔭",1,"sct",{scanCut:0.04}],
+["s2","간섭계 관측","📡",2,"sct",{scanCut:0.04}],
+["s3","자동 탐사정","🛰",3,"sct",{probeCut:14}],
+["s4","전천 관측망","👁",4,"sct",{scanCut:0.04}],
+["s5","우주 기록","📖",5,"sct",{scanCut:0.04}],
+// 확장 · 개척 — 정착 비용(100%→26%) · 보급 거리(5→20정거장)
+["c1","대기권 돌파","🛫",1,"col",{colonyCut:0.05}],
+["c2","폐쇄 생태계","🌱",2,"col",{colonyCut:0.05}],
+["c3","개척 함대","⛵",3,"col",{supplyFree:3}],
+["c4","방주 함대","🚢",4,"col",{colonyCut:0.03}],
+["c5","창세 계획","🌠",5,"col",{colonyCut:0.03}],
+// 생산 · 동력 — 에너지 +330% · 유지비(100%→30%)
+["w1","태양광 집열","☀",1,"pow",{prod:{energy:0.40}}],
+["w2","핵융합로","⚛",2,"pow",{prod:{energy:0.30}},"fusion"],
+["w3","반물질 발전","⚡",3,"pow",{upkeepCut:0.07}],
+["w4","항성 채광","🌟",4,"pow",{prod:{energy:0.15}}],
+["w5","무한 동력","♾",5,"pow",{upkeepCut:0.05},"singular"],
+// 생산 · 자원 — 광물 +304% · 철괴 +271%
+["r1","노천 채굴","⛏",1,"res",{prod:{minerals:0.36}}],
+["r2","심층 갱도","🕳",2,"res",{prod:{minerals:0.28}},"deepmine"],
+["r3","소행성 채광","☄",3,"res",{prod:{alloy:0.22}}],
+["r4","중성자 압축","⬛",4,"res",{prod:{minerals:0.14}},"foundry"],
+["r5","원질 제련","✨",5,"res",{prod:{alloy:0.23}}],
+// 생산 · 산업 — 소비재 +418% · 건설비(100%→44%) · 저장 +390%
+["i1","조립 라인","🔧",1,"ind",{prod:{goods:0.45}}],
+["i2","자동 공장","🏭",2,"ind",{buildCut:0.14}],
+["i3","궤도 농장","🌿",3,"ind",{prod:{goods:0.30}},"hydro"],
+["i4","물질 복제기","🖨",4,"ind",{storage:0.65}],
+["i5","풍요 경제","🎁",5,"ind",{prod:{goods:0.19}}],
+// 사회 · 도시 — 정원 +199% · 성장 +200% · 구역 슬롯 +6칸
+["u1","정착촌 계획","🏘",1,"urb",{housing:0.22}],
+["u2","고밀도 주거","🏢",2,"urb",{growth:0.50}],
+["u3","궤도 거주구","🛸",3,"urb",{housing:0.14},"orbital"],
+["u4","초거대 도시","🌇",4,"urb",{slots:1},"arcology"],
+["u5","고리 거주","💍",5,"urb",{housing:0.09}],
+// 사회 · 통치 — 행정(100%→37%) · 범죄 −80 · 행복 +24
+["g1","식민 헌장","📜",1,"gov",{adminCut:0.09}],
+["g2","관료제","🗂",2,"gov",{crime:20}],
+["g3","항성 의회","🏛",3,"gov",{happy:2}],
+["g4","통합 법전","🏵",4,"gov",{adminCut:0.06}],
+["g5","완전한 조화","🪶",5,"gov",{happy:2}],
+// 사회 · 학술 — 연구 +686% · 초구조물(100%→46%)
+["e1","기초 과학","🧪",1,"sci",{prod:{research:0.60}}],
+["e2","궤도 연구소","🔬",2,"sci",{prod:{research:0.45}}],
+["e3","신경 교육","🧠",3,"sci",{prod:{research:0.33}},"campus"],
+["e4","초지능","💡",4,"sci",{megaCut:0.09}],
+["e5","신격 지성","🌌",5,"sci",{prod:{research:0.23}}],
 ];
 
-/* TECH_DEF → TECHS (계열 내 선행 관계·비용 자동 부여) */
+/* ── 분기 9쌍 ── 시대 Ⅲ. 같은 계열의 시대 Ⅲ 줄기를 만렙으로 올려야 열리고,
+   한쪽을 고르면 반대쪽은 이 게임에서 영원히 잠긴다. */
+const FORKS = [
+["f_jump",  "도약 항법","🎇","prop",{reachAdd:1500}],
+["f_route", "항로 개척","🕸","prop",{rule:["scoutFree"]}],
+["f_precis","정밀 관측","🔬","sct",{scanCut:0.10}],
+["f_deep",  "심층 시추","⛏","sct",{rule:["depositUp"]}],
+["f_terra", "테라포밍","🌍","col",{rule:["noTempPen"]}],
+["f_press", "기압 도시","🏙","col",{rule:["halfTypePen"]}],
+["f_photo", "광구 채집","🌞","pow",{prod:{energy:0.80}}],
+["f_grid",  "무손실 송전","🔌","pow",{upkeepCut:0.10}],
+["f_open",  "노천 확장","🪨","res",{prod:{minerals:0.80}}],
+["f_auto",  "무인 채굴","🤖","res",{rule:["autoMine"]}],
+["f_mass",  "대량 생산","📦","ind",{prod:{goods:1.00}}],
+["f_comp",  "압축 설계","🗜","ind",{buildCut:0.10, storage:1.50}],
+["f_high",  "고층화","🏗","urb",{slots:4}],
+["f_spread","분산 정착","🗺","urb",{rule:["bigStart"]}],
+["f_deleg", "위임 통치","📋","gov",{adminCut:0.10}],
+["f_centr", "중앙 집권","👑","gov",{pol:1.00, rule:["dualPolicy"]}],
+["f_theory","이론 심화","🧮","sci",{prod:{research:1.50}}],
+["f_apply", "응용 우선","🧷","sci",{prod:{research:0.50}, prodAll:0.10}],
+];
+
+/* ── 각인 8개 ── 시대 Ⅴ. 계열이 아니라 제국 전체에 붙고, 2개만 고를 수 있다. */
+const DOCTS = [
+["d_machine","기계 승천","⚙","pow",{prodAll:0.20, rule:["noJobless","noGrowth"]}],
+["d_bio",    "생물 승천","🧬","urb",{growth:0.60, housing:0.30}],
+["d_psi",    "정신 승천","🧿","gov",{prod:{research:0.25}, rule:["maxHappy"]}],
+["d_circuit","통합 회로","🔗","col",{rule:["noSupplyPen"]}],
+["d_mega",   "초구조 특화","🏙","sci",{megaCut:0.15, rule:["megaPlus"]}],
+["d_pioneer","개척자","🧭","prop",{colonyCut:0.35, reachAdd:1000}],
+["d_fort",   "요새 경제","🛡","ind",{upkeepCut:0.40}],
+["d_sing",   "특이점","🌀","res",{prodAll:0.30, growth:-0.50}],
+];
+
+/* ── 반복형 6개 ── 연구할 것이 떨어지지 않게 (레벨 무한) */
+const REPS = [
+["x_opt",   "생산 최적화","🪟",2,"ind",{prodAll:0.0128}],
+["x_unity", "사회 통합","🎬",2,"gov",{happy:1}],
+["x_hyper", "초공간 도약","🌀",2,"prop",{reachAdd:60}],
+["x_theory","연구 심화","📚",3,"sci",{prod:{research:0.04}}],
+["x_effi",  "효율 개선","🛠",4,"pow",{upkeepCut:0.01}],
+["x_transc","초월 연구","🫧",5,"sci",{prodAll:0.0171}],
+];
+
+/* ── 구 기술 id → 새 기술 id (예전 저장 파일에서 연구 성과를 승계) ── */
+const TECH_MIGRATE = {
+  t_chem:"p1", t_solid:"p1", t_aero:"c1", t_ion:"p2", t_nth:"p2", t_sling:"c3",
+  t_chart:"p1", t_inert:"s1", t_lane:"c3", t_auto:"s2", t_beacon:"p2",
+  t_scope:"s1", t_spect:"s1", t_survey:"u4", t_supply:"c3", t_pgeo:"s3",
+  t3_counc:"g3", t3_just:"g2", t3_chart:"g3", t3_holo:"g3", t3_myth:"g2",
+  t3_exch:"g3", t3_neur:"e3", t3_acad:"e3", t3_open:"g1", t3_acore:"e3",
+  t3_aadm:"g1", t3_alog:"w3", t3_swarm:"s3", t3_pcore:"s3",
+  t4_jump:"p4", t4_fold:"p4", t4_tach:"p4", t4_qent:"s4", t4_gnet:"c4",
+  t4_beacon2:"s4", t4_omni:"s4", t4_pred:"s4", t4_ageless:"c4", t4_ark:"c4",
+  t4_instant:"i2", t4_pcrack:"r4", t4_dcore:"s3", t4_uplift:"u2", t4_bioforge:"i3",
+  t4_hgate:"p4", t4_hlane:"c4", t4_hstab:"s4", t4_star:"w4", t4_sing:"w4",
+  t4_grid4:"w3", t4_dsm:"r4", t4_tport:"r4", t4_neut:"r4", t4_transm:"r5",
+  t4_repl:"i4", t4_asup:"i4", t4_shell:"u4", t4_gstab:"u3", t4_wormh:"i4",
+  t4_qstore:"i4", t4_grey:"i2", t4_nanof:"r4", t4_nmega:"e4",
+  t4_fshield:"w3", t4_fgrav:"u3", t4_fstab:"e4", t4_ecum:"u4", t4_hive:"u3",
+  t4_ctrl:"g4", t4_deleg:"g4", t4_immort:"u2", t4_perf:"i4",
+  t4_senate:"g4", t4_unicode:"g4", t4_diplo:"g4", t4_transc:"g3",
+  t4_legend:"g4", t4_museum:"e4", t4_learn:"e4", t4_think:"e4",
+  t4_archive:"e4", t4_asi:"e4", t4_agov:"g4", t4_psi:"g3", t4_pcoord:"g4", t4_pfore:"e4",
+  t5_omniw:"p5", t5_step:"p5", t5_allmap:"s5", t5_akash:"e5", t5_genesis:"c5",
+  t5_ascend:"u5", t5_hweave:"c5", t5_inf:"w5", t5_multi:"w5", t5_void:"r5",
+  t5_pharv:"r5", t5_prime:"r5", t5_abund:"i5", t5_world:"u5", t5_mega:"e5",
+  t5_ostore:"i5", t5_fleet:"e5", t5_femto:"e5", t5_reality:"i5", t5_ring:"u5",
+  t5_endless:"u5", t5_perfadm:"g5", t5_eternal:"u5", t5_body:"u5",
+  t5_harmony:"g5", t5_immcul:"g5", t5_omnisci:"e5", t5_god:"e5", t5_over:"g5",
+  t2_fusion:"w2", t2_orbital:"u3", t3_deepmine:"r2", t3_hydro:"i3",
+  t4_campus:"e3", t4_foundry:"r4", t5_arcology:"u4", t5_singular:"w5",
+  r_opt:"x_opt", r_unity:"x_unity", r_hyper:"x_hyper",
+  r_refine:"x_theory", r_theory:"x_theory", r_effi:"x_effi",
+  r_megaop:"x_effi", r_transc:"x_transc",
+};
+
+/* ── TECH_DEF → TECHS ── */
 const TECHS={};
 (function buildTechs(){
-  const lastOf={};
-  TECH_DEF.forEach(d=>{
-    const [id,name,icon,era,line,max,eff,unlock,rep]=d;
-    const lk=line+"@"+era, prevSameEra=lastOf[lk], prevLine=lastOf["L@"+line];
-    TECHS[id]={ id,name,icon,era,line,max,eff:eff||{},unlock:unlock||null,rep:!!rep,
-      br:LINES[line].br, lineName:LINES[line].n,
-      pre: rep ? null : (prevSameEra||prevLine||null),
-      idx: (lastOf["N@"+line]=(lastOf["N@"+line]||0)+1) };
-    lastOf[lk]=id; lastOf["L@"+line]=id;
-  });
+  const add=(id,name,icon,era,line,eff,unlock,kind,max)=>{
+    TECHS[id]={ id,name,icon,era,line,kind,max,
+      eff:eff||{}, unlock:unlock||null, pair:null, pre:null,
+      br:LINES[line].br, lineName:LINES[line].n, own:LINES[line].own,
+      rep: kind==="rep", idx:0 };
+  };
+  TRUNK.forEach(([id,n,ic,era,ln,eff,unl])=>add(id,n,ic,era,ln,eff,unl,"trunk",ERAS[era].max));
+  for(let i=0;i<FORKS.length;i+=2){
+    const A=FORKS[i], B=FORKS[i+1];
+    add(A[0],A[1],A[2],FORK_ERA,A[3],A[4],null,"fork",1);
+    add(B[0],B[1],B[2],FORK_ERA,B[3],B[4],null,"fork",1);
+    TECHS[A[0]].pair=B[0]; TECHS[B[0]].pair=A[0];
+  }
+  DOCTS.forEach(([id,n,ic,ln,eff])=>add(id,n,ic,DOCT_ERA,ln,eff,null,"doct",1));
+  REPS.forEach(([id,n,ic,era,ln,eff])=>add(id,n,ic,era,ln,eff,null,"rep",Infinity));
+  /* 선행 관계 — 줄기는 같은 계열의 직전 시대, 분기는 같은 계열의 시대 Ⅲ 줄기 */
+  const trunkOf={}; TRUNK.forEach(([id,,,era,ln])=>{ trunkOf[ln+"@"+era]=id; });
+  TRUNK.forEach(([id,,,era,ln])=>{ TECHS[id].pre = era>1 ? trunkOf[ln+"@"+(era-1)] : null;
+                                   TECHS[id].idx = era; });
+  Object.values(TECHS).forEach(T=>{ if(T.kind==="fork"){ T.pre=trunkOf[T.line+"@"+FORK_ERA]; T.idx=FORK_ERA+0.5; }
+                                    if(T.kind==="doct") T.idx=6;
+                                    if(T.kind==="rep")  T.idx=9; });
 })();
 const TECH_KEYS=Object.keys(TECHS), TECH_BRANCHES=["확장","생산","사회"];
 const techLvl = k => (S&&S.tech&&S.tech[k])||0;
+const doctPicked = () => DOCTS.reduce((a,d)=>a+(techLvl(d[0])>0?1:0),0);
 
 /* ── 시대 게이트 ── */
 /* 아래 두 함수와 JOB_ICON 은 화면에서는 쓰지 않지만, 사양서·계수 사전을 뽑는
    도구 스크립트가 이 게임 안에서 호출한다. 지우면 문서 생성이 깨진다. */
-function eraTotal(e){ let n=0; for(const k in TECHS) if(TECHS[k].era===e&&!TECHS[k].rep) n++; return n; }
+function eraTotal(e){ let n=0; for(const k in TECHS) if(TECHS[k].era===e&&TECHS[k].kind==="trunk") n++; return n; }
 function employedTotal(e){ return Object.values(e).reduce((a,b)=>a+b,0); }
-function eraDone(e){ let n=0; for(const k in TECHS) if(TECHS[k].era===e&&!TECHS[k].rep&&techLvl(k)>0) n++; return n; }
+function eraDone(e){ let n=0; for(const k in TECHS) if(TECHS[k].era===e&&TECHS[k].kind==="trunk"&&techLvl(k)>0) n++; return n; }
 function eraOpen(e){ return e<=1 || eraDone(e-1)>=(ERA_GATE[e]||0); }
 function curEra(){ let e=1; for(let i=2;i<ERAS.length;i++) if(eraOpen(i)) e=i; return e; }
 
-/* ── 기술 효과 합산 (모든 소비처가 여기서 읽는다) ── */
-const HAPPY_CAP = 25;      // 기술로 올릴 수 있는 행복도의 점근 상한 (기존 플레이 감각을 거의 유지하는 값)
+/* ── 기술 효과 합산 (모든 소비처가 여기서 읽는다) ──
+   전부 더하기다. 곱셈도 점근식도 없다. 마지막에 상한에서 한 번 자른다. */
+const ADD_KEYS=["reachAdd","supplyFree","prodAll","upkeepCut","storage","slots","housing",
+                "crime","happy","adminCut","buildCut","colonyCut","scanCut","growth","pol",
+                "probeCut","megaCut"];
+/* 감소 수치의 바닥 — 여기 아래로는 내려가지 않는다 */
+const FLOOR={upkeep:0.25, admin:0.30, build:0.30, colony:0.25, scan:0.20, mega:0.35};
 let _tm=null,_tmk="";
 function techMods(){
   const sig=JSON.stringify((S&&S.tech)||{});
   if(_tm&&_tmk===sig) return _tm;
-  const m={reachMul:1,supplyFree:0,prodAll:0,prod:{energy:0,minerals:0,goods:0,research:0,alloy:0},
-           upkeepMul:1,storage:0,slots:0,housing:0,crime:0,happy:0,adminMul:1,buildMul:1,
-           colonyMul:1,scanMul:1,growth:0,pol:0,survey:0,megaMul:1,unlock:{}};
+  const m={reachAdd:0,supplyFree:0,prodAll:0,prod:{energy:0,minerals:0,goods:0,research:0,alloy:0},
+           upkeepCut:0,storage:0,slots:0,housing:0,crime:0,happy:0,adminCut:0,buildCut:0,
+           colonyCut:0,scanCut:0,growth:0,pol:0,probeCut:0,megaCut:0,unlock:{},rule:{}};
   for(const k in TECHS){ const l=techLvl(k); if(!l)continue; const T=TECHS[k], e=T.eff;
-    if(e.reach)      m.reachMul*=Math.pow(1+e.reach,l);
-    if(e.supplyFree) m.supplyFree+=e.supplyFree*l;
-    if(e.prodAll)    m.prodAll+=e.prodAll*l;
+    for(const f of ADD_KEYS) if(e[f]) m[f]+=e[f]*l;
     if(e.prod) for(const r in e.prod) m.prod[r]+=e.prod[r]*l;
-    if(e.upkeep)     m.upkeepMul*=Math.pow(1-e.upkeep,l);
-    if(e.storage)    m.storage+=e.storage*l;
-    if(e.slots)      m.slots+=e.slots*l;
-    if(e.housing)    m.housing+=e.housing*l;
-    if(e.crime)      m.crime+=e.crime*l;
-    if(e.happy)      m.happy+=e.happy*l;
-    if(e.admin)      m.adminMul*=Math.pow(1-e.admin,l);
-    if(e.build)      m.buildMul*=Math.pow(1-e.build,l);
-    if(e.colony)     m.colonyMul*=Math.pow(1-e.colony,l);
-    if(e.scan)       m.scanMul*=Math.pow(1-e.scan,l);
-    if(e.growth)     m.growth+=e.growth*l;
-    if(e.pol)        m.pol+=e.pol*l;
-    if(e.survey)     m.survey+=e.survey*l;
-    if(e.megaCost)   m.megaMul*=Math.pow(1-e.megaCost,l);
-    if(T.unlock)     m.unlock[T.unlock]=true;
+    if(e.rule) e.rule.forEach(r=>m.rule[r]=true);
+    if(T.unlock) m.unlock[T.unlock]=true;
   }
-  /* 감소 계열은 바닥값에 점근시킨다 — 어떤 기술도 완전히 죽지 않고, 어떤 비용도 0이 되지 않는다. */
-  const soft=(raw,floor)=>floor+(1-floor)*raw;
-  m.adminMul  = soft(m.adminMul , 0.30);
-  m.upkeepMul = soft(m.upkeepMul, 0.25);
-  m.megaMul   = soft(m.megaMul  , 0.35);
-  m.buildMul  = soft(m.buildMul , 0.30);
-  m.colonyMul = soft(m.colonyMul, 0.25);
-  m.scanMul   = soft(m.scanMul  , 0.20);
+  m.upkeepMul = Math.max(1-m.upkeepCut, FLOOR.upkeep);
+  m.adminMul  = Math.max(1-m.adminCut , FLOOR.admin);
+  m.buildMul  = Math.max(1-m.buildCut , FLOOR.build);
+  m.colonyMul = Math.max(1-m.colonyCut, FLOOR.colony);
+  m.scanMul   = Math.max(1-m.scanCut  , FLOOR.scan);
+  m.megaMul   = Math.max(1-m.megaCut  , FLOOR.mega);
+  m.survey    = m.probeCut;                 // 예전 이름 호환 (문서 도구가 읽는다)
+  m.reachMul  = 1;                          // 사거리는 더 이상 배수가 아니다
   m.happyRaw  = m.happy;
-  m.happy     = HAPPY_CAP*(1-Math.exp(-m.happyRaw/28));   // 쌓을수록 덜 오르지만 0이 되지는 않는다
   _tm=m;_tmk=sig; return m;
 }
-/* 행복도는 0~100 으로 잘린다. 기술 보너스를 그냥 더하면 시대 Ⅱ 만에 상한을 넘겨
-   이후 행복도 기술이 전부 죽는다. 점근식으로 바꿔 '항상 조금은 오르지만
-   쌓을수록 덜 오른다'로 만든다. */
 const hasUnlock = u => !!techMods().unlock[u];
+const hasRule   = r => !!techMods().rule[r];
 
 /* ── 효과를 사람이 읽는 문장으로 ── */
 const RES_KO={energy:"에너지",minerals:"광물",goods:"소비재",research:"연구",alloy:"철괴"};
-const UNLOCK_TXT={probe:"사거리 내 미탐사 항성계를 <b>자동 스캔</b>",
-                  terra:"식민 행성의 ESI를 <b>영구 개조</b> — 행성 등급 승격",
-                  fusion:"구역 <b>융합로</b> 건설 가능",
-                  orbital:"구역 <b>궤도 거주구</b> 건설 가능"};
+const UNLOCK_TXT={fusion:"구역 <b>융합로</b> 건설 가능",
+                  orbital:"구역 <b>궤도 거주구</b> 건설 가능",
+                  deepmine:"구역 <b>심층 채굴장</b> 건설 가능",
+                  hydro:"구역 <b>수경 농장</b> 건설 가능",
+                  campus:"구역 <b>연구 단지</b> 건설 가능",
+                  foundry:"구역 <b>제련 단지</b> 건설 가능",
+                  arcology:"구역 <b>에큐메노폴리스</b> 건설 가능",
+                  singular:"구역 <b>특이점 발전소</b> 건설 가능"};
+const RULE_TXT={
+  scoutFree:"아직 <b>탐사하지 않은 항성계도 경유</b>해 갈 수 있습니다",
+  depositUp:"행성의 <b>특수 광맥 확률 25% → 50%</b>",
+  noTempPen:"온도로 인한 <b>구역 슬롯 페널티가 사라집니다</b>",
+  halfTypePen:"행성 유형으로 인한 <b>구역 슬롯 페널티가 절반</b>이 됩니다",
+  autoMine:"채굴 구역이 <b>광부가 없어도 50%</b>를 생산합니다",
+  bigStart:"새 식민지가 <b>인구 5</b>로 시작합니다",
+  dualPolicy:"행성마다 <b>정책 2개를 동시에</b> 적용할 수 있습니다",
+  noJobless:"실업 인구가 <b>소비재를 먹지 않습니다</b>",
+  noGrowth:"<b>인구가 자연 증가하지 않습니다</b>",
+  maxHappy:"모든 식민지의 <b>행복도가 100으로 고정</b>됩니다",
+  noSupplyPen:"보급 거리에 따른 <b>생산 감소가 사라집니다</b>",
+  megaPlus:"초구조물 <b>최대 레벨 +3</b>",
+};
 const pctS = v => (v>=0?"+":"−")+Math.round(Math.abs(v)*100)+"%";
 function effText(k,l){
   const T=TECHS[k], e=T.eff, a=[];
-  if(T.unlock) return UNLOCK_TXT[T.unlock]||"신규 해금";
   if(l<=0) l=1;
-  if(e.reach)      a.push(`항행 사거리 ${pctS(Math.pow(1+e.reach,l)-1)}`);
+  if(e.reachAdd)   a.push(`항행 사거리 +${e.reachAdd*l}ly`);
   if(e.supplyFree) a.push(`보급 거리 +${e.supplyFree*l}정거장`);
   if(e.prodAll)    a.push(`모든 자원 생산 ${pctS(e.prodAll*l)}`);
   if(e.prod) for(const r in e.prod) a.push(`${rIco(r,13)} ${RES_KO[r]} 생산 ${pctS(e.prod[r]*l)}`);
-  if(e.upkeep)     a.push(`구역 유지비 ${pctS(-(1-Math.pow(1-e.upkeep,l)))}`);
+  if(e.upkeepCut)  a.push(`구역 유지비 −${Math.round(e.upkeepCut*l*100)}%`);
   if(e.storage)    a.push(`보관 한도 ${pctS(e.storage*l)}`);
-  if(e.slots)      a.push(`구역 슬롯 +${e.slots*l}`);
+  if(e.slots)      a.push(`구역 슬롯 +${e.slots*l}칸`);
   if(e.housing)    a.push(`주거 정원 ${pctS(e.housing*l)}`);
   if(e.crime)      a.push(`범죄 −${e.crime*l}`);
-  if(e.happy)      a.push(`행복도 +${e.happy*l} <small>(누적 시 체감 감소)</small>`);
-  if(e.admin)      a.push(`행정 부담 ${pctS(-(1-Math.pow(1-e.admin,l)))}`);
-  if(e.build)      a.push(`구역 건설비 ${pctS(-(1-Math.pow(1-e.build,l)))}`);
-  if(e.colony)     a.push(`식민지 비용 ${pctS(-(1-Math.pow(1-e.colony,l)))}`);
-  if(e.scan)       a.push(`스캔 비용 ${pctS(-(1-Math.pow(1-e.scan,l)))}`);
+  if(e.happy)      a.push(`행복도 +${e.happy*l}`);
+  if(e.adminCut)   a.push(`행정 부담 −${Math.round(e.adminCut*l*100)}%`);
+  if(e.buildCut)   a.push(`구역 건설비 −${Math.round(e.buildCut*l*100)}%`);
+  if(e.colonyCut)  a.push(`식민지 비용 −${Math.round(e.colonyCut*l*100)}%`);
+  if(e.scanCut)    a.push(`스캔 비용 −${Math.round(e.scanCut*l*100)}%`);
   if(e.growth)     a.push(`인구 성장 ${pctS(e.growth*l)}`);
   if(e.pol)        a.push(`정책 효과 ${pctS(e.pol*l)}`);
-  if(e.survey)     a.push(`행성 지질 조사 Lv.${e.survey*l}`);
-  if(e.megaCost)   a.push(`메가구조물 비용 ${pctS(-(1-Math.pow(1-e.megaCost,l)))}`);
+  if(e.probeCut)   a.push(`행성 조사 기간 −${e.probeCut*l}일`);
+  if(e.megaCut)    a.push(`초구조물 비용 −${Math.round(e.megaCut*l*100)}%`);
+  if(e.rule)       e.rule.forEach(r=>a.push(RULE_TXT[r]||"규칙 변경"));
+  if(T.unlock)     a.push(UNLOCK_TXT[T.unlock]||"신규 해금");
   return a.join(" · ")||"—";
 }
 
@@ -1551,11 +1486,13 @@ const MEGA = {
 };
 const MEGA_KEYS=Object.keys(MEGA);
 const megaLvl = k => (S&&S.mega&&S.mega[k])||0;
+/* 각인 '초구조 특화' — 초구조물 최대 레벨 +3 */
+const megaMax = k => MEGA[k].max + (hasRule("megaPlus")?3:0);
 const megaTotal = () => MEGA_KEYS.reduce((a,k)=>a+megaLvl(k),0);
 const megaCost = k => {const c=MEGA[k].cost(megaLvl(k)),a=adminMult(),g=techMods().megaMul;
   return {minerals:Math.round(c.minerals*a*g), energy:Math.round(c.energy*a*g)};};
 function buildMega(k){
-  if(megaLvl(k)>=MEGA[k].max){toast("이미 완공되었습니다","warn");return;}
+  if(megaLvl(k)>=megaMax(k)){toast("이미 완공되었습니다","warn");return;}
   if(!Object.keys(S.colonies).length){toast("식민지가 필요합니다","warn");return;}
   const c=megaCost(k);
   if(S.res.minerals<c.minerals||S.res.energy<c.energy){toast("자원 부족 (광물 "+fmt(c.minerals)+" · 에너지 "+fmt(c.energy)+")","warn");return;}
@@ -1610,9 +1547,19 @@ function rngFrom(n){ return frac(Math.sin((n+1)*97.13)*4391.77); }
 function techOpen(k){ const T=TECHS[k];
   if(techLvl(k)>=T.max) return false;
   if(!eraOpen(T.era)) return false;
-  if(T.rep && !eraOpen(2)) return false;
+  if(T.kind==="rep") return eraOpen(T.era);
+  if(T.kind==="fork"){
+    if(techLvl(T.pair)>0) return false;                    // 형제를 골랐다 — 영구 잠김
+    return techLvl(T.pre) >= TECHS[T.pre].max;             // 같은 계열 시대 Ⅲ 만렙 필요
+  }
+  if(T.kind==="doct") return doctPicked() < DOCT_PICK;     // 8개 중 2개까지
   if(T.pre && !techLvl(T.pre)) return false;
   return true; }
+/* 분기에서 포기해 영영 못 찍는 기술인가 */
+const techBarred = k => { const T=TECHS[k];
+  if(T.kind==="fork") return techLvl(T.pair)>0;
+  if(T.kind==="doct") return techLvl(k)===0 && doctPicked()>=DOCT_PICK;
+  return false; };
 function eligibleTechs(){ return TECH_KEYS.filter(techOpen); }
 function drawCards(){
   const pool=eligibleTechs(); const picks=[];
@@ -1643,15 +1590,20 @@ function finishResearch(){
   pushLog(`${T.icon} ${T.name}${T.max===1?'':` Lv.${S.tech[k]}`} 완료 — ${effText(k,S.tech[k])}`,"good");
   const wasEra=curEra();
   S.ractive=null; S.rprog=0; _tm=null; drawCards();
-  if(T.eff.reach||T.unlock==="probe") initMap();
+  if(T.eff.reachAdd || T.eff.rule) initMap();
   if(curEra()>wasEra) pushLog(`🏛 새로운 시대 — <b>${ERAS[curEra()].n}</b> 기술이 열렸습니다!`,"good");
   save();
 }
 /* 비용 = 시대 기본값 × 계열 내 순번 × 현재 레벨 × 행정 배수 */
+/* 레벨당 ×1.35 (반복형은 ×1.30). 분기·각인은 일회성 고정가. */
+const FORK_COST={research:2900, minerals:1900};
+const DOCT_COST={research:12000, minerals:7800};
 function techCost(k){
   const T=TECHS[k], E=ERAS[T.era], l=techLvl(k), a=adminMult();
-  const step=Math.pow(1.22,T.idx-1), lv=Math.pow(T.rep?1.30:1.60,l);
-  return {research:Math.round(E.base*step*lv*a), minerals:Math.round(E.mb*step*lv*a)};
+  if(T.kind==="fork") return {research:Math.round(FORK_COST.research*a), minerals:Math.round(FORK_COST.minerals*a)};
+  if(T.kind==="doct") return {research:Math.round(DOCT_COST.research*a), minerals:Math.round(DOCT_COST.minerals*a)};
+  const lv=Math.pow(T.kind==="rep"?1.30:1.35, l);
+  return {research:Math.round(E.base*lv*a), minerals:Math.round(E.mb*lv*a)};
 }
 
 /* ============ 상태 ============ */
@@ -1774,7 +1726,7 @@ function planetTraits(p){
     {ic:"🔩",t:"희귀 금속 광맥",res:"alloy",   v:.50, tip:"특수 자원 — 철괴 +50%"},
     {ic:"📡",t:"이상 신호원",   res:"research",v:.70, tip:"특수 자원 — 정체불명의 신호 · 연구 +70%"},
   ];
-  if(roll>=75){
+  if(roll >= (hasRule("depositUp")?50:75)){          // 분기 '심층 시추' — 광맥 확률 25%→50%
     const D=DEP[_hstr(p.n+"d")%5];
     pct[D.res]+=D.v; deposit=D;
     second={ic:D.ic,t:D.t,k:"dep",tip:D.tip};
@@ -1782,6 +1734,8 @@ function planetTraits(p){
   if(second) tags.push(second);
 
   for(const k in pct) pct[k]=clamp(pct[k],TRAIT_MIN,TRAIT_MAX);   // 합계는 −85%~+60%
+  if(hasRule("noTempPen"))   tempPen=0;                   // 분기 '테라포밍'
+  if(hasRule("halfTypePen")) slotPen=Math.floor(slotPen/2); // 분기 '기압 도시'
   return {pct,mods,tags,deposit,second,happy,tempPen,slotPen};
 }
 /* 구역 슬롯 — 최적 행성(온화·지구형)이 10칸.
@@ -1797,7 +1751,7 @@ const SLOT_CAP = 20;      // 구역 슬롯 상한 (한 행성이 가질 수 있�
 const GALAXY_EDGE = Math.ceil(SYSTEMS.reduce((a,s)=>Math.max(a,s.dist),0));
 /* 주행 거리는 직선 거리보다 길다 — 은하 끝까지 실제로 달리려면 반지름의 2배쯤 필요하다 */
 const REACH_CAP = Math.ceil(GALAXY_EDGE*2.2);
-const maxReach=()=>Math.min(REACH_CAP, Math.round(BASE_REACH*techMods().reachMul));
+const maxReach=()=>Math.min(REACH_CAP, BASE_REACH + techMods().reachAdd);
 const reachStr=()=>maxReach()>=REACH_CAP?"전 은하":maxReach()+"ly";
 const scanCost=sys=>Math.max(1,Math.ceil((3+Math.sqrt(sys.dist)*1.6)*techMods().scanMul));
 const isSurveyed=id=>!!S.surveyed[id];
@@ -1811,7 +1765,7 @@ const isProbed = id => !!(S.probed&&S.probed[id]);
 const probeJob = () => (S&&S.probe)||null;
 /* 조사 기간도 감소 계열이다. 뺄셈이면 Lv.4 에서 하한에 붙어 이후 기술이 죽으므로
    곱셈으로 바꿔 점근시킨다 — 레벨당 −13%, 하한 20일. */
-function probeDaysFor(){ return Math.max(20, Math.round(PROBE_DAYS*Math.pow(0.87, techMods().survey))); }
+function probeDaysFor(){ return Math.max(20, PROBE_DAYS - techMods().probeCut); }
 function startProbe(sysId){
   if(S.probe){ toast(`이미 ${sysById(S.probe.id).name}을(를) 조사 중입니다.`,"warn"); return; }
   if(!isSurveyed(sysId)){ toast("먼저 항성계를 스캔해야 합니다.","warn"); return; }
@@ -1849,13 +1803,14 @@ function probeTick(){
    → 직선으로 20ly인 별도 항로가 돌아가면 60ly를 달려야 할 수 있다. 길목(초크포인트)이 생긴다. */
 let _road=null, _roadKey="";
 function roadDist(){
-  const key=Object.keys(S.surveyed||{}).length+"|"+maxReach();
+  const free=hasRule("scoutFree");                  // 분기 '항로 개척' — 미탐사 항성계도 지나갈 수 있다
+  const key=Object.keys(S.surveyed||{}).length+"|"+maxReach()+"|"+free;
   if(_road && _roadKey===key) return _road;
   const R=maxReach()+0.001, D={sol:0}, pq=[["sol",0]];
   while(pq.length){
     pq.sort((a,b)=>a[1]-b[1]);
     const [c,d]=pq.shift(); if(d>D[c]) continue;
-    if(c!=="sol" && !isSurveyed(c)) continue;        // 아직 탐사 안 한 곳은 지나갈 수 없다 (종점만 가능)
+    if(!free && c!=="sol" && !isSurveyed(c)) continue;   // 아직 탐사 안 한 곳은 지나갈 수 없다 (종점만 가능)
     for(const nb of (ADJ[c]||[])){
       const nd=d+laneLen(c,nb); if(nd>R) continue;
       if(D[nb]===undefined || nd<D[nb]){ D[nb]=nd; pq.push([nb,nd]); }
@@ -1991,7 +1946,7 @@ function colonyInfo(key){
     if(def.job) totalJobs[def.job]+=def.jobs*c;
   }
   housing=Math.max(2, Math.round(housing*(traits.mods.housing||1)*(1+techMods().housing)) + megaLvl('ring')*3);   // 행성 특성 + 도시 계획 + 궤도 고리
-  const polKey=col.policy||"balanced", pol=POLICIES[polKey];
+  const polKey=col.policy||"balanced", pol=mergedPol(col);
   /* 배정은 저장된 상태(col.jobs)를 읽기만 한다. 여기서 바꾸지 않는다 —
      colonyInfo 는 화면 갱신 때마다 여러 번 호출되는 순수 조회 함수다. */
   const J=jobsOf(col);
@@ -2006,7 +1961,7 @@ function colonyInfo(key){
   const hardCap=Math.max(housing+2, Math.round(housing*1.2));        // 절대 상한(구조적) — 실질 정원은 주거(100%)
   const crime=clamp(Math.round(3 + rem*8 + excess*9 + col.pops*0.3 + (pol.crimeMod||0) - techMods().crime), 0, 100);
   /* 행성 유형이 행복에 직접 붙는다 (지구형 +10) — v76 */
-  const happiness=clamp(Math.round(75 - crime*0.5 - excess*4 - depletePenalty() + techMods().happy + modSum('happy') + (traits.happy||0)), 0, 100);
+  const happiness=hasRule("maxHappy") ? 100 : clamp(Math.round(75 - crime*0.5 - excess*4 - depletePenalty() + techMods().happy + modSum('happy') + (traits.happy||0)), 0, 100);
   return {key,sys,p,col,housing,hardCap,totalJobs,employed,unemployed:rem,pops:col.pops,slots:slotsOf(p),used,excess,crime,happiness,policy:polKey,pol,traits};
 }
 /* 전역 가동률(OPR): 에너지 재고가 바닥나면 '소비' 구역이 자동 정전(가동 중단)된다.
@@ -2942,7 +2897,7 @@ function supplyInfo(sysId){
   if(sysId==="sol") return {jumps:0, mult:1, state:"본거지"};
   const j=SUPPLY[sysId];
   if(j===undefined) return {jumps:null, mult:0.6, state:"보급 단절"};
-  const m=clamp(1-Math.max(0,j-supplyFree())*0.06, 0.6, 1);
+  const m=hasRule("noSupplyPen") ? 1 : clamp(1-Math.max(0,j-supplyFree())*0.06, 0.6, 1);
   return {jumps:j, mult:m, state:m>=0.999?"보급 양호":"보급 지연"};
 }
 function supplyMult(info){ return info&&info.sys ? supplyInfo(info.sys.id).mult : 1; }
@@ -2958,8 +2913,10 @@ const DIST_UP_RES={housing:"energy",agri:"energy",energy:"minerals",mining:"ener
   deepmine:"energy",hydro:"energy",campus:"energy",foundry:"minerals",arcology:"energy",singular:"minerals"};
 const DFAC=(o,mr)=>{const f={};for(const dk in DISTRICTS)f[dk]=DIST_UP_RES[dk]==="minerals"?mr:o;return f;};
 function mineralProdOf(info){
-  const {employed,happiness,pol,traits}=info;
-  return PER_MO(employed.miner*BASE_YIELD*modTotal(info,'minerals'));
+  const {employed,totalJobs}=info;
+  /* 분기 '무인 채굴' — 광부가 비어 있어도 채굴 자리의 50% 만큼은 자동으로 캔다 */
+  const n = hasRule("autoMine") ? Math.max(employed.miner, (totalJobs.miner||0)*0.5) : employed.miner;
+  return PER_MO(n*BASE_YIELD*modTotal(info,'minerals'));
 }
 /* 자원별 가동률을 함께 푼다.
    에너지 소비 구역(주거·소비재·채굴·연구소)은 OPR, 광물 소비 구역(발전·제련소)은 MPR로 감산된다.
@@ -3021,10 +2978,25 @@ const POP_STARVE = 250;                          // 소비재가 바닥나면 �
    페널티 최대는 특성 −40% + 보급 −50% = −90% → 최저 10%. 0 밑으로는 못 내려간다.
    행복도는 여기 없다 — 생산이 아니라 '인구 증감'에만 작용한다. */
 /* 정책 보너스 = 표기값 × 행복도 보정. 행복도를 못 구하는 자리(먹을 양 계산 등)에서는 기준값 60을 쓴다. */
+/* 분기 '중앙 집권' — 정책을 두 개까지 겹쳐 적용한다. 보너스도 유지비도 둘 다 더해진다.
+   기존 소비처는 전부 하나의 정책 객체를 읽으므로, 둘을 합친 가짜 정책을 만들어 넘긴다. */
+function mergedPol(col){
+  const a = POLICIES[(col&&col.policy)||"balanced"];
+  const b = (hasRule("dualPolicy") && col && col.policy2 && col.policy2!==col.policy) ? POLICIES[col.policy2] : null;
+  if(!b) return a;
+  const m={name:`${a.name} + ${b.name}`, icon:a.icon, desc:"정책 2개 동시 적용",
+           pct:{}, drain:{}, growthPct:0, crimeMod:0, dual:true};
+  [a,b].forEach(P=>{
+    if(P.pct)   for(const k in P.pct)   m.pct[k]  =(m.pct[k]  ||0)+P.pct[k];
+    if(P.drain) for(const k in P.drain) m.drain[k]=(m.drain[k]||0)+P.drain[k];
+    m.growthPct += P.growthPct||0; m.crimeMod += P.crimeMod||0;
+  });
+  return m;
+}
 function polBonus(pol, res, ctx){
   if(!pol||!pol.pct||!pol.pct[res]) return 0;
   let h = (ctx && ctx.happiness!==undefined) ? ctx.happiness : 60;
-  return pol.pct[res]*polScale(h);
+  return pol.pct[res]*polScale(h)*(1+techMods().pol);
 }
 function modParts(info, res){
   const pol=info.pol, tr=info.traits||planetTraits(info.p);
@@ -3057,10 +3029,12 @@ function colonyRates(info, B){
   const eBase = PER_MO(BASE_ENERGY*emergE(col));
   const eVar  = (energyProdOf(info)-PER_MO(BASE_ENERGY*emergE(col)))*F.energy*au('energy')*dp;
   const mBase = PER_MO(BASE_MINERALS*emergM(col));
-  const mVar  = Y('miner','minerals')    *F.mining   *au('minerals')*dp;
+  const mVar  = mineralProdOf(info)      *F.mining   *au('minerals')*dp;   // '무인 채굴' 이 여기서 적용된다
   const rVar  = Y('researcher','research')*F.lab     *au('research')*dp;
   const aVar  = Y('refiner','alloy')     *F.refinery *au('alloy')   *da;
-  const gPop  = PER_MO(pops*POP_GOODS), gCrowd = PER_MO(excess*POP_GOODS_CROWD);
+  /* 각인 '기계 승천' — 실업 인구는 소비재를 먹지 않는다 */
+  const eaters = hasRule("noJobless") ? Math.max(0, pops-(info.unemployed||0)) : pops;
+  const gPop  = PER_MO(eaters*POP_GOODS), gCrowd = PER_MO(excess*POP_GOODS_CROWD);
   if(rec){
     rec('goods','소비재 구역(생산공)', gProd);
     rec('goods','인구 소비재', -gPop);
@@ -3134,7 +3108,9 @@ function doColonize(sys,pi){
   const c=colonizeCost(sys,p);
   if(!canAfford(c)){toast("자원 부족 — 식민지선을 보낼 수 없습니다.","warn");return;}
   pay(c);
-  S.colonies[key]={districts: slotsOf(p)>=7?{housing:1,agri:1}:{housing:1,mining:1}, pops:1, growth:0, decline:0, policy:"balanced", born:gameDays()};
+  S.colonies[key]={districts: slotsOf(p)>=7?{housing:1,agri:1}:{housing:1,mining:1},
+    pops: hasRule("bigStart")?5:1,                       // 분기 '분산 정착'
+    growth:0, decline:0, policy:"balanced", policy2:null, born:gameDays()};
   rebalanceJobs(key);
   pushLog("["+p.n+"] 식민지 건설! ("+tierName[tierOf(p.esi)]+")", p.esi>=0.8?"good":"");
   if(!S.surveyed[sys.id])S.surveyed[sys.id]=true;
@@ -3222,9 +3198,11 @@ function buildTick(){
      우연히 같은 값이라 붙어 있었을 뿐이라, 공사 기간을 바꾸면 잠금 표시가 같이 틀어졌다. */
 const MONTH_DAYS = 30;
 const POL_COOLDOWN_MO = 120, POL_COOLDOWN_DAYS = POL_COOLDOWN_MO*MONTH_DAYS;
-function polLeft(key){                       // 남은 '개월' (0이면 변경 가능)
-  const col=S.colonies[key]; if(!col||col.polAtDay===undefined) return 0;
-  const passed = gameDays()-col.polAtDay;
+function polLeft(key,slot){                  // 남은 '개월' (0이면 변경 가능). 주/보조 정책은 잠금이 따로다.
+  const col=S.colonies[key]; if(!col) return 0;
+  const at = (slot===2) ? col.polAtDay2 : col.polAtDay;
+  if(at===undefined) return 0;
+  const passed = gameDays()-at;
   return Math.max(0, Math.ceil((POL_COOLDOWN_DAYS-passed)/MONTH_DAYS));
 }
 /* 남은 개월을 사람이 읽는 말로 — 120개월은 '10년'이 훨씬 빨리 읽힌다 */
@@ -3234,12 +3212,16 @@ function moStr(mo){
   return m?`${y}년 ${m}개월`:`${y}년`;
 }
 /* 정책을 누르면 바로 바뀌지 않고, 효과·유지비·잠금 기간을 보여준 뒤 확인을 받는다 */
-function askPolicy(key,pk){
+function askPolicy(key,pk,slot){
+  slot = slot===2 ? 2 : 1;
   const col=S.colonies[key]; if(!col)return;
-  if(col.policy===pk){ toast("이미 적용 중인 정책입니다.",""); return; }
-  const left=polLeft(key);
+  const curKey = slot===2 ? (col.policy2||"balanced") : (col.policy||"balanced");
+  if(curKey===pk){ toast("이미 적용 중인 정책입니다.",""); return; }
+  const other = slot===2 ? (col.policy||"balanced") : (col.policy2||"balanced");
+  if(pk!=="balanced" && pk===other){ toast("주 정책과 같은 정책은 겹칠 수 없습니다.","warn"); return; }
+  const left=polLeft(key,slot);
   if(left>0){ toast(`정책 변경 잠금 중 — ${left}개월 남음`,"warn"); return; }
-  const P=POLICIES[pk], cur=POLICIES[col.policy||"balanced"];
+  const P=POLICIES[pk], cur=POLICIES[curKey];
   const M=SEC_PER_MONTH;
   /* 표기값과 '지금 이 행성에서 실제로 붙는 값'을 함께 보여준다 — 행복도에 따라 달라지기 때문 */
   const hNow=Math.round(colonyInfo(key).happiness), sc=polScale(hNow);
@@ -3256,13 +3238,16 @@ function askPolicy(key,pk){
     <div class="pw-warn">⚠ 한 번 바꾸면 <b>${moStr(POL_COOLDOWN_MO)}간 다시 바꿀 수 없습니다.</b>
       유지비를 감당하지 못하면 자원이 마이너스로 돌아설 수 있으니 순생산을 먼저 확인하세요.</div>
     <div class="row"><button class="act solid" id="mYes">${P.name}으로 변경</button><button class="act ghost" id="mNo">취소</button></div>`);
-  $("mYes").onclick=()=>{ doPolicy(key,pk); closeModal(); };
+  $("mYes").onclick=()=>{ doPolicy(key,pk,slot); closeModal(); };
   $("mNo").onclick=()=>closeModal();
 }
-function doPolicy(key,pol){
-  const col=S.colonies[key]; if(!col||col.policy===pol)return;
-  if(polLeft(key)>0)return;
-  col.policy=pol; col.polAtDay=gameDays();
+function doPolicy(key,pol,slot){
+  slot = slot===2 ? 2 : 1;
+  const col=S.colonies[key]; if(!col)return;
+  if(slot===2){ if(col.policy2===pol)return; if(polLeft(key,2)>0)return;
+                col.policy2=pol; col.polAtDay2=gameDays(); }
+  else        { if(col.policy===pol)return;  if(polLeft(key,1)>0)return;
+                col.policy=pol;  col.polAtDay=gameDays(); }
   pushLog(`${POLICIES[pol].icon} 정책 변경 — ${POLICIES[pol].name} (${moStr(POL_COOLDOWN_MO)} 잠금)`,"");
   save(); renderPanel(); renderTop();
 }
@@ -3317,9 +3302,10 @@ function applyMonth(span){
     /* 생명공학·생명유지·외계생물학 계열의 '인구 성장 +N%' 는 techMods() 에서
        계산만 되고 여기에 연결돼 있지 않았다 — 기술을 아무리 찍어도 성장이 그대로였다. */
     const techG  = Math.max(0.1, 1 + techMods().growth);
-    const growPerMo = (POP_GROW_MIN + (POP_GROW_MAX-POP_GROW_MIN)*hRatio)
+    const growPerMo = hasRule("noGrowth") ? 0 :
+                      (POP_GROW_MIN + (POP_GROW_MAX-POP_GROW_MIN)*hRatio)
                       * scale * techG * room * hab
-                      * (1 + (info.pol.growthPct||0)*polScale(info.happiness));
+                      * (1 + (info.pol.growthPct||0)*polScale(info.happiness)*(1+techMods().pol));
 
     let dropPerMo = 0;
     if(info.happiness < POP_UNREST_AT) dropPerMo += (POP_UNREST_AT-info.happiness)*POP_UNREST_PER;
@@ -4190,7 +4176,7 @@ function renderPanel(){
   bindCancel(panel);
   panel.querySelectorAll("[data-probe]").forEach(b=>b.onclick=()=>startProbe(b.dataset.probe));
   {const pc=panel.querySelector("#probeCancel"); if(pc)pc.onclick=cancelProbe;}
-  panel.querySelectorAll("[data-pol]").forEach(b=>b.onclick=()=>askPolicy(b.dataset.key,b.dataset.pol));
+  panel.querySelectorAll("[data-pol]").forEach(b=>b.onclick=()=>askPolicy(b.dataset.key,b.dataset.pol,+(b.dataset.slot||1)));
   panel.querySelectorAll("[data-terra]").forEach(b=>b.onclick=()=>doTerra(b.dataset.terra));
   panel.querySelectorAll("[data-anom]").forEach(b=>b.onclick=()=>doAnomaly(b.dataset.anom));
 }
@@ -4313,14 +4299,22 @@ function renderColony(key){
     </div>`;
   }
   // ── 행성 정책 ──
-  {const pl=polLeft(key), cp=POLICIES[policy];
-   h+=`<details class="polbox"${pl?'':''}>
+  {const dual=hasRule("dualPolicy");
+   const p2=(S.colonies[key].policy2)||"balanced";
+   const cp=POLICIES[policy], cp2=POLICIES[p2];
+   const row=(slot,cur)=>{const pl=polLeft(key,slot);
+     return `<div class="pols">`+POL_ORDER.map(pk=>{const P=POLICIES[pk];
+       const on=cur===pk, lock=pl>0&&!on;
+       return `<button class="pol ${on?'on':''}${lock?' lock':''}" data-pol="${pk}" data-key="${key}" data-slot="${slot}" ${lock?'disabled':''} data-tip="${POL_RES[pk]?rIco(POL_RES[pk],14):P.icon} ${P.name} — ${P.desc}${lock?` · 🔒 ${moStr(pl)} 뒤 변경 가능`:on?' · 적용 중':' · 누르면 효과를 확인한 뒤 변경합니다'}">${POL_RES[pk]?rIco(POL_RES[pk],13):P.icon} ${P.name}</button>`;}).join("")+`</div>`;};
+   const pl1=polLeft(key,1);
+   h+=`<details class="polbox">
      <summary><span class="pb-l">행성 정책</span>
-       <span class="pb-cur">${POL_RES[policy]?rIco(POL_RES[policy],13):cp.icon} ${cp.name}</span>
-       ${pl?`<span class="pol-lock">🔒 ${moStr(pl)}</span>`:`<span class="pb-more">변경 ▾</span>`}</summary>`;
-   h+=`<div class="pols">`+POL_ORDER.map(pk=>{const P=POLICIES[pk];
-     const on=policy===pk, lock=pl>0&&!on;
-     return `<button class="pol ${on?'on':''}${lock?' lock':''}" data-pol="${pk}" data-key="${key}" ${lock?'disabled':''} data-tip="${POL_RES[pk]?rIco(POL_RES[pk],14):P.icon} ${P.name} — ${P.desc}${lock?` · 🔒 ${moStr(pl)} 뒤 변경 가능`:on?' · 적용 중':' · 누르면 효과를 확인한 뒤 변경합니다'}">${POL_RES[pk]?rIco(POL_RES[pk],13):P.icon} ${P.name}</button>`;}).join("")+`</div></details>`;}
+       <span class="pb-cur">${POL_RES[policy]?rIco(POL_RES[policy],13):cp.icon} ${cp.name}${dual&&p2!=="balanced"?` + ${POL_RES[p2]?rIco(POL_RES[p2],13):cp2.icon} ${cp2.name}`:""}</span>
+       ${pl1?`<span class="pol-lock">🔒 ${moStr(pl1)}</span>`:`<span class="pb-more">변경 ▾</span>`}</summary>`;
+   if(dual) h+=`<div class="pb-sub">주 정책</div>`;
+   h+=row(1,policy);
+   if(dual){ h+=`<div class="pb-sub">보조 정책 <small>중앙 집권 — 정책 2개 동시 적용</small></div>`+row(2,p2); }
+   h+=`</details>`;}
 
   // ── 구역 (타일 그리드 + 슬롯 세그먼트) ──
   const _col=S.colonies[key], _q=qOf(_col);
@@ -4553,9 +4547,28 @@ function renderLog(){}   // 알림은 이제 상시 표시하지 않음 (자동 
 /* ============ 저장 ============ */
 const KEY="goldilocks_v1";
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
-function load(){try{const raw=localStorage.getItem(KEY);if(raw){S=JSON.parse(raw);return true;}}catch(e){}return false;}
+/* 예전 저장 파일의 기술 성과를 새 격자로 옮긴다.
+   여러 옛 기술이 한 새 기술로 합쳐지므로 레벨은 더하되 새 상한에서 자른다. */
+function migrateTech(st){
+  if(!st || !st.tech) return st;
+  const old=st.tech, next={};
+  for(const k in old){
+    const lv=old[k]|0; if(lv<=0) continue;
+    if(TECHS[k]){ next[k]=(next[k]||0)+lv; continue; }      // 이미 새 id
+    const to=TECH_MIGRATE[k]; if(!to||!TECHS[to]) continue;  // 대응 없는 기술은 버린다
+    next[to]=(next[to]||0)+lv;
+  }
+  for(const k in next){ const mx=TECHS[k].max; if(mx!==Infinity) next[k]=Math.min(next[k],mx); }
+  /* 분기는 한쪽만 남긴다 */
+  for(const k in next){ const T=TECHS[k];
+    if(T.kind==="fork" && next[T.pair]) delete next[T.pair]; }
+  /* 각인은 2개까지만 */
+  let picked=0; DOCTS.forEach(([id])=>{ if(next[id]){ if(++picked>DOCT_PICK) delete next[id]; } });
+  st.tech=next; return st;
+}
+function load(){try{const raw=localStorage.getItem(KEY);if(raw){S=migrateTech(JSON.parse(raw));return true;}}catch(e){}return false;}
 function exportSave(){return btoa(unescape(encodeURIComponent(JSON.stringify(S))));}
-function importSave(c){try{const o=JSON.parse(decodeURIComponent(escape(atob(c.trim()))));if(o&&o.res&&o.colonies){S=o;won=primeCount()>=GOAL_PRIME;save();renderAll();return true;}}catch(e){}return false;}
+function importSave(c){try{const o=JSON.parse(decodeURIComponent(escape(atob(c.trim()))));if(o&&o.res&&o.colonies){S=migrateTech(o);won=primeCount()>=GOAL_PRIME;save();renderAll();return true;}}catch(e){}return false;}
 
 /* ============ 모달 / 도움말 ============ */
 /* 창은 전부 이 함수를 거친다. 오른쪽 위 X 를 여기서 한 번만 붙인다 —
@@ -4572,6 +4585,118 @@ function showModal(html,center,closable){
 }
 
 /* ============ 제국 화면: 기술 트리 + 직업 우선순위 ============ */
+
+/* ============ 기술 격자 화면 ============
+   9계열(행) × 5시대(열) 격자. 시대 Ⅲ 뒤에 '택 1' 분기가 붙고, 아래에 각인 8개가 온다. */
+const TG_BC={"확장":"var(--sky)","생산":"var(--marginal)","사회":"var(--j-research)"};
+function tgState(k){
+  const T=TECHS[k], l=techLvl(k);
+  if(techBarred(k)) return "barred";
+  if(T.max!==Infinity && l>=T.max) return "max";
+  if(l>0) return "has";
+  return techOpen(k) ? "open" : "lock";
+}
+function tgNode(k){
+  const T=TECHS[k], l=techLvl(k), st=tgState(k);
+  const pct = T.max===Infinity ? 100 : Math.round(l/T.max*100);
+  return `<button class="tg-node ${st}${S.ractive===k?" act":""}${S.tsel===k?" sel":""}" data-tg="${k}"
+    aria-label="${T.name}"><span class="ic">${T.icon}</span><span class="fl"><i style="width:${pct}%"></i></span></button>`;
+}
+function tgLattice(){
+  const trunk={}; TRUNK.forEach(([id,,,era,ln])=>{ trunk[ln+"@"+era]=id; });
+  const forkOf={}; for(let i=0;i<FORKS.length;i+=2) forkOf[FORKS[i][3]]=[FORKS[i][0],FORKS[i+1][0]];
+  let h = tgDetail();                                   // 상세를 맨 위에 고정으로 둔다
+  TECH_BRANCHES.forEach(br=>{
+    const lns = LINE_ORDER.filter(ln=>LINES[ln].br===br);   // 갈래마다 계열 3개 = 3열
+    h+=`<section class="tg-sec" style="--bc:${TG_BC[br]}">
+      <div class="tg-bt"><i></i><u>${br}</u></div>
+      <div class="tg-g">
+        <div></div>`;
+    lns.forEach(ln=>{ h+=`<div class="tg-ch"><b>${LINES[ln].n}</b><u>${LINES[ln].own}</u></div>`; });
+    for(let e=1;e<=5;e++){
+      // 시대 사이를 잇는 세로선 (앞 시대를 하나라도 올렸으면 불이 들어온다)
+      if(e>1) h+=`<div class="tg-vr">`+lns.map(ln=>
+        `<i class="${techLvl(trunk[ln+"@"+(e-1)])>0?"lit":""}"></i>`).join("")+`</div>`;
+      h+=`<div class="tg-el ${curEra()===e?"now":eraOpen(e)?"on":""}"
+             data-tip="시대 ${ERAS[e].rn} · ${ERAS[e].n} — 기술마다 ${ERAS[e].max}레벨${eraOpen(e)?"":` · 아직 열리지 않았습니다 (시대 ${ERAS[e-1].rn} 기술 ${ERA_GATE[e]}종 필요)`}">${ERAS[e].rn}</div>`;
+      lns.forEach(ln=>{
+        const k=trunk[ln+"@"+e], T=TECHS[k], l=techLvl(k), st=tgState(k);
+        h+=`<div class="tg-vc ${st}">${tgNode(k)}<span class="tg-cp">${T.name}</span>
+              <span class="tg-lv">${l}/${T.max}</span></div>`;
+      });
+      // 시대 Ⅲ 다음에 분기 줄
+      if(e===3){
+        h+=`<div class="tg-vr">`+lns.map(ln=>
+          `<i class="${techLvl(trunk[ln+"@3"])>0?"lit":""}"></i>`).join("")+`</div>`;
+        h+=`<div class="tg-el fk" data-tip="분기 — 계열마다 하나만 고를 수 있고, 고르지 않은 쪽은 영원히 잠깁니다">택1</div>`;
+        lns.forEach(ln=>{
+          const [a,b]=forkOf[ln], dec=techLvl(a)>0||techLvl(b)>0;
+          h+=`<div class="tg-vc"><div class="tg-fkb${dec?" dec":""}">${tgNode(a)}${tgNode(b)}</div>
+            <div class="tg-fc">${[a,b].map(x=>{
+              const c = dec ? (techLvl(x)>0?"on":"off") : "";
+              return `<span class="${c}">${TECHS[x].name}</span>`;}).join("")}</div></div>`;
+        });
+      }
+    }
+    h+=`</div></section>`;
+  });
+  // ── 각인 ──
+  h+=`<div class="emp-h" style="margin-top:14px">각인 <small>시대 Ⅴ · 8개 중 <b style="color:var(--j-research)">${DOCT_PICK}개</b>만 선택 · 되돌릴 수 없음 (${doctPicked()}/${DOCT_PICK} 선택함)</small></div>`;
+  h+=`<div class="tg-doc">`+DOCTS.map(([id])=>{
+    const T=TECHS[id], st=tgState(id);
+    return `<button class="tg-d ${st}" data-tg="${id}"><span class="ic">${T.icon}</span>
+      <div><b>${T.name}</b><u>${effText(id,1).replace(/<[^>]+>/g,"")}</u></div></button>`;}).join("")+`</div>`;
+  h+=`<div class="emp-h" style="margin-top:12px">반복 연구 <small>끝이 없는 무한 기술 — 연구할 것이 떨어지지 않게 합니다</small></div>`;
+  h+=`<div class="tg-doc">`+REPS.map(([id])=>{
+    const T=TECHS[id], st=tgState(id), l=techLvl(id);
+    return `<button class="tg-d ${st}" data-tg="${id}"><span class="ic">${T.icon}</span>
+      <div><b>${T.name} <em style="font-style:normal;color:var(--amber)">Lv.${l}</em></b>
+      <u>${effText(id,1).replace(/<[^>]+>/g,"")}</u></div></button>`;}).join("")+`</div>`;
+  return h;
+}
+function tgDetail(){
+  const k=S.tsel && TECHS[S.tsel] ? S.tsel : "p1";
+  const T=TECHS[k], l=techLvl(k), c=techCost(k), st=tgState(k);
+  const kindTxt = T.kind==="fork" ? "시대 Ⅲ · 택 1" : T.kind==="doct" ? "시대 Ⅴ · 각인"
+                : T.kind==="rep" ? "반복 연구 · 무한" : `시대 ${ERAS[T.era].rn} ${ERAS[T.era].n}`;
+  const stTxt = {barred:"포기함 — 영구 잠김", max:"확보 완료", has:"연구 중 아님 · 더 올릴 수 있음",
+                 open:"연구 가능", lock:"선행 기술 필요"}[st];
+  /* 수치 칸에서는 '레벨당' 줄과 겹치는 이름을 떼고 숫자만 남긴다 (좁은 화면에서 3줄이 되던 문제) */
+  const base=effText(k,1);
+  const trim=(t)=>{ if(T.max===1) return t; if(t===base) return t;
+    let i=0; while(i<t.length&&i<base.length&&t[i]===base[i]) i++;
+    const cut=t.slice(0,i).lastIndexOf(" ");
+    return cut>1 ? t.slice(cut+1) : t; };
+  const one  = T.max===1;                                   // 분기·각인은 레벨이 하나뿐
+  const now  = one ? (l>0?"적용 중":"미적용") : (l>0 ? trim(effText(k,l)) : "—");
+  const next = one ? (l>0?"—":"적용") : ((T.max!==Infinity && l>=T.max) ? "만렙" : trim(effText(k,l+1)));
+  const canStart = !S.ractive && techOpen(k) && S.res.minerals>=c.minerals;
+  let note = "";
+  if(T.kind==="fork"){ const o=TECHS[T.pair];
+    note = techLvl(T.pair)>0 ? `<b style="color:var(--hostile)">${o.name}</b> 을(를) 골라서 이 기술은 영원히 잠겼습니다.`
+         : `이걸 고르면 <b>${o.name}</b> 은(는) 이 게임에서 영원히 잠깁니다.`; }
+  else if(T.kind==="doct") note = `각인은 제국 전체에 붙습니다. <b>8개 중 ${DOCT_PICK}개</b>만 고를 수 있습니다.`;
+  else if(T.kind==="rep")  note = `끝이 없는 반복 연구입니다.`;
+  else note = `<b>${LINES[T.line].n}</b> 계열이 <b>${LINES[T.line].own}</b> 수치를 단독으로 담당합니다.`;
+  return `<div class="tg-det">
+    <div class="di">${T.icon}</div>
+    <div class="db">
+      <h4>${T.name}</h4>
+      <div class="dm">${T.br} · ${T.lineName} · ${kindTxt} · ${stTxt}</div>
+      <div class="de">레벨당 ${effText(k,1)}</div>
+      <div class="tg-vs">
+        <div><u>기술 보정 수치</u><b>${now}</b></div>
+        <div><u>다음 레벨</u><b class="${next==="만렙"?"na":"up"}">${next}</b></div>
+        <div><u>레벨</u><b>${l} / ${T.max===Infinity?"∞":T.max}</b></div>
+      </div>
+      <div class="dm" style="margin:6px 0 0">${note}</div>
+    </div>
+    <div class="dc"><u>비용</u><b>${rIco("research",11)}${fmt(c.research)}</b><b>${rIco("minerals",11)}${fmt(c.minerals)}</b>
+      <button class="act ${canStart?"solid":""}" data-start="${k}" ${canStart?"":"disabled"}>${
+        st==="barred"?"잠김":st==="max"?"완료":S.ractive?"연구 중":techOpen(k)?"연구 지정":"잠김"}</button></div>
+  </div>`;
+}
+
 function openEmpire(){
   let h=`<h2>⚛ 기술 트리 &amp; 제국 관리</h2>`;
   h+=`<div class="emp-res" id="empRes"><span class="chip" data-tip="이번 달 연구 순수치 — 연구는 쌓이지 않습니다. 매달의 순수치가 그대로 진행도로 들어가고, 0 이하면 연구가 멈춥니다. 연구소를 늘리거나 확장을 늦추세요.">${rIco("research",13)} 연구 ${(totalRates().research*SEC_PER_MONTH>=0?"+":"")}${(totalRates().research*SEC_PER_MONTH).toFixed(1)}/월</span><span class="chip" data-tip="보유 광물 — 연구를 시작할 때 광물을 함께 투입합니다. 구역 건설과 메가구조물에도 쓰입니다.">${rIco("minerals",13)} 광물 ${fmt(S.res.minerals)}</span>
@@ -4606,38 +4731,19 @@ function openEmpire(){
     </div>`;});}
   h+=`</div>`;
 
-  // ── 전체 기술 트리 (갈래 → 계열) ──
-  h+=`<div class="emp-h">기술 트리 <small>계열 안에서는 앞 기술을 연구해야 다음이 열립니다 · 시대는 직전 시대 기술을 일정 수 확보해야 열립니다</small></div>`;
-  TECH_BRANCHES.forEach(br=>{
-    const lines=Object.keys(LINES).filter(l=>LINES[l].br===br);
-    const got=TECH_KEYS.filter(k=>TECHS[k].br===br&&techLvl(k)>0).length;
-    const all=TECH_KEYS.filter(k=>TECHS[k].br===br).length;
-    h+=`<details class="brx"${got?' open':''}><summary><b>${br}</b> <span class="mono">${got}/${all}</span></summary>`;
-    lines.forEach(ln=>{
-      const ks=TECH_KEYS.filter(k=>TECHS[k].line===ln).sort((a,b)=>TECHS[a].idx-TECHS[b].idx);
-      h+=`<div class="lnrow"><span class="lnn">${LINES[ln].n}</span><span class="lnk">`;
-      let prevEra=0;
-      ks.forEach(k=>{ const T=TECHS[k], l=techLvl(k), op=techOpen(k), mx=(l>=T.max);
-        const st=mx?'max':l?'has':op?'open':'lock';
-        if(T.rep && prevEra!==-1){ prevEra=-1;
-          h+=`<span class="erad" data-tip="반복 연구 — 끝이 없습니다. 연구할 것이 떨어지지 않게 하는 무한 기술입니다.">∞</span>`; }
-        if(!T.rep && T.era!==prevEra){ prevEra=T.era;
-          h+=`<span class="erad${eraOpen(T.era)?'':' lock'}" data-tip="시대 ${ERAS[T.era].rn} · ${ERAS[T.era].n}${eraOpen(T.era)?'':' — 아직 열리지 않았습니다 (시대 '+ERAS[T.era-1].rn+' 기술 '+ERA_GATE[T.era]+'종 필요)'}">${ERAS[T.era].rn}</span>`; }
-        h+=`<span class="tk ${st}" data-tip="${T.icon} ${T.name} — 시대 ${ERAS[T.era].rn} · ${T.lineName} · ${effText(k,Math.max(1,l))}${T.pre&&!techLvl(T.pre)?' · 선행 필요: '+TECHS[T.pre].name:''}${!eraOpen(T.era)?' · 시대 '+ERAS[T.era].rn+' 미개방':''}">${T.icon}${l&&T.max!==1?`<b>${T.max===Infinity?l:l}</b>`:mx?'<b>✓</b>':''}</span>`; });
-      h+=`</span></div>`;
-    });
-    h+=`</details>`;
-  });
+  // ── 기술 격자 (9계열 × 5시대) ──
+  h+=`<div class="emp-h">기술 격자 <small>계열 하나가 수치 하나를 단독 담당합니다 · 시대 Ⅲ 뒤의 <b style="color:var(--amber-2)">택 1</b>은 고르지 않은 쪽이 영원히 잠깁니다</small></div>`;
+  h+=`<div id="tgBox">`+tgLattice()+`</div>`;
 
   // ── 메가구조물 ──
   h+=`<div class="emp-h">메가구조물 <small>후반부의 대형 건설 — 광물을 대량 소모합니다</small></div>`;
   h+=`<div class="megas">`;
   MEGA_KEYS.forEach(k=>{
-    const M=MEGA[k], l=megaLvl(k), done=l>=M.max, c=megaCost(k);
+    const M=MEGA[k], l=megaLvl(k), done=l>=megaMax(k), c=megaCost(k);
     const ok=!done&&S.res.minerals>=c.minerals&&S.res.energy>=c.energy;
     h+=`<div class="mega ${done?'done':ok?'ok':''}">
-      <div class="mg-h"><span class="ti">${M.icon}</span><span class="tn">${M.name}</span><span class="tl">${l}/${M.max}</span></div>
-      <div class="tbar">${Array.from({length:M.max},(_,i)=>`<i class="${i<l?'on':''}"></i>`).join("")}</div>
+      <div class="mg-h"><span class="ti">${M.icon}</span><span class="tn">${M.name}</span><span class="tl">${l}/${megaMax(k)}</span></div>
+      <div class="tbar">${Array.from({length:megaMax(k)},(_,i)=>`<i class="${i<l?'on':''}"></i>`).join("")}</div>
       <div class="te">${M.eff(l)}${done?'':` <span class="nx">→ ${M.eff(l+1)}</span>`}</div>
       <div class="mg-d">${M.desc}</div>
       ${done?`<div class="tmax">완공</div>`
@@ -4648,6 +4754,15 @@ function openEmpire(){
   h+=`<div class="row"><button class="act solid" id="mOk">닫기</button></div>`;
   showModal(h);
   $("modalCard").querySelectorAll("[data-start]").forEach(b=>b.onclick=()=>startResearch(b.dataset.start));
+  /* 격자는 클릭을 상자 하나에 위임한다 — 다시 그려도 핸들러가 살아 있다 */
+  const box=$("tgBox");
+  if(box) box.onclick=(ev)=>{
+    const s1=ev.target.closest("[data-start]");
+    if(s1){ startResearch(s1.dataset.start); return; }
+    const n=ev.target.closest("[data-tg]"); if(!n) return;
+    S.tsel=n.dataset.tg;
+    box.innerHTML=tgLattice();
+  };
   $("modalCard").querySelectorAll("[data-mega]").forEach(b=>b.onclick=()=>buildMega(b.dataset.mega));
   const ok=$("mOk"); if(ok)ok.onclick=()=>closeModal();
 }
@@ -4720,7 +4835,7 @@ function openHelp(intro){
     <div class="gterm"><div class="t">📈 인구 성장</div><div class="d">①<b>소비재</b>이 충분하고 ②<b>행복도</b>가 20% 이상일 때 늘어납니다. 속도는 <b>ESI·행복도가 높을수록 빠름</b>. 주거를 넘겨도 성장은 되지만(과밀), 행복이 떨어져 느려져요. 행복 80%↑이면 <b>이주 유입</b> 보너스.</div></div>
     <div class="gterm"><div class="t">🏙 주거·과밀</div><div class="d">구역 하나를 세우는 데 <b>3개월</b>이 걸리고, 짓는 동안에도 <b>다음 구역을 대기열에 넣어</b>둘 수 있습니다(순서대로 하나씩). 취소하면 건설비를 전액 돌려받아요. <b>거주 구역</b>이 주거를 늘립니다. 인구가 주거를 <b>초과(과밀)</b>하면 소비재을 더 먹고 행복도가 떨어져요. <b>주거가 곧 정원(100%)</b>이라 인구는 거기서 자연히 멈추고, 넘으면 <b style="color:var(--hostile)">이주로 빠져나가</b> 다시 100%로 돌아옵니다. 거주 구역을 지으면 정원이 올라가 다시 성장해요.</div></div>
     <div class="gterm"><div class="t">🔌 정전 사태</div><div class="d">에너지(또는 광물)가 <b>바닥나고 계속 적자</b>면 해당 자원을 쓰는 구역이 <b>자동으로 가동 중단</b>됩니다. 생산은 줄지만 유지비도 함께 줄어요. 그리고 <b>발전(또는 채굴) 구역이 하나도 없는데 재고까지 바닥나면 비상 설비가 다시 돌아갑니다</b> — <b style="color:var(--habit)">어떤 상황에서도 재건할 수 있습니다</b>. 구역을 지으면 즉시 정상화돼요.</div></div>
-    <div class="gterm"><div class="t">⚛ 기술 트리</div><div class="d">상단 <b style="color:var(--amber-2)">⚛ 제국</b> 버튼에서 <b>확장·생산·사회</b> 3갈래 기술을 개발합니다. <b>연구 + 광물</b>을 함께 소모해요. 항행(사거리), 개척(식민지 비용↓), 자동화(생산↑), 격자(유지비↓), 도시(주거↑), 치안(범죄↓).</div></div>
+    <div class="gterm"><div class="t">⚛ 기술 트리</div><div class="d">상단 <b style="color:var(--amber-2)">⚛ 기술</b> 버튼에서 <b>확장·생산·사회</b> 3갈래, 갈래마다 <b>3계열</b>씩 총 9계열을 개발합니다. <b>연구 + 광물</b>을 함께 소모해요. 계열 하나가 수치 하나를 <b>단독으로</b> 담당하므로, 급한 수치가 있으면 그 계열을 타면 됩니다 — 추진(사거리) · 탐사(스캔·조사) · 개척(정착·보급) · 동력(에너지·유지비) · 자원(광물·철괴) · 산업(소비재·건설) · 도시(거주·성장) · 통치(행정·치안) · 학술(연구·초구조물). 시대 Ⅲ에는 계열마다 <b style="color:var(--amber-2)">택 1 분기</b>가 있고 <b>고르지 않은 쪽은 영원히 잠깁니다</b>. 시대 Ⅴ의 <b>각인</b>은 제국 전체에 붙는 효과로 <b>8개 중 2개</b>만 고를 수 있습니다.</div></div>
     <div class="gterm"><div class="t">📦 보급 범위</div><div class="d">본거지에서 <b>항로</b>를 따라 <b>탐사한 항성계</b>를 거쳐 보급선이 이어집니다. 별과 별 사이를 한 번 건너는 것이 <b>1정거장</b>이고, 본거지에서 <b>${supplyFree()}정거장</b> 안쪽이면 물자가 온전히 닿습니다. 그보다 멀면 1정거장마다 생산이 <b>6%</b>씩 깎이고 최저 <b>60%</b>까지 떨어집니다. 항로가 아예 이어지지 않으면 <b style="color:var(--hostile)">고립(×0.6)</b>돼요 — 사이의 별을 스캔해 길을 이으세요. 온전히 닿는 거리는 <b>항행 기술</b>로 넓어집니다.</div></div>
     <div class="gterm"><div class="t">🏛 행정 부담</div><div class="d">식민지가 <b>5곳을 넘으면</b> 1곳당 연구·건설 비용이 <b>+6%</b>씩 올라갑니다. 무작정 늘리기보다 <b>확장 속도를 조절</b>하는 게 중요해요.</div></div>
     <div class="gterm"><div class="t">😊 행복도·범죄</div><div class="d"><b>범죄율</b>은 실업·과밀·인구가 높이고, <b>행복도</b>를 깎습니다. 행복도는 <b>인구 성장 속도</b>를 정하고, <b>40% 아래로 떨어지면 인구가 줄기 시작</b>합니다 — 생산량에는 곱해지지 않아요. 실업을 없애고 주거를 넉넉히 두는 게 가장 확실한 안정책입니다.</div></div>
