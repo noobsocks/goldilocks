@@ -556,6 +556,15 @@
   .evchip.good{border-color:rgba(86,214,127,.5);background:rgba(86,214,127,.1);color:var(--habit)}
   .node.clue .star{background:#ffd98a;box-shadow:0 0 14px rgba(255,217,138,.95)}
   /* 이벤트 */
+  .vol-row{display:flex;align-items:center;gap:11px;margin-top:14px;padding:11px 13px;
+    border:1px solid var(--line-soft);border-radius:10px;background:var(--panel-2)}
+  .vol-row .vol-l{font-size:13px;color:var(--ink);flex:none;display:flex;align-items:center;gap:6px}
+  .vol-row input[type=range]{flex:1;min-width:0;accent-color:var(--amber);height:22px}
+  .vol-row .vol-v{font-family:var(--f-m);font-size:12px;color:var(--amber);flex:none;width:38px;text-align:right}
+  /* 화면이 낮으면 그림이 먼저 줄어든다 — 이벤트 카드는 어떤 폰에서도 스크롤이 생기면 안 된다 */
+  .ev-pic{margin:-4px -4px 13px;border-radius:11px;overflow:hidden;border:1px solid var(--line-soft);
+    background:var(--panel-2);height:clamp(78px, calc(55vh - 275px), 170px)}
+  .ev-pic img{width:100%;height:100%;object-fit:cover;display:block}
   .ev-h{display:flex;align-items:flex-start;gap:13px;margin-bottom:14px}
   .ev-i{font-size:32px;line-height:1;flex:none}
   .ev-t{font-family:var(--f-d);font-weight:600;font-size:19px;color:var(--ink)}
@@ -575,6 +584,9 @@
   .sit-bar.good i{background:linear-gradient(90deg,var(--sky),var(--habit))}
   .sit-n{font-size:10.5px;color:var(--muted);margin:5px 0 12px;text-align:right}
   @media(max-width:560px){.ev-i{font-size:26px}.ev-t{font-size:16px}.ev-x{font-size:13px}.ev-o{padding:11px 12px;min-height:auto}}
+  @media(max-height:640px){.ev-pic{margin-bottom:8px}.ev-h{margin-bottom:8px}
+    .ev-x{margin-bottom:9px;line-height:1.5}.ev-opts{gap:5px}
+    .ev-foot{margin-top:9px;padding-top:8px}}
   .dwrap{position:relative}
   .dwrap .dtile{width:100%}
   .dt-del{position:absolute;top:5px;right:5px;z-index:2;width:24px;height:24px;border-radius:6px;
@@ -617,6 +629,9 @@
      막대가 타원으로 잘렸다 — 겹치지 않는 이름으로 바꿨다. */
   .plart{flex:none;border-radius:50%;display:block}
   .phead .plart{box-shadow:0 0 0 1px rgba(255,255,255,.10),0 1px 4px rgba(0,0,0,.5)}
+  .psurf{margin:2px 0 8px;border-radius:9px;overflow:hidden;border:1px solid var(--line-soft);
+    background:var(--panel-2);height:clamp(64px,15vw,104px)}
+  .psurf img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9}
   .pview{display:flex;align-items:center;gap:14px;padding:4px 2px 10px}
   .pview .plart{box-shadow:0 0 0 1px rgba(255,255,255,.12),0 3px 12px rgba(0,0,0,.55)}
   .pvd{display:grid;grid-template-columns:auto auto;gap:3px 14px;font-family:var(--f-m);font-size:11px}
@@ -893,6 +908,13 @@
   .ng-h{font-family:var(--f-d);font-size:11px;font-weight:700;letter-spacing:.08em;
     color:var(--amber);margin:8px 0 4px;text-transform:none}
   .ng-list{display:flex;flex-direction:column;gap:5px}
+  /* 화면이 낮으면 그림이 먼저 줄어든다 — 새 게임 창도 스크롤이 생기면 안 된다 */
+  .ng-p{grid-row:1 / span 2;grid-column:1;width:clamp(34px,calc(9.4vh - 18px),62px);aspect-ratio:1;border-radius:7px;
+    overflow:hidden;border:1px solid var(--line-soft);background:var(--panel-2);align-self:center}
+  .ng-p img{width:100%;height:100%;object-fit:cover;display:block;opacity:.82}
+  .ng-o.on .ng-p{border-color:var(--amber-line)} .ng-o.on .ng-p img{opacity:1}
+  .ng-o:has(.ng-p){grid-template-columns:auto auto 1fr}
+  .ng-o:has(.ng-p) .ng-d{grid-column:2 / -1}
   .ng-o{display:grid;grid-template-columns:auto 1fr;gap:0 8px;text-align:left;
     border:1px solid var(--line);background:var(--void-2);border-radius:8px;padding:6px 10px;
     min-height:38px;transition:.12s}
@@ -908,6 +930,16 @@
     letter-spacing:.06em}
   .ng-seed .act{flex:0 0 96px;width:auto;font-size:11.5px;padding:8px 6px}
   .ng-note{font-size:10px;line-height:1.45;color:var(--dim);margin-top:4px}
+  /* 낮은 화면에서는 새 게임 창이 스크롤되지 않도록 여백과 그림을 함께 줄인다.
+     ng-h 는 <p> 라 .card p 가 여백을 잡고 있어 같은 무게로 눌러야 한다. */
+  @media(max-height:700px){
+    .ng-list{gap:4px}
+    .ng-o{padding:5px 9px;min-height:34px}
+    .ng-d{font-size:10px;line-height:1.32}
+    .card p.ng-h{margin:6px 0 3px}
+    .card p.ng-note{font-size:9.5px;line-height:1.35;margin-top:3px;margin-bottom:4px}
+    .ng-seed input{padding:5px 11px}
+  }
   .tt-note{margin-top:16px;font-family:var(--f-m);font-size:10.5px;color:var(--dim);min-height:14px}
   .card{position:relative}
   /* 기술 창은 탭마다 내용 길이가 달라 창이 늘었다 줄었다 했다. 높이를 고정한다. */
@@ -1683,7 +1715,7 @@ function buildMega(k){
   if(S.res.minerals<c.minerals||S.res.energy<c.energy){toast("자원 부족 (광물 "+fmt(c.minerals)+" · 에너지 "+fmt(c.energy)+")","warn");return;}
   S.res.minerals-=c.minerals; S.res.energy-=c.energy;
   if(!S.mega)S.mega={}; S.mega[k]=megaLvl(k)+1;
-  pushLog(`${MEGA[k].icon} ${MEGA[k].name} ${S.mega[k]}단계 완공 — ${MEGA[k].eff(S.mega[k])}`,"good");
+  pushLog(`${MEGA[k].icon} ${MEGA[k].name} ${S.mega[k]}단계 완공 — ${MEGA[k].eff(S.mega[k])}`,"good"); sfx("mega");
   save(); renderAll(); if($("modal").classList.contains("on")) openEmpire();   // 격자를 새 상태로 다시 그린다
 }
 /* 메가구조물이 제국 전체에 더하는 고정 산출 */
@@ -1691,6 +1723,81 @@ function megaBonus(){
   const b={energy:0,minerals:0,goods:0,research:0,alloy:0};
   MEGA_KEYS.forEach(k=>{const M=MEGA[k], l=megaLvl(k); if(M.res&&l) b[M.res]+=PER_MO(M.perMo*l);});
   return b;
+}
+
+/* ============ 외부 에셋 — 이벤트 일러스트 · 효과음 ============
+   assets/events/<이벤트id>.png 와 assets/sfx/<키>.wav 를 쓴다.
+   파일이 없으면 그림은 스스로 사라지고 소리는 조용히 넘어간다 — 게임은 그대로 돈다.
+   에셋 저작권은 Paradox Interactive AB. 개인 소장·비배포 용도로만 쓴다. */
+const AST="assets/";
+const SFX_TRIM={colony:2.85, click:0.35};   // 긴 소리는 여기까지만 (초)
+const SFX_GAIN={click:0.40, open:0.55, close:0.50};   // UI 음은 사건 음보다 작게
+const VOL_KEY="gd_vol";
+let _vol=null;
+function sfxVol(){
+  if(_vol===null){ let v=0.7; try{ const s=localStorage.getItem(VOL_KEY); if(s!==null) v=Math.max(0,Math.min(1,parseFloat(s)||0)); }catch(e){}
+    _vol=v; }
+  return _vol;
+}
+function setSfxVol(v){ _vol=Math.max(0,Math.min(1,v)); try{ localStorage.setItem(VOL_KEY,String(_vol)); }catch(e){} }
+const _sfxPool={};
+function sfx(k){
+  let v=sfxVol(); if(!k||v<=0) return;
+  v*=(SFX_GAIN[k]||1);
+  try{
+    let a=_sfxPool[k];
+    if(!a){ a=new Audio(AST+"sfx/"+k+".wav"); a.preload="auto"; _sfxPool[k]=a; }
+    if(a._t){ clearInterval(a._t); a._t=null; }
+    try{ a.pause(); a.currentTime=0; }catch(e){}
+    a.volume=v;
+    const end=SFX_TRIM[k];
+    const p=a.play();
+    if(p&&p.catch) p.catch(()=>{});
+    if(end) a._t=setInterval(()=>{
+      const left=end-a.currentTime;
+      if(left<=0){ clearInterval(a._t); a._t=null; try{a.pause();}catch(e){} a.volume=v; }
+      else if(left<0.25) a.volume=v*(left/0.25);
+    },30);
+  }catch(e){}
+}
+/* 버튼 클릭음. 같은 클릭이 모달을 열거나 닫으면 그쪽 소리에 자리를 내준다. */
+let _clkPend=false;
+function uiClick(){ _clkPend=true; setTimeout(()=>{ if(_clkPend){ _clkPend=false; sfx("click"); } },0); }
+function uiModal(k){ _clkPend=false; sfx(k); }
+document.addEventListener("click",e=>{
+  const b=e.target.closest("button,[data-tab],[data-tg],[data-dsel],[data-ns]");
+  if(b && !b.disabled) uiClick();
+},true);
+
+/* 행성 지표면 배너 — 어떤 그림이 붙을지는 그 행성의 실제 관측값이 정한다.
+   구체(planetArt)는 그대로 두고 이건 분위기만 더한다. 파일이 없으면 통째로 사라진다.
+   개조로 ESI가 오르면 그림도 같이 승격되고, 구역을 채우면 도시가 된다. */
+function surfKey(pl, esi, dist){
+  if(/해왕성|거인/.test(pl.t||"")) return "gas_giant";
+  if((dist||0)>=12)               return "city_planet";
+  const t=pl.temp||0;
+  const dens=(pl.r>0) ? (pl.m||1)/Math.pow(pl.r,3) : 1;   // 밀도가 낮으면 휘발성·물이 많다
+  if(esi>=0.90) return "gaia";
+  if(esi>=0.80) return dens<0.9 ? "ocean" : "continental";
+  if(esi>=0.65) return t>=290 ? "savannah" : "tundra";
+  if(esi>=0.50) return "arid";
+  if(esi>=0.35) return t>=300 ? "desert" : "tundra";
+  if(t<150)     return "frozen";
+  if(t<180)     return "arctic";
+  if(t>=600)    return "molten";
+  if(t>=400)    return "toxic";
+  return t>=290 ? "warm_barren" : "cold_barren";
+}
+function surfBanner(pl, esi, dist){
+  const k=surfKey(pl, esi, dist||0);
+  return `<div class="psurf"><img src="${AST}surface/${k}.png" alt=""
+    onerror="this.parentNode.remove()"></div>`;
+}
+
+/* 이벤트 일러스트 — 파일이 없으면 onerror 로 블록째 사라진다 */
+function evPic(id){
+  return `<div class="ev-pic"><img src="${AST}events/${id}.png" alt=""
+    onerror="this.parentNode.remove()"></div>`;
 }
 
 /* ============ 제국 등급 (단계별 목표) ============
@@ -1806,6 +1913,7 @@ function finishResearch(br){
   if(!S.tech)S.tech={}; S.tech[k]=techLvl(k)+1;
   const T=TECHS[k];
   pushLog(`${tico(k,13)} ${T.name}${T.max===1?'':` Lv.${S.tech[k]}`} 완료 — ${effText(k,S.tech[k])}`,"good");
+  sfx("research");
   const wasEra=curEra();
   delete S.ract[br]; _tm=null;
   if(T.eff.reachAdd || T.eff.rule) initMap();
@@ -2867,9 +2975,10 @@ function openEventCard(ev,opts){
   opts=opts||ev.opts.filter(o=>!o.when||o.when());
   if(evResume===null){ evResume=S.speed; }
   S.speed=0; syncSpeed();
+  sfx(ev.imp?"alert":"news");
   const pd=pendList().find(x=>x.id===ev.id);
   const left=pd?pendDueMo(pd):null;
-  let h=`<div class="ev-h"><span class="ev-i">${evIco(ev.id,ev.icon,26)}</span><div><div class="ev-t">${ev.title}</div>
+  let h=evPic(ev.id)+`<div class="ev-h"><span class="ev-i">${evIco(ev.id,ev.icon,26)}</span><div><div class="ev-t">${ev.title}</div>
     <div class="ev-tag"><b class="imp">일시정지</b>${left!=null?` · <b class="due">기한 ${left}개월</b>`:""}</div></div></div>`;
   h+=`<p class="ev-x">${typeof ev.text==="function"?ev.text():ev.text}</p>`;
   h+=`<div class="ev-opts">`+opts.map((o,i)=>
@@ -2894,7 +3003,7 @@ function openEventCard(ev,opts){
 }
 function openPending(id){ const ev=evById(id); if(ev) fireEvent(ev,true); }
 function showEvResult(ev,msg){
-  showModal(`<div class="ev-h"><span class="ev-i">${evIco(ev.id,ev.icon,26)}</span><div><div class="ev-t">${ev.title}</div>
+  showModal(evPic(ev.id)+`<div class="ev-h"><span class="ev-i">${evIco(ev.id,ev.icon,26)}</span><div><div class="ev-t">${ev.title}</div>
       <div class="ev-tag">결과</div></div></div>
     <p class="ev-x">${msg||"처리했습니다."}</p>
     <div class="row"><button class="act solid" id="evOk">확인</button></div>`,false);
@@ -3424,7 +3533,7 @@ function scanTick(){
     const id=S.scan.id, sys=sysById(id); S.scan=null;
     S.surveyed[id]=true;
     const pr=sys.planets.filter(p=>p.esi>=0.8).length;
-    pushLog(`${uico("ui_scan","◎",13)} ${sys.name} 스캔 완료 · 행성 ${sys.planets.length}개`+(pr?` · 거주후보 ${pr}`:""), pr?"good":"");
+    pushLog(`${uico("ui_scan","◎",13)} ${sys.name} 스캔 완료 · 행성 ${sys.planets.length}개`+(pr?` · 거주후보 ${pr}`:""), pr?"good":""); sfx("scan");
     initMap();
   }
 }
@@ -3443,7 +3552,7 @@ function doColonize(sys,pi){
     pops: hasRule("bigStart")?5:1,                       // 분기 '분산 정착'
     growth:0, decline:0, policy:"balanced", policy2:null, born:gameDays()};
   rebalanceJobs(key);
-  pushLog("["+p.n+"] 식민지 건설! ("+tierName[tierOf(p.esi)]+")", p.esi>=0.8?"good":"");
+  pushLog("["+p.n+"] 식민지 건설! ("+tierName[tierOf(p.esi)]+")", p.esi>=0.8?"good":""); sfx("colony");
   if(!S.surveyed[sys.id])S.surveyed[sys.id]=true;
   save(); renderAll();
 }
@@ -3519,7 +3628,7 @@ function buildTick(){
     if(col.bld.left<=0){ const dk=col.bld.dk;
       col.districts[dk]=(col.districts[dk]||0)+1; col.bld=null;
       rebalanceJobs(key);                                   // 새 구역은 '남는 인구'로만 채운다
-      pushLog(`${ico("d_"+dk,DISTRICTS[dk].icon,13)} ${DISTRICTS[dk].name} 완공`,"good");
+      pushLog(`${ico("d_"+dk,DISTRICTS[dk].icon,13)} ${DISTRICTS[dk].name} 완공`,"good"); sfx("build");
       startNextBuild(col);                                  // 줄 서 있던 다음 구역을 바로 착공
     } }
 }
@@ -3685,6 +3794,7 @@ function stepDay(){
   buildTick();                        // 구역 공사 진행 (하루 단위)
   scanTick();                         // 항성계 스캔 진행
   probeTick();                        // 행성 조사 진행
+  dryWarn();                          // 에너지·광물 고갈 경보 (게임 10년에 1회)
 
   // ── 이벤트·상황·위기는 시점이 중요하므로 매일 흐른다
   rollEvents(DAY_SEC); sitTick(DAY_SEC); crisisTick(DAY_SEC);
@@ -4535,6 +4645,7 @@ function renderPanel(){
     if(open){
       h+=`<div class="pbody">`;
       /* 큰 원반 — 옆에 '이 그림이 무엇으로 그려졌는지'를 그대로 적는다 */
+      h+=surfBanner(p, esiOf(sys.id,i), col?Object.values(col.districts||{}).reduce((a,b)=>a+b,0):0);
       h+=`<div class="pview">${planetArt(p,78)}<div class="pvd">
            <div><span>유형</span><b>${p.t}</b></div>
            <div><span>반지름</span><b>${p.r} R⊕</b></div>
@@ -5022,6 +5133,19 @@ function openEmpireStats(){
   });
 }
 
+/* 에너지나 광물이 바닥나고 순생산까지 마이너스일 때만 경보.
+   잔소리가 되지 않도록 게임 내 10년에 한 번으로 묶는다. */
+function dryWarn(){
+  const r=totalRates();
+  const dry = (S.res.energy<0.5 && r.energy<0) || (S.res.minerals<0.5 && r.minerals<0);
+  if(!dry){ S.dryOn=false; return; }
+  if(S.dryOn) return;                             // 이미 경보 낸 고갈 상태
+  if(S.dryT!==undefined && S.t-S.dryT < 120*SEC_PER_MONTH) { S.dryOn=true; return; }
+  S.dryOn=true; S.dryT=S.t;
+  sfx("warn");
+  pushLog(`${uico("ui_upkeep","⚖",13)} 자원 고갈 — 순생산이 마이너스입니다. 구역 구성을 점검하세요.`,"bad");
+}
+
 /* ============ 승리 ============ */
 function checkWin(){
   const i=tierIndex();
@@ -5029,6 +5153,7 @@ function checkWin(){
   if(i>S.tierSeen){                       // 등급이 올랐을 때 알림
     S.tierSeen=i;
     if(i<TIERS.length-1) pushLog(`★ 제국 등급 상승 — ${TIERS[i].n}. 다음 목표: ${TIERS[i+1].d}`,"good");
+    sfx("tier");
   }
   if(won)return;
   if(i>=TIERS.length-1){ won=true; S.speed=0; syncSpeed();
@@ -5140,13 +5265,16 @@ function importSave(c){try{const o=JSON.parse(decodeURIComponent(escape(atob(c.t
 /* 창은 전부 이 함수를 거친다. 오른쪽 위 X 를 여기서 한 번만 붙인다 —
    창마다 따로 닫기 버튼을 만들면 어떤 창은 아래, 어떤 창은 없는 지금 상태가 된다.
    closable=false 는 '반드시 골라야 하는 창'(사건 선택지)에만 쓴다. */
-function closeModal(){ $("modal").classList.remove("on"); if(typeof syncTabs==="function") syncTabs(); }
+function closeModal(){ const m=$("modal");
+  if(m.classList.contains("on")) uiModal("close");
+  m.classList.remove("on"); if(typeof syncTabs==="function") syncTabs(); }
 function showModal(html,center,closable){
   const m=$("modal"), c=$("modalCard");
   const wasOpen=m.classList.contains("on"), keep=wasOpen?c.scrollTop:0;   // 새로 열면 맨 위, 갱신이면 위치 유지
   c.className="card"+(center?" center":"");
   c.innerHTML=(closable===false?"":`<button class="card-x" id="cardX" aria-label="닫기" data-tip="닫기">✕</button>`)+html;
   m.classList.add("on"); c.scrollTop=keep;
+  if(!wasOpen) uiModal("open");
   const x=$("cardX"); if(x) x.onclick=closeModal;
 }
 
@@ -5745,6 +5873,12 @@ function openSettings(){
   showModal(`<h2>${uico("ui_settings","⚙",17)} 설정</h2>
     <p style="margin-bottom:2px">진행 상황은 5초마다 자동 저장됩니다.</p>
     ${S?`<p class="ng-note" style="margin-top:6px">이 게임 — <b>${startDef().name}</b> · 판별 씨앗 <b style="font-family:var(--f-m)">${gseed()}</b></p>`:""}
+    <div class="vol-row">
+      <span class="vol-l">${uico("ui_news","🔔",14)} 효과음</span>
+      <input type="range" id="stVol" min="0" max="100" step="5" value="${Math.round(sfxVol()*100)}">
+      <b class="vol-v" id="stVolV">${Math.round(sfxVol()*100)}%</b>
+    </div>
+    <p class="ng-note" style="margin-top:4px">0%로 내리면 완전히 꺼집니다. 음량은 새 게임에도 그대로 유지됩니다.</p>
     <div class="tt-menu" style="margin-top:10px">
       <button class="tt-b solid" id="stBack">돌아가기</button>
       <button class="tt-b" id="stSave">저장하기</button>
@@ -5752,6 +5886,9 @@ function openSettings(){
       <button class="tt-b danger" id="stReset">새 게임 — 지금 진행이 사라집니다</button>
       <button class="tt-b" id="stQuit">메인 화면으로</button>
     </div>`);
+  const vs=$("stVol");
+  if(vs){ const upd=()=>{ setSfxVol(vs.value/100); $("stVolV").textContent=vs.value+"%"; };
+    vs.oninput=upd; vs.onchange=()=>{ upd(); sfx("build"); }; }
   $("stBack").onclick=closeModal;
   $("stSave").onclick=()=>{ save(); toast("저장 완료","good"); };
   $("stIO").onclick=()=>openSaveCode(false);
@@ -5787,6 +5924,7 @@ function openNewGame(){
   const draw=()=>`<div class="ng-list">`+Object.keys(STARTS).map(k=>{
       const D=STARTS[k];
       return `<button class="ng-o ${_nsPick===k?"on":""}" data-ns="${k}">
+        <span class="ng-p"><img src="${AST}starts/${k}.png" alt="" onerror="this.parentNode.remove()"></span>
         <span class="ng-n">${D.name}</span><span class="ng-l">${D.line}</span>
         <span class="ng-d">${D.desc}</span></button>`;}).join("")+`</div>`;
   showModal(`<h2>새로운 게임</h2>
